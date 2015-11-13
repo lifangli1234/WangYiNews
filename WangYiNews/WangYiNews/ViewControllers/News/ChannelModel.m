@@ -7,9 +7,14 @@
 //
 
 #import "ChannelModel.h"
-#import "SingleModel.h"
+
 @implementation ChannelModel
-+ (NSDictionary *)objectClassInArray {
-    return @{@"tList" : [SingleModel class]};
+
++ (instancetype)channelModelWithDict:(NSDictionary *)dict
+{
+    ChannelModel *channelModel = [[self alloc] init];
+    [channelModel setValuesForKeysWithDictionary:dict];
+    return channelModel;
 }
+
 @end

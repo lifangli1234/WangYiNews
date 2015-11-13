@@ -23,7 +23,7 @@
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor whiteColor];
-    [[[Helper alloc] init] createNavigationBarWithSuperView:self.view andTitle:@"设置" andTarget:self andSel:@selector(preferenceBack)];
+    //[[[Helper alloc] init] createNavigationBarWithSuperView:self.view andTitle:@"设置" andTarget:self andSel:@selector(preferenceBack)];
     [self createTableView];
 }
 
@@ -68,42 +68,42 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellName];
     }
-    UILabel *contentLab = [Helper label:[[_preferenceList objectAtIndex:0] objectAtIndex:indexPath.row] frame:CGRectMake(10, 0, [Helper screenWidth]-160, 44) font:[UIFont systemFontOfSize:15] textColor:[UIColor darkGrayColor] textAligment:NSTextAlignmentLeft];
-    [cell.contentView addSubview:contentLab];
-    if (indexPath.row == 0) {
-        contentLab.frame = CGRectMake(10, 10, [Helper screenWidth]-160, 44);
-        [cell.contentView addSubview:[Helper view:CGRectMake(0, 0, [Helper screenWidth], 10) backgroundColor:GRAYCOLOR]];
-        [cell.contentView addSubview:[Helper view:CGRectMake(0, 9.5, [Helper screenWidth], 0.5) backgroundColor:LINECOLOR]];
-        [cell.contentView addSubview:[Helper view:CGRectMake(0, 53.5, [Helper screenWidth], 0.5) backgroundColor:LINECOLOR]];
-    }
-    else if (indexPath.row == 1 || indexPath.row == 4 || indexPath.row == 9) {
-        UIView *lineView = [Helper view:CGRectMake(0, 44, [Helper screenWidth], 10) backgroundColor:GRAYCOLOR];
-        lineView.layer.borderWidth = 0.5;
-        lineView.layer.borderColor = [LINECOLOR CGColor];
-        [cell.contentView addSubview:lineView];
-    }
-    else{
-        [cell.contentView addSubview:[Helper view:CGRectMake(0, 43.5, [Helper screenWidth], 0.5) backgroundColor:LINECOLOR]];
-        if (indexPath.row == [[_preferenceList objectAtIndex:0] count]-1){
-            [cell.contentView addSubview:[Helper view:CGRectMake(0, 44, [Helper screenWidth], 10) backgroundColor:GRAYCOLOR]];
-        }
-    }
-    if (indexPath.row == 8 || indexPath.row == 4) {
-        
-    }
-    else if(indexPath.row == 9){
-        
-    }
-    else{
-        if (indexPath.row == 2 || indexPath.row == 3) {
-            
-        }
-        UIImageView *enterImg = [Helper imageView:CGRectMake([Helper screenWidth]-17.5, 15, 7.5, 14) name:@"lm_cell_detail_indicator@2x.png"];
-        [cell.contentView addSubview:enterImg];
-        if (indexPath.row == 0) {
-            enterImg.frame = CGRectMake([Helper screenWidth]-21.5, 25, 7.5, 14);
-        }
-    }
+//    UILabel *contentLab = [Helper label:[[_preferenceList objectAtIndex:0] objectAtIndex:indexPath.row] frame:CGRectMake(10, 0, [Helper screenWidth]-160, 44) font:[UIFont systemFontOfSize:15] textColor:[UIColor darkGrayColor] textAligment:NSTextAlignmentLeft];
+//    [cell.contentView addSubview:contentLab];
+//    if (indexPath.row == 0) {
+//        contentLab.frame = CGRectMake(10, 10, [Helper screenWidth]-160, 44);
+//        [cell.contentView addSubview:[Helper view:CGRectMake(0, 0, [Helper screenWidth], 10) backgroundColor:GRAYCOLOR]];
+//        [cell.contentView addSubview:[Helper view:CGRectMake(0, 9.5, [Helper screenWidth], 0.5) backgroundColor:LINECOLOR]];
+//        [cell.contentView addSubview:[Helper view:CGRectMake(0, 53.5, [Helper screenWidth], 0.5) backgroundColor:LINECOLOR]];
+//    }
+//    else if (indexPath.row == 1 || indexPath.row == 4 || indexPath.row == 9) {
+//        UIView *lineView = [Helper view:CGRectMake(0, 44, [Helper screenWidth], 10) backgroundColor:GRAYCOLOR];
+//        lineView.layer.borderWidth = 0.5;
+//        lineView.layer.borderColor = [LINECOLOR CGColor];
+//        [cell.contentView addSubview:lineView];
+//    }
+//    else{
+//        [cell.contentView addSubview:[Helper view:CGRectMake(0, 43.5, [Helper screenWidth], 0.5) backgroundColor:LINECOLOR]];
+//        if (indexPath.row == [[_preferenceList objectAtIndex:0] count]-1){
+//            [cell.contentView addSubview:[Helper view:CGRectMake(0, 44, [Helper screenWidth], 10) backgroundColor:GRAYCOLOR]];
+//        }
+//    }
+//    if (indexPath.row == 8 || indexPath.row == 4) {
+//        
+//    }
+//    else if(indexPath.row == 9){
+//        
+//    }
+//    else{
+//        if (indexPath.row == 2 || indexPath.row == 3) {
+//            
+//        }
+//        UIImageView *enterImg = [Helper imageView:CGRectMake([Helper screenWidth]-17.5, 15, 7.5, 14) name:@"lm_cell_detail_indicator@2x.png"];
+//        [cell.contentView addSubview:enterImg];
+//        if (indexPath.row == 0) {
+//            enterImg.frame = CGRectMake([Helper screenWidth]-21.5, 25, 7.5, 14);
+//        }
+//    }
     return cell;
 }
 

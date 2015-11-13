@@ -11,6 +11,6 @@
 @interface NewsTableViewController : UITableViewController<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, strong) NSString *newsUrl;
-@property (nonatomic, strong) NSString *key;
+@property (nonatomic, assign) NSInteger index;
 
 @end

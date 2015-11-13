@@ -7,7 +7,28 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SepecialContentModel.h"
 
 @interface SepecialCell : UITableViewCell
+
+@property (strong, nonatomic) SepecialContentModel *contentModel;
+@property (weak, nonatomic) IBOutlet UIView *line;
+
+@property (weak, nonatomic) IBOutlet UIView *view1;
+@property (weak, nonatomic) IBOutlet UIView *view2;
+@property (weak, nonatomic) IBOutlet UIImageView *imgsrc1;
+@property (weak, nonatomic) IBOutlet UIImageView *imgsrc2;
+@property (weak, nonatomic) IBOutlet UIImageView *imgplay1;
+@property (weak, nonatomic) IBOutlet UIImageView *imgplay2;
+@property (weak, nonatomic) IBOutlet UILabel *digst1;
+@property (weak, nonatomic) IBOutlet UILabel *digst2;
+
+@property (weak, nonatomic) IBOutlet UIImageView *replyImg;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *descLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *imgsrc;
+@property (weak, nonatomic) IBOutlet UIImageView *imgsrc3;
+@property (weak, nonatomic) IBOutlet UIImageView *imgsrc4;
+@property (weak, nonatomic) IBOutlet UILabel *replyLabel;
 
 @end

@@ -8,7 +8,11 @@
 
 #define BASEURL @"http://c.3g.163.com"
 
-#define BASERED [UIColor colorWithRed:178.0/255.0 green:15.0/255.0 blue:16.0/255.0 alpha:1.0]
+#define DAYBACKGROUNDCOLOR [UIColor whiteColor]
+#define NIGHTBACKGROUNDCOLOR [UIColor colorWithRed:70.0/255.0 green:70.0/255.0 blue:70.0/255.0 alpha:1.0]
+#define NIGHTTEXTCOLOR [UIColor colorWithRed:205.0/255.0 green:205.0/255.0 blue:205.0/255.0 alpha:1.0]
+#define BASERED [UIColor colorWithRed:0.87 green:0.19 blue:0.19 alpha:1.0]
+#define BASERED_NIGHT [UIColor colorWithRed:0.71 green:0.18 blue:0.17 alpha:1.0]
 #define LINECOLOR [UIColor colorWithRed:225.0/255.0 green:225.0/255.0 blue:225.0/255.0 alpha:1.0]
 #define GRAYCOLOR [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0]
 

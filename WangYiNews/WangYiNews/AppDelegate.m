@@ -7,6 +7,12 @@
 //
 
 #import "AppDelegate.h"
+#import "NewsViewController.h"
+#import "ReadingViewController.h"
+#import "DiscoveryViewController.h"
+#import "VideoViewController.h"
+#import "MineViewController.h"
+#import "TabBarViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +23,20 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    TabBarViewController *Tab = [[TabBarViewController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:Tab];
+    nav.navigationBarHidden = YES;
+    self.window.rootViewController = nav;
+    
+    MineViewController *mvc = [[MineViewController alloc] init];
+    NewsViewController *nvc = [[NewsViewController alloc] init];
+    ReadingViewController *rvc = [[ReadingViewController alloc] init];
+    VideoViewController *vvc = [[VideoViewController alloc] init];
+    DiscoveryViewController *dvc = [[DiscoveryViewController alloc] init];
+    
+    Tab.viewControllers = [NSArray arrayWithObjects:nvc, rvc, vvc, dvc, mvc, nil];
+    
     return YES;
 }
 

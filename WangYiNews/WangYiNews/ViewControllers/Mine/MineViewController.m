@@ -26,7 +26,7 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self loadArr];
-    [self createHeaderView];
+    //[self createHeaderView];
     [self crateTableView];
 }
 
@@ -49,7 +49,7 @@
 }
 
 #pragma mark ------------------TableView-----------------
--(void)createHeaderView
+/*-(void)createHeaderView
 {
     UIView *headerView = [Helper view:CGRectMake(0, 0, [Helper screenWidth], 345) backgroundColor:[UIColor whiteColor]];
     
@@ -95,7 +95,7 @@
     [headerView addSubview:lineView];
     
     [self.view addSubview:headerView];
-}
+}*/
 
 -(void)crateTableView
 {
@@ -118,18 +118,18 @@
 {
     
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-    [cell.contentView addSubview:[Helper imageView:CGRectMake(10, 12, 20, 20) name:[_myInfoList[indexPath.row] objectForKey:@"image"]]];
-    [cell.contentView addSubview:[Helper label:[_myInfoList[indexPath.row] objectForKey:@"name"] frame:CGRectMake(44, 0, 200, 44) font:[UIFont systemFontOfSize:14] textColor:[UIColor blackColor] textAligment:NSTextAlignmentLeft]];
-    [cell.contentView addSubview:[Helper imageView:CGRectMake([Helper screenWidth]-17.5, 15, 7.5, 14) name:@"lm_cell_detail_indicator@2x.png"]];
-    if (indexPath.row == 0 || indexPath.row == 3) {
-        UIView *lineView = [Helper view:CGRectMake(0, 44, [Helper screenWidth], 5) backgroundColor:GRAYCOLOR];
-        lineView.layer.borderColor = [LINECOLOR CGColor];
-        lineView.layer.borderWidth = 0.5;
-        [cell.contentView addSubview:lineView];
-    }
-    else{
-        [cell.contentView addSubview:[Helper view:CGRectMake(0, 44, [Helper screenWidth], 0.5) backgroundColor:LINECOLOR]];
-    }
+//    [cell.contentView addSubview:[Helper imageView:CGRectMake(10, 12, 20, 20) name:[_myInfoList[indexPath.row] objectForKey:@"image"]]];
+//    [cell.contentView addSubview:[Helper label:[_myInfoList[indexPath.row] objectForKey:@"name"] frame:CGRectMake(44, 0, 200, 44) font:[UIFont systemFontOfSize:14] textColor:[UIColor blackColor] textAligment:NSTextAlignmentLeft]];
+//    [cell.contentView addSubview:[Helper imageView:CGRectMake([Helper screenWidth]-17.5, 15, 7.5, 14) name:@"lm_cell_detail_indicator@2x.png"]];
+//    if (indexPath.row == 0 || indexPath.row == 3) {
+//        UIView *lineView = [Helper view:CGRectMake(0, 44, [Helper screenWidth], 5) backgroundColor:GRAYCOLOR];
+//        lineView.layer.borderColor = [LINECOLOR CGColor];
+//        lineView.layer.borderWidth = 0.5;
+//        [cell.contentView addSubview:lineView];
+//    }
+//    else{
+//        [cell.contentView addSubview:[Helper view:CGRectMake(0, 44, [Helper screenWidth], 0.5) backgroundColor:LINECOLOR]];
+//    }
     return cell;
 }
 

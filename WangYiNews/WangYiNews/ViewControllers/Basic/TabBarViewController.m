@@ -11,12 +11,19 @@
 
 @interface TabBarViewController ()
 
+@property (nonatomic, assign) BOOL isNightMode;
+
 @end
 
 @implementation TabBarViewController
 {
     UIView *_tabBarView;
     UIButton *_customButton;
+}
+
+-(void)setIsNightMode:(BOOL)isNightMode
+{
+    _isNightMode = isNightMode;
 }
 
 - (void)viewDidLoad {
@@ -30,36 +37,40 @@
 
 -(void)createTabBar
 {
-    CGFloat tabBarViewY = self.view.frame.size.height - 49;
-    
-    _tabBarView = [[UIView alloc] initWithFrame:CGRectMake(0, tabBarViewY, self.view.frame.size.width, 49)];
-    _tabBarView.backgroundColor = [UIColor whiteColor];
-    _tabBarView.layer.borderColor = [[UIColor colorWithRed:225.0/255.0 green:225.0/255.0 blue:225.0/255.0 alpha:1.0] CGColor];
+    _tabBarView = [[UIView alloc] init];
+    _tabBarView.backgroundColor = self.isNightMode?NIGHTBACKGROUNDCOLOR:DAYBACKGROUNDCOLOR;
+    _tabBarView.layer.borderColor = [LINECOLOR CGColor];
     _tabBarView.layer.borderWidth = 0.5;
     [self.view addSubview:_tabBarView];
     
-    [self creatButtonWithNormalName:@"tabbar_icon_news_normal@2x.png" andSelectName:@"tabbar_icon_news_highlight@2x.png" andTitle:@"新闻" andIndex:0];
-    [self creatButtonWithNormalName:@"tabbar_icon_reader_normal@2x.png" andSelectName:@"tabbar_icon_reader_highlight@2x.png" andTitle:@"阅读" andIndex:1];
-    [self creatButtonWithNormalName:@"tabbar_icon_media_normal@2x.png" andSelectName:@"tabbar_icon_media_highlight@2x.png" andTitle:@"视听" andIndex:2];
-    [self creatButtonWithNormalName:@"tabbar_icon_found_normal@2x.png" andSelectName:@"tabbar_icon_found_highlight@2x.png" andTitle:@"发现" andIndex:3];
-    [self creatButtonWithNormalName:@"tabbar_icon_me_normal@2x.png" andSelectName:@"tabbar_icon_me_highlight@2x.png" andTitle:@"我" andIndex:4];
+    [_tabBarView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.and.left.and.right.mas_equalTo(self.view);
+        make.height.offset(49);
+    }];
+    
+    [self creatButton:@"tabbar_icon_news_normal@2x.png" select:@"tabbar_icon_news_highlight@2x.png" nightNormal:@"night_tabbar_icon_news_normal@2x.png" nightSelected:@"night_tabbar_icon_news_highlight@2x.png" title:@"新闻" index:0];
+    [self creatButton:@"tabbar_icon_reader_normal@2x.png" select:@"tabbar_icon_reader_highlight@2x.png" nightNormal:@"night_tabbar_icon_reader_normal@2x.png" nightSelected:@"night_tabbar_icon_reader_highlight@2x.png" title:@"阅读" index:1];
+    [self creatButton:@"tabbar_icon_media_normal@2x.png" select:@"tabbar_icon_media_highlight@2x.png" nightNormal:@"night_tabbar_icon_media_normal@2x.png" nightSelected:@"night_tabbar_icon_media_highlight@2x.png" title:@"视听" index:2];
+    [self creatButton:@"tabbar_icon_found_normal@2x.png" select:@"tabbar_icon_found_highlight@2x.png" nightNormal:@"night_tabbar_icon_found_normal@2x.png" nightSelected:@"night_tabbar_icon_found_highlight@2x.png" title:@"发现" index:3];
+    [self creatButton:@"tabbar_icon_me_normal@2x.png" select:@"tabbar_icon_me_highlight@2x.png" nightNormal:@"night_tabbar_icon_me_normal@2x.png" nightSelected:@"night_tabbar_icon_me_highlight@2x.png" title:@"我" index:4];
 }
 
-- (void)creatButtonWithNormalName:(NSString *)normal andSelectName:(NSString *)selected andTitle:(NSString *)title andIndex:(int)index
+- (void)creatButton:(NSString *)normal select:(NSString *)selected nightNormal:(NSString *)nightNormal nightSelected:(NSString *)nightSelected title:(NSString *)title index:(int)index
 {
-    CGFloat customBtnW = _tabBarView.frame.size.width/5;
-    CGFloat customBtnH = _tabBarView.frame.size.height;
+    CGFloat customBtnW = [Helper screenWidth]/5;
+    CGFloat customBtnH = 49;
     CGFloat customBtnX = customBtnW*index;
     
-    UILabel *lab = [Helper label:title frame:CGRectMake(customBtnX, 24, customBtnW, 25) font:[UIFont systemFontOfSize:12] textColor:[UIColor grayColor] textAligment:NSTextAlignmentCenter];
+    UILabel *lab = [Helper label:title font:[UIFont systemFontOfSize:12] textColor:[UIColor grayColor] nightTextColor:[UIColor lightGrayColor] textAligment:NSTextAlignmentCenter isNightMode:self.isNightMode];
+    lab.frame = CGRectMake(customBtnX, 24, customBtnW, 25);
     lab.tag = index;
     [_tabBarView addSubview:lab];
 
     UIButton *customBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     customBtn.frame = CGRectMake(customBtnX, 0, customBtnW, customBtnH);
     customBtn.tag = index;
-    [customBtn setImage:[UIImage imageNamed:normal] forState:UIControlStateNormal];
-    [customBtn setImage:[UIImage imageNamed:selected] forState:UIControlStateDisabled];
+    [customBtn setImage:[UIImage imageNamed:self.isNightMode?nightNormal:normal] forState:UIControlStateNormal];
+    [customBtn setImage:[UIImage imageNamed:self.isNightMode?nightSelected:selected] forState:UIControlStateDisabled];
     [customBtn addTarget:self action:@selector(changeViewController:) forControlEvents:UIControlEventTouchDown];
     
     switch (index) {
@@ -94,7 +105,7 @@
                 ((UILabel *)subview).textColor = BASERED;
             }
             else{
-                ((UILabel *)subview).textColor = [UIColor grayColor];
+                ((UILabel *)subview).textColor = self.isNightMode?[UIColor lightGrayColor]:[UIColor grayColor];
             }
         }
     }

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HotNewsViewController : UIViewController
+@interface HotNewsViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
 
 @end

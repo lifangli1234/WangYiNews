@@ -10,4 +10,6 @@
 
 @interface NetworkTools : AFHTTPSessionManager
 
++ (instancetype)sharedNetworkTools;
+
 @end

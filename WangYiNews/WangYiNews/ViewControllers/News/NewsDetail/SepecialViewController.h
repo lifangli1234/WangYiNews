@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SepecialModel.h"
 
 @interface SepecialViewController : UIViewController
+
+@property (nonatomic, strong) SepecialModel *sepecialModel;
 
 @end

@@ -10,4 +10,11 @@
 
 @implementation NewsModel
 
++(instancetype)newsModelWithDict:(NSDictionary *)dict
+{
+    NewsModel *newsModel = [[self alloc] init];
+    [NewsModel setValuesForKeysWithDictionary:dict];
+    return newsModel;
+}
+
 @end

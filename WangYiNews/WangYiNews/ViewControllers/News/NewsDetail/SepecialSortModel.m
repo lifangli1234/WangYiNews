@@ -10,4 +10,11 @@
 
 @implementation SepecialSortModel
 
++ (instancetype)sepecialSortModelWithDict:(NSDictionary *)dict
+{
+    SepecialSortModel *model = [[self alloc] init];
+    [model setValuesForKeysWithDictionary:dict];
+    return model;
+}
+
 @end

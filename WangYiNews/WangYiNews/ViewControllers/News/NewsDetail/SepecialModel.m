@@ -10,4 +10,11 @@
 
 @implementation SepecialModel
 
++(instancetype)sepecialModelWithDict:(NSDictionary *)dict
+{
+    SepecialModel *sepecialModel = [[self alloc] init];
+    [sepecialModel setValuesForKeysWithDictionary:dict];
+    return sepecialModel;
+}
+
 @end

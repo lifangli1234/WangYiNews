@@ -7,64 +7,89 @@
 //
 
 #import "NewsTableViewController.h"
-#import "PhotoSetCell.h"
-#import "BigPhotoCell.h"
-#import "ArticleCell.h"
+#import "NewsCell.h"
 #import "NewsDetailViewController.h"
+#import "PhotosetViewController.h"
+#import "SepecialModel.h"
+#import "SepecialViewController.h"
+#import "PhotoSetModel.h"
 
 @interface NewsTableViewController ()
 
-@property(nonatomic,strong)NSMutableArray *newsList;
+@property(nonatomic,strong) NSMutableArray *arrayList;
+@property(nonatomic,assign)BOOL update;
 
 @end
 
 @implementation NewsTableViewController
-{
-    UIScrollView *_titleScro;
-    NSMutableArray *_titleImageArr;
-    NSMutableArray *_newsList;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    [self sentRequest];
+    [self.tableView addHeaderWithTarget:self action:@selector(loadData)];
+    [self.tableView addFooterWithTarget:self action:@selector(loadMoreData)];
+    self.update = YES;
+}
+
+- (void)setNewsUrl:(NSString *)newsUrl
+{
+    _newsUrl = newsUrl;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    if (self.update == YES) {
+        [self.tableView headerBeginRefreshing];
+        self.update = NO;
+    }
+    [[NSNotificationCenter defaultCenter]postNotification:[NSNotification notificationWithName:@"contentStart" object:nil]];
+}
+
+// ------下拉刷新
+- (void)loadData
+{
+    [self loadDataForType:1 withURL:self.newsUrl];
+}
+
+// ------上拉加载
+//- (void)loadMoreData
+//{
+    //NSString *allUrlstring = [NSString stringWithFormat:@"/nc/article/%@/%ld-20.html",self.urlString,(self.arrayList.count - self.arrayList.count%10)];
+    //    NSString *allUrlstring = [NSString stringWithFormat:@"/nc/article/%@/%ld-20.html",self.urlString,self.arrayList.count];
+    //[self loadDataForType:2 withURL:allUrlstring];
+//}
+
+- (void)loadDataForType:(int)type withURL:(NSString *)allUrlstring
+{
+    [[[NetworkTools sharedNetworkTools] GET:allUrlstring parameters:nil success:^(NSURLSessionDataTask *task, NSDictionary* responseObject) {
+        NSLog(@"%@",allUrlstring);
+        NSString *key = [responseObject.keyEnumerator nextObject];
+        
+        NSArray *temArray = responseObject[key];
+        
+        NSMutableArray *arrayM = [NewsModel objectArrayWithKeyValuesArray:temArray];
+    
+        if (type == 1) {
+            self.arrayList = arrayM;
+            [self.tableView headerEndRefreshing];
+            [self.tableView reloadData];
+        }else if(type == 2){
+            [self.arrayList addObjectsFromArray:arrayM];
+            
+            [self.tableView footerEndRefreshing];
+            [self.tableView reloadData];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"%@",error);
+        [self.tableView headerEndRefreshing];
+    }] resume];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
--(void)sentRequest
-{
-    _newsList = [[NSMutableArray alloc] init];
-    [DownLoad requestURL:self.newsUrl parameters:nil withType:@"GET" format:@"json" complete:^(id result) {
-        _newsList = [result objectForKey:self.key];
-        //self.tableView.tableHeaderView = [self tableViewHeaderView];
-        [self.tableView reloadData];
-    }];
-}
-
--(UIView *)tableViewHeaderView
-{
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [Helper screenWidth], 200)];
-    
-    _titleScro = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, [Helper screenWidth], 170)];
-    _titleScro.contentSize = CGSizeMake([Helper screenWidth]*_titleImageArr.count, 170);
-    _titleScro.showsHorizontalScrollIndicator = NO;
-    _titleScro.pagingEnabled = YES;
-    for (int i=0; i<_titleImageArr.count; i++) {
-        UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake([Helper screenWidth]*i, 0, [Helper screenWidth], 170)];
-        [img sd_setImageWithURL:[[_titleImageArr objectAtIndex:i] objectAtIndex:1] placeholderImage:[UIImage imageNamed:@"video_cell_content_bg@2x.png"]];
-        [_titleScro addSubview:img];
-    }
-    [headerView addSubview:_titleScro];//photoset_list_cell_icon@2x.png
-    
-    return headerView;
 }
 
 #pragma mark - Table view data source
@@ -74,97 +99,123 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _newsList.count-1;
+    return self.arrayList.count;
 }
 
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *cellName = @"cell";
-    NSDictionary *dic = [_newsList objectAtIndex:indexPath.row];
-    NSArray *imageArr = [dic objectForKey:@"imgextra"];
-    NSInteger replyCount = [[dic objectForKey:@"replyCount"] integerValue];
-    NSString *reply = [[NSString alloc] init];
-    if (replyCount>10000) {
-        reply = [NSString stringWithFormat:@"%.1f万跟帖",replyCount/10000.0];
-    }
-    else{
-        reply = [NSString stringWithFormat:@"%ld跟帖",replyCount];
-    }
-    CGSize replySize = [reply sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]}];
-    if ([[dic objectForKey:@"skipType"] isEqualToString:@"photoset"] && imageArr.count>0) {
-        BigPhotoCell *cell = [tableView dequeueReusableCellWithIdentifier:cellName];
-        if (cell == nil) {
-            cell = [[[NSBundle mainBundle] loadNibNamed:@"BigPhotoCell" owner:self options:nil] lastObject];
-        }
-        cell.title.text = [dic objectForKey:@"title"];
-        [cell.image1 sd_setImageWithURL:[NSURL URLWithString:[dic objectForKey:@"imgsrc"]] placeholderImage:[UIImage imageNamed:@""]];
-        [cell.image2 sd_setImageWithURL:[NSURL URLWithString:[imageArr.firstObject objectForKey:@"imgsrc"]] placeholderImage:[UIImage imageNamed:@""]];
-        [cell.image3 sd_setImageWithURL:[NSURL URLWithString:[imageArr.lastObject objectForKey:@"imgsrc"]] placeholderImage:[UIImage imageNamed:@""]];
-        [cell.contentView addSubview:[Helper imageView:CGRectMake([Helper screenWidth]-14-replySize.width, 7.5, replySize.width+4, 15) name:@"cola_bubble_gray@2x.png"]];
-        [cell.contentView addSubview:[Helper label:reply frame:CGRectMake([Helper screenWidth]-12-replySize.width, 7.5, replySize.width, 15) font:[UIFont systemFontOfSize:12] textColor:[UIColor grayColor] textAligment:NSTextAlignmentCenter]];
-        [cell.contentView addSubview:[Helper view:CGRectMake(0, 113.5, [Helper screenWidth], 0.5) backgroundColor:LINECOLOR]];
-        return cell;
-    }
-    else if ([[dic objectForKey:@"imgType"] intValue] == 1) {
-        PhotoSetCell *cell = [tableView dequeueReusableCellWithIdentifier:cellName];
-        if (cell == nil) {
-            cell = [[[NSBundle mainBundle] loadNibNamed:@"PhotoSetCell" owner:self options:nil] lastObject];
-        }
-        cell.title.text = [dic objectForKey:@"title"];
-        cell.desc.text = [dic objectForKey:@"digest"];
-        [cell.image sd_setImageWithURL:[NSURL URLWithString:[dic objectForKey:@"imgsrc"]] placeholderImage:[UIImage imageNamed:@""]];
-        [cell.contentView addSubview:[Helper imageView:CGRectMake([Helper screenWidth]-14-replySize.width, 155, replySize.width+4, 15) name:@"cola_bubble_gray@2x.png"]];
-        [cell.contentView addSubview:[Helper label:reply frame:CGRectMake([Helper screenWidth]-12-replySize.width, 155, replySize.width, 15) font:[UIFont systemFontOfSize:12] textColor:[UIColor grayColor] textAligment:NSTextAlignmentCenter]];
-        [cell.contentView addSubview:[Helper view:CGRectMake(0, 179.5, [Helper screenWidth], 0.5) backgroundColor:LINECOLOR]];
-        return cell;
-    }
-    else{
-        ArticleCell *cell = [tableView dequeueReusableCellWithIdentifier:cellName];
-        if (cell == nil) {
-            cell = [[[NSBundle mainBundle] loadNibNamed:@"ArticleCell" owner:self options:nil] lastObject];
-        }
-        [cell.image sd_setImageWithURL:[NSURL URLWithString:[dic objectForKey:@"imgsrc"]] placeholderImage:[UIImage imageNamed:@""]];
-        cell.title.text = [dic objectForKey:@"title"];
-        cell.desc.text = [dic objectForKey:@"digest"];
-        [cell.contentView addSubview:[Helper imageView:CGRectMake([Helper screenWidth]-14-replySize.width, 55, replySize.width+4, 15) name:@"cola_bubble_gray@2x.png"]];
-        [cell.contentView addSubview:[Helper label:reply frame:CGRectMake([Helper screenWidth]-12-replySize.width, 55, replySize.width, 15) font:[UIFont systemFontOfSize:12] textColor:[UIColor grayColor] textAligment:NSTextAlignmentCenter]];
-        [cell.contentView addSubview:[Helper view:CGRectMake(0, 79.5, [Helper screenWidth], 0.5) backgroundColor:LINECOLOR]];
-        return cell;
-    }
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *dic = [_newsList objectAtIndex:indexPath.row];
-    NSArray *imageArr = [dic objectForKey:@"imgextra"];
-    if ([[dic objectForKey:@"skipType"] isEqualToString:@"photoset"] && imageArr.count>0){
-        return 114.0f;
+    NewsModel *newsModel = self.arrayList[indexPath.row];
+    
+    NSString *ID = [NewsCell idForRow:newsModel];
+    
+    if ((indexPath.row%20 == 0)&&(indexPath.row != 0)) {
+        ID = @"BasicCell";
     }
-    else if ([[dic objectForKey:@"skipType"] isEqualToString:@"photoset"] && [[dic objectForKey:@"imgType"] intValue] == 1){
-        return 180.0f;
+    
+    NewsCell * cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    NSArray *nib;
+    if ([ID isEqualToString:@"BasicCell"]) {
+        nib = [[NSBundle mainBundle]loadNibNamed:@"BasicCell" owner:self options:nil];
+    }
+    else if ([ID isEqualToString:@"ImagesCell"]){
+        nib = [[NSBundle mainBundle]loadNibNamed:@"ImagesCell" owner:self options:nil];
     }
     else{
-        return 80.0f;
+        nib = [[NSBundle mainBundle]loadNibNamed:@"BigPhotoCell" owner:self options:nil];
+    }
+    for(id oneObject in nib){
+        if([oneObject isKindOfClass:[NewsCell class]]){
+            cell = (NewsCell *)oneObject;
+        }
+    }
+    cell.newsModel = newsModel;
+    
+    return cell;
+    
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NewsModel *newsModel = self.arrayList[indexPath.row];
+//    
+//    CGFloat rowHeight = [NewsCell heightForRow:newsModel];
+//    
+//    if ((indexPath.row%20 == 0)&&(indexPath.row != 0)) {
+//        rowHeight = 80;
+//    }
+    
+    NSString *ID = [NewsCell idForRow:newsModel];
+    if ([ID isEqualToString:@"BasicCell"]) {
+        return 90;
+    }
+    else if ([ID isEqualToString:@"ImagesCell"]){
+        return 121;
+    }
+    else{
+        return 200;
+    }
+    
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // 刚选中又马上取消选中，格子不变色
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    UIViewController *vc = [[UIViewController alloc]init];
+    vc.view.backgroundColor = [UIColor yellowColor];
+    
+    NewsModel *newsModel = self.arrayList[indexPath.row];
+    if (newsModel.skipType) {
+        if ([newsModel.skipType isEqualToString:@"photoset"]) {
+            PhotosetViewController *pvc = [[PhotosetViewController alloc] init];
+            NSArray *idArr = [newsModel.skipID componentsSeparatedByString:@"|"];
+            NSString *url = [NSString stringWithFormat:@"/photo/api/set/%@/%@.json",idArr[0],idArr[1]];
+            pvc.replyCount = [NSString stringWithFormat:@"%@",newsModel.replyCount];
+            [[NetworkTools sharedNetworkTools] GET:url parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+                PhotoSetModel *model = [PhotoSetModel objectWithKeyValues:responseObject];
+                [pvc setPhotoSetModel:model];
+            } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                NSLog(@"%@",error);
+            }];
+            [self.navigationController pushViewController:pvc animated:YES];
+        }
+        else if ([newsModel.skipType isEqualToString:@"special"]) {
+            SepecialViewController *svc = [[SepecialViewController alloc] init];
+            NSString *url = [NSString stringWithFormat:@"/nc/special/%@.html",newsModel.skipID];
+            [[NetworkTools sharedNetworkTools] GET:url parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+                NSDictionary *dic = [responseObject objectForKey:newsModel.skipID];
+                SepecialModel *model = [SepecialModel objectWithKeyValues:dic];
+                [svc setSepecialModel:model];
+            } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                NSLog(@"%@",error);
+            }];
+            [self.navigationController pushViewController:svc animated:YES];
+        }
+    }
+    else {
+        NewsDetailViewController *ndvc = [[NewsDetailViewController alloc] init];
+        ndvc.newsModel = newsModel;
+        [self.navigationController pushViewController:ndvc animated:YES];
     }
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSDictionary *dic = [_newsList objectAtIndex:indexPath.row];
-    NewsDetailViewController  *dvc = [[NewsDetailViewController alloc] init];
-    if ([[dic objectForKey:@"skipType"] isEqualToString:@"special"]) {
-        dvc.isSpecial = YES;
-        dvc.detailUrl = [NSString stringWithFormat:@"/nc/special/%@.html",[dic objectForKey:@"skipID"]];
-        dvc.detailId = [dic objectForKey:@"skipID"];
-        dvc.commentUrl = nil;
-    }
-    else{
-        dvc.isSpecial = NO;
-        dvc.detailUrl = [NSString stringWithFormat:@"/nc/article/%@/full.html",[dic objectForKey:@"docid"]];
-        dvc.detailId = [dic objectForKey:@"docid"];
-        dvc.commentUrl = [NSString stringWithFormat:@"http://comment.api.163.com/api/json/post/list/new/hot/%@/%@/0/10/10/2/2",[dic objectForKey:@"boardid"],[dic objectForKey:@"docid"]];
-    }
-    [self.navigationController pushViewController:dvc animated:YES];
-}
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+//{
+//    if ([segue.destinationViewController isKindOfClass:[SXDetailController class]]) {
+//        
+//        NSInteger x = self.tableView.indexPathForSelectedRow.row;
+//        SXDetailController *dc = segue.destinationViewController;
+//        dc.newsModel = self.arrayList[x];
+//        dc.index = self.index;
+//        if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+//            self.navigationController.interactivePopGestureRecognizer.delegate = nil;
+//        }
+//    }else{
+//        NSInteger x = self.tableView.indexPathForSelectedRow.row;
+//        SXPhotoSetController *pc = segue.destinationViewController;
+//        pc.newsModel = self.arrayList[x];
+//    }
+//    
+//}
 
 @end

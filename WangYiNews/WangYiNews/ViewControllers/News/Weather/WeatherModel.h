@@ -10,4 +10,9 @@
 
 @interface WeatherModel : NSObject
 
+@property (nonatomic, strong) NSArray *detailArray;
+@property (nonatomic, strong) NSString *dt;
+@property (nonatomic, strong) NSDictionary *pm2d5;
+@property (nonatomic, strong) NSNumber *rt_temperature;
+
 @end

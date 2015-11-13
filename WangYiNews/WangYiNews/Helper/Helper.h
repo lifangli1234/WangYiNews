@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "TodayNewsModel.h"
-#import "VideoModel.h"
 
 @interface Helper : NSObject
 
@@ -18,22 +16,15 @@
 
 +(BOOL)isNightMode:(BOOL)isNight;
 
-+(UILabel *)label:(NSString *)title frame:(CGRect)frame font:(UIFont *)font textColor:(UIColor *)color textAligment:(NSTextAlignment)alignment;
-+(UIImageView *)imageView:(CGRect)frame name:(NSString *)name;
-+(UIView *)view:(CGRect)frame backgroundColor:(UIColor *)color;
-+(UIButton *)button:(NSString *)title normalImage:(NSString *)normalImage    highlightedImage:(NSString *)highlightedImage frame:(CGRect)frame target:(id)target action:(SEL)sel textColor:(UIColor *)color textFont:(UIFont *)font tag:(NSInteger)tag;
++(UILabel *)label:(NSString *)title font:(UIFont *)font textColor:(UIColor *)color nightTextColor:(UIColor *)nightColor textAligment:(NSTextAlignment)alignment isNightMode:(BOOL)isNightMode;
++(UIImageView *)imageView:(NSString *)image nightImage:(NSString *)nightImage isNightMode:(BOOL)isNightMode;
++(UIView *)view:(UIColor *)backgroundColor nightColor:(UIColor *)nightBackgroundColor isNightMode:(BOOL)isNightMode;
++(UIButton *)button:(NSString *)normalImage highlightedImage:(NSString *)highlightedImage nightNormalImage:(NSString *)nightNormalImage nightHighlightedImage:(NSString *)nightHighlightedImage target:(id)target action:(SEL)sel tag:(NSInteger)tag isNightMode:(BOOL)isNightMode;
++(UIButton *)button:(NSString *)title textColor:(UIColor *)color nightTextColor:(UIColor *)nightColor textFont:(UIFont *)font tag:(NSInteger)tag target:(id)target action:(SEL)sel isNightMode:(BOOL)isNightMode;
 
 +(NSMutableArray *)addUrlsWithArr:(NSMutableArray *)arr;
 
--(void)createNavigationBarWithSuperView:(UIView *)view andTitle:(NSString *)title andTarget:(id)target andSel:(SEL)sel;
-
--(void)todayNewsDataWithDict:(NSDictionary *)dic andArrKey:(NSString *)arrKey andArr:(NSMutableArray *)listArr;
--(void)videoContentCellDataWithDict:(NSDictionary *)dic andArrKey:(NSString *)arrKey andArr:(NSMutableArray *)listArr;
--(void)videoTitleViewDataWithDict:(NSDictionary *)dic andArrKey:(NSString *)arrKey andArr:(NSMutableArray *)listArr;
--(void)audioDataWithDict:(NSDictionary *)dic andArrKey:(NSString *)arrKey andArr:(NSMutableArray *)listArr;
--(void)topNewsTitleListWithDict:(NSDictionary *)dic andArrKey:(NSString *)arrKey andArr:(NSMutableArray *)listArr;
-
-+(NSMutableArray *)sepcialNewsDetailWithDict:(NSDictionary *)dic andKey:(NSString *)key;
+-(void)createNavigationBarWithSuperView:(UIView *)view andTitle:(NSString *)title andTarget:(id)target andSel:(SEL)sel isNightMode:(BOOL)isNightMode;
 
 @end
 

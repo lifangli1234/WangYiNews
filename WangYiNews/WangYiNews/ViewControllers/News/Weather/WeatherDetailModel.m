@@ -10,4 +10,11 @@
 
 @implementation WeatherDetailModel
 
++ (instancetype)weatherDetailModelWithDict:(NSDictionary *)dict
+{
+    WeatherDetailModel *detailModel = [[self alloc] init];
+    [detailModel setValuesForKeysWithDictionary:dict];
+    return detailModel;
+}
+
 @end
