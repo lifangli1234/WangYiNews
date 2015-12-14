@@ -137,12 +137,6 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NewsModel *newsModel = self.arrayList[indexPath.row];
-//    
-//    CGFloat rowHeight = [NewsCell heightForRow:newsModel];
-//    
-//    if ((indexPath.row%20 == 0)&&(indexPath.row != 0)) {
-//        rowHeight = 80;
-//    }
     
     NSString *ID = [NewsCell idForRow:newsModel];
     if ([ID isEqualToString:@"BasicCell"]) {
@@ -159,7 +153,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // 刚选中又马上取消选中，格子不变色
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     UIViewController *vc = [[UIViewController alloc]init];
     vc.view.backgroundColor = [UIColor yellowColor];
@@ -198,24 +191,5 @@
         [self.navigationController pushViewController:ndvc animated:YES];
     }
 }
-
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-//{
-//    if ([segue.destinationViewController isKindOfClass:[SXDetailController class]]) {
-//        
-//        NSInteger x = self.tableView.indexPathForSelectedRow.row;
-//        SXDetailController *dc = segue.destinationViewController;
-//        dc.newsModel = self.arrayList[x];
-//        dc.index = self.index;
-//        if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
-//            self.navigationController.interactivePopGestureRecognizer.delegate = nil;
-//        }
-//    }else{
-//        NSInteger x = self.tableView.indexPathForSelectedRow.row;
-//        SXPhotoSetController *pc = segue.destinationViewController;
-//        pc.newsModel = self.arrayList[x];
-//    }
-//    
-//}
 
 @end

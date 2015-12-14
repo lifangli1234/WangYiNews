@@ -107,6 +107,15 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+-(void)downLoadImage
+{}
+
+-(void)share
+{}
+
+-(void)addToFavotrite
+{}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
