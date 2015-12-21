@@ -7,6 +7,7 @@
 //
 
 #import "PhotosetViewController.h"
+#import "PhotoSetScrollView.h"
 
 @interface PhotosetViewController ()
 
@@ -20,11 +21,8 @@
     UIButton *_downLoadBtn;
     UIButton *_shareBtn;
     UIButton *_favouriteBtn;
-}
-
--(void)setPhotoSetModel:(PhotoSetModel *)photoSetModel
-{
-    _photoSetModel = photoSetModel;
+    PhotoSetScrollView *_photoSetView;
+    PhotoSetModel *_photoSetModel;
 }
 
 - (void)viewDidLoad {
@@ -32,8 +30,28 @@
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor blackColor];
+    [self createImageSroll];
     [self createNavigationBar];
     [self createFooterButton];
+}
+
+-(void)createImageSroll
+{
+    NSArray *idArr = [self.newsModel.skipID componentsSeparatedByString:@"|"];
+    NSString *url = [NSString stringWithFormat:@"/photo/api/set/0096/%@.json",idArr[1]];
+    [[NetworkTools sharedNetworkTools] GET:url parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        _photoSetModel = [PhotoSetModel objectWithKeyValues:responseObject];
+        _photoSetView = [[PhotoSetScrollView alloc] init];
+        [_photoSetView setPhotoSetModel:_photoSetModel];
+        _photoSetView.backgroundColor = [UIColor clearColor];
+        [self.view addSubview:_photoSetView];
+        [_photoSetView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.view).offset(20);
+            make.right.left.bottom.equalTo(self.view);
+        }];
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"%@",error);
+    }];
 }
 
 -(void)createNavigationBar
@@ -47,10 +65,10 @@
     }];
     
     _replyCountBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    CGSize size = [self.replyCount sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]}];
+    CGSize size = [[NSString stringWithFormat:@"%@",_newsModel.replyCount] sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]}];
     _replyCountBtn.frame = CGRectMake([Helper screenWidth]-size.width-28, 20, size.width + 20, 40);
     _replyCountBtn.titleLabel.font = [UIFont systemFontOfSize:13];
-    [_replyCountBtn setTitle:self.replyCount forState:UIControlStateNormal];
+    [_replyCountBtn setTitle:[NSString stringWithFormat:@"%@",_newsModel.replyCount] forState:UIControlStateNormal];
     [_replyCountBtn needsUpdateConstraints];
     UIImage *normalImg = [UIImage imageNamed:@"contentview_commentbacky"];
     UIImage *highlightedImg = [UIImage imageNamed:@"contentview_commentbacky_selected"];

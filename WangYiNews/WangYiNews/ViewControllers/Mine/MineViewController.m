@@ -24,9 +24,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.dk_backgroundColorPicker = DKColorWithColors([UIColor whiteColor], NIGHTBACKGROUNDCOLOR);
     [self loadArr];
-    //[self createHeaderView];
     [self crateTableView];
 }
 
@@ -39,7 +38,7 @@
 {
     _myInfoList = [[NSMutableArray alloc] init];
     NSArray *nameArr = [[NSArray alloc] initWithObjects:@"我的消息",@"金币商城",@"金币任务",@"我的钱包",@"我的邮箱", nil];
-    NSArray *imageArr = [[NSArray alloc] initWithObjects:@"user_set_icon_message@2x.png",@"user_set_icon_mall@2x.png",@"user_set_icon_mission@2x.png",@"user_set_icon_wallet@2x.png",@"user_set_icon_mail@2x.png", nil];
+    NSArray *imageArr = [[NSArray alloc] initWithObjects:@"user_set_icon_message@2x",@"user_set_icon_mall@2x",@"user_set_icon_mission@2x.png",@"user_set_icon_wallet@2x",@"user_set_icon_mail@2x", nil];
     for (int i=0; i<nameArr.count; i++) {
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         [dic setValue:nameArr[i] forKey:@"name"];
@@ -49,62 +48,133 @@
 }
 
 #pragma mark ------------------TableView-----------------
-/*-(void)createHeaderView
+-(UIView *)createHeaderView
 {
-    UIView *headerView = [Helper view:CGRectMake(0, 0, [Helper screenWidth], 345) backgroundColor:[UIColor whiteColor]];
+    UIView *headerView = [Helper view:[UIColor whiteColor] nightColor:[UIColor blackColor]];
     
-    UIView *userHeader = [Helper view:CGRectMake(0, 0, [Helper screenWidth], 255) backgroundColor:BASERED];
+    UIView *userHeader = [Helper view:BASERED nightColor:BASERED_NIGHT];
     [headerView addSubview:userHeader];
+    [userHeader mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.equalTo(headerView);
+        make.height.offset(225);
+    }];
     
-    [userHeader addSubview:[Helper button:@"设置" normalImage:nil highlightedImage:nil frame:CGRectMake([Helper screenWidth]-66, 25, 66, 25) target:self action:@selector(UserPreference) textColor:[UIColor whiteColor] textFont:[UIFont systemFontOfSize:15] tag:0]];
-    [userHeader addSubview:[Helper label:@"立即登录" frame:CGRectMake(([Helper screenWidth]-120)/2, 138, 120, 25) font:[UIFont systemFontOfSize:18] textColor:[UIColor whiteColor] textAligment:NSTextAlignmentCenter]];
-    UIButton *loginBtn = [Helper button:nil normalImage:@"user_defaulthead@2x.png" highlightedImage:nil frame:CGRectMake(([Helper screenWidth]-100)/2, 55, 100, 100) target:self action:@selector(userLogin) textColor:nil textFont:nil tag:0];
-    loginBtn.contentEdgeInsets = UIEdgeInsetsMake(0, 12.5, 25, 12.5);
+    UIButton *settingBtn = [Helper button:@"设置" textColor:[UIColor whiteColor] nightTextColor:[UIColor whiteColor] textFont:[UIFont systemFontOfSize:15] tag:0 target:self action:@selector(UserPreference)];
+    [userHeader addSubview:settingBtn];
+    [settingBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(userHeader).offset(-66);
+        make.top.equalTo(userHeader).offset(25);
+        make.size.sizeOffset(CGSizeMake(66, 25));
+    }];
+    
+    UILabel *loginLabel = [Helper label:@"立即登录" font:[UIFont systemFontOfSize:18] textColor:[UIColor whiteColor] nightTextColor:[UIColor whiteColor] textAligment:NSTextAlignmentCenter];
+    [userHeader addSubview:loginLabel];
+    [loginLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(userHeader);
+        make.height.offset(25);
+        make.top.equalTo(userHeader).offset(138);
+    }];
+    
+    UIButton *loginBtn = [Helper button:@"user_defaulthead@2x" target:self action:@selector(userLogin) tag:0];
+        loginBtn.contentEdgeInsets = UIEdgeInsetsMake(0, 12.5, 25, 12.5);
     [userHeader addSubview:loginBtn];
-    [userHeader addSubview:[Helper label:@"赢金币抢大礼!" frame:CGRectMake(([Helper screenWidth]-120)/2, 161, 120, 25) font:[UIFont systemFontOfSize:15] textColor:[UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:30.0/255.0 alpha:1.0] textAligment:NSTextAlignmentCenter]];
+    [loginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(userHeader);
+        make.size.sizeOffset(CGSizeMake(100, 100));
+        make.top.equalTo(userHeader).offset(55);
+    }];
     
-    UIView *bottomView = [Helper view:CGRectMake(0, 255, [Helper screenWidth], 85) backgroundColor:[UIColor whiteColor]];
+    UILabel *coinLabel = [Helper label:@"赢金币抢大礼!" font:[UIFont systemFontOfSize:15] textColor:RGB(0.98, 0.93, 0.49) nightTextColor:RGB(0.90, 0.78, 0.43) textAligment:NSTextAlignmentCenter];
+    [userHeader addSubview:coinLabel];
+    [coinLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(userHeader);
+        make.height.offset(25);
+        make.top.equalTo(loginLabel.mas_bottom);
+    }];
+    
+    UIView *bottomView = [Helper view:[UIColor whiteColor] nightColor:NIGHTBACKGROUNDCOLOR];
     [headerView addSubview:bottomView];
+    [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(userHeader.mas_bottom);
+        make.left.right.equalTo(headerView);
+        make.bottom.equalTo(headerView).offset(-5);
+    }];
     
-    [bottomView addSubview:[Helper label:@"阅读" frame:CGRectMake(0, 46, ([Helper screenWidth]-1.5)/4, 26) font:[UIFont systemFontOfSize:12] textColor:[UIColor darkGrayColor] textAligment:NSTextAlignmentCenter]];
-    UIButton *userReadBtn = [Helper button:nil normalImage:@"user_read_icon@2x.png" highlightedImage:nil frame:CGRectMake(0, 0, ([Helper screenWidth]-1.5)/4, 85) target:self action:@selector(userAction:) textColor:nil textFont:nil tag:USERREAD_TAG];
-    userReadBtn.contentEdgeInsets = UIEdgeInsetsMake(21, (([Helper screenWidth]-1.5)/4-40)/2, 46, (([Helper screenWidth]-1.5)/4-40)/2);
-    [bottomView addSubview:userReadBtn];
-    [bottomView addSubview:[Helper view:CGRectMake(([Helper screenWidth]-1.5)/4, 0, 0.5, 85) backgroundColor:LINECOLOR]];
+    [self addButton:@"阅读" image:@"user_read_icon@2x" superView:bottomView index:0 count:4 tag:USERREAD_TAG];
+    [self addButton:@"收藏" image:@"user_favor_icon@2x" superView:bottomView index:1 count:4 tag:USEFAVO_TAG];
+    [self addButton:@"跟贴" image:@"user_comment_icon@2x" superView:bottomView index:2 count:4 tag:USECOMMENT_TAG];
+    [self addButton:@"金币" image:@"user_coin_icon@2x" superView:bottomView index:3 count:4 tag:USECOIN_TAG];
     
-    [bottomView addSubview:[Helper label:@"收藏" frame:CGRectMake(([Helper screenWidth]-1.5)/4+0.5, 46, ([Helper screenWidth]-1.5)/4, 26) font:[UIFont systemFontOfSize:12] textColor:[UIColor darkGrayColor] textAligment:NSTextAlignmentCenter]];
-    UIButton *userFavoBtn = [Helper button:nil normalImage:@"user_favor_icon@2x.png" highlightedImage:nil frame:CGRectMake(([Helper screenWidth]-1.5)/4+0.5, 0, ([Helper screenWidth]-1.5)/4, 85) target:self action:@selector(userAction:) textColor:nil textFont:nil tag:USEFAVO_TAG];
-    userFavoBtn.contentEdgeInsets = UIEdgeInsetsMake(18, (([Helper screenWidth]-1.5)/4-25)/2, 42, (([Helper screenWidth]-1.5)/4-25)/2);
-    [bottomView addSubview:userFavoBtn];
-    [bottomView addSubview:[Helper view:CGRectMake(([Helper screenWidth]-1.5)/2+0.5, 0, 0.5, 85) backgroundColor:LINECOLOR]];
-    
-    [bottomView addSubview:[Helper label:@"跟贴" frame:CGRectMake(([Helper screenWidth]-1.5)/2+0.5, 46, ([Helper screenWidth]-1.5)/4, 26) font:[UIFont systemFontOfSize:12] textColor:[UIColor darkGrayColor] textAligment:NSTextAlignmentCenter]];
-    UIButton *userCommentBtn = [Helper button:nil normalImage:@"user_comment_icon@2x.png" highlightedImage:nil frame:CGRectMake(([Helper screenWidth]-1.5)/2+0.5, 0, ([Helper screenWidth]-1.5)/4, 85) target:self action:@selector(userAction:) textColor:nil textFont:nil tag:USECOMMENT_TAG];
-    userCommentBtn.contentEdgeInsets = UIEdgeInsetsMake(19, (([Helper screenWidth]-1.5)/4-22)/2, 43, (([Helper screenWidth]-1.5)/4-22)/2);
-    [bottomView addSubview:userCommentBtn];
-    [bottomView addSubview:[Helper view:CGRectMake(([Helper screenWidth]-1.5)/4*3+1, 0, 0.5, 85) backgroundColor:LINECOLOR]];
-    
-    [bottomView addSubview:[Helper label:@"金币" frame:CGRectMake(([Helper screenWidth]-1.5)/4*3+1, 46, ([Helper screenWidth]-1.5)/4, 26) font:[UIFont systemFontOfSize:12] textColor:[UIColor darkGrayColor] textAligment:NSTextAlignmentCenter]];
-    UIButton *userCoinBtn = [Helper button:nil normalImage:@"user_coin_icon@2x.png" highlightedImage:nil frame:CGRectMake(([Helper screenWidth]-1.5)/4*3+1, 0, ([Helper screenWidth]-1.5)/4, 85) target:self action:@selector(userAction:) textColor:nil textFont:nil tag:USECOIN_TAG];
-    userCoinBtn.contentEdgeInsets = UIEdgeInsetsMake(19, (([Helper screenWidth]-1.5)/4-29)/2, 44, (([Helper screenWidth]-1.5)/4-29)/2);
-    [bottomView addSubview:userCoinBtn];
-    
-    UIView *lineView = [Helper view:CGRectMake(0, 340, [Helper screenWidth], 5) backgroundColor:GRAYCOLOR];
-    lineView.layer.borderColor = [LINECOLOR CGColor];
+    UIView *lineView = [Helper view:LINECOLOR nightColor:NIGHTLINECOLOR];
+    lineView.layer.borderColor = [[UIColor grayColor] CGColor];
     lineView.layer.borderWidth = 0.5;
     [headerView addSubview:lineView];
+    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.equalTo(headerView);
+        make.height.offset(5);
+    }];
     
-    [self.view addSubview:headerView];
-}*/
+    headerView.frame = CGRectMake(0, 0, [Helper screenWidth], 310);
+    
+    return headerView;
+}
+
+-(void)addButton:(NSString *)name image:(NSString *)imageName superView:(UIView *)superView index:(NSInteger)index count:(NSInteger)count tag:(NSInteger)tag
+{
+    CGFloat width = ([Helper screenWidth]-(count-1)*0.5)/count;
+    
+    UILabel *lab = [Helper label:name font:[UIFont systemFontOfSize:12] textColor:[UIColor darkGrayColor] nightTextColor:[UIColor lightGrayColor] textAligment:NSTextAlignmentCenter];
+    [superView addSubview:lab];
+    [lab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(superView);
+        make.height.offset(26);
+        make.width.offset(width);
+        make.left.equalTo(superView).offset(width*index);
+    }];
+    
+    UIButton *btn = [Helper button:imageName target:self action:@selector(userAction:) tag:tag];
+    
+    [superView addSubview:btn];
+    [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(lab);
+        make.top.equalTo(superView);
+        make.height.offset(85);
+        make.width.equalTo(lab.mas_width);
+    }];
+    
+    UIView *line = [Helper view:LINECOLOR nightColor:NIGHTLINECOLOR];
+    [superView addSubview:line];
+    [line mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(btn.mas_right);
+        make.width.offset(0.5);
+        make.top.bottom.equalTo(superView);
+    }];
+    
+    switch (index) {
+        case 0:
+            btn.contentEdgeInsets = UIEdgeInsetsMake(21, (([Helper screenWidth]-(count*0.5))/count-40)/2, 46, (([Helper screenWidth]-(count*0.5))/count-40)/2);
+            break;
+        case 1:
+            btn.contentEdgeInsets = UIEdgeInsetsMake(18, (([Helper screenWidth]-(count*0.5))/count-25)/2, 42, (([Helper screenWidth]-(count*0.5))/count-25)/2);
+            break;
+        case 2:
+            btn.contentEdgeInsets = UIEdgeInsetsMake(19, (([Helper screenWidth]-(count*0.5))/count-22)/2, 43, (([Helper screenWidth]-(count*0.5))/count-22)/2);
+            break;
+        case 3:
+            btn.contentEdgeInsets = UIEdgeInsetsMake(19, (([Helper screenWidth]-(count*0.5))/count-29)/2, 44, (([Helper screenWidth]-(count*0.5))/count-29)/2);
+            break;
+        default:
+            break;
+    }
+}
 
 -(void)crateTableView
 {
-    _myInfoListTableView = [[UITableView alloc] init];
-    _myInfoListTableView.frame = CGRectMake(0, 345, [Helper screenWidth], [Helper screenHeight]-345);
+    _myInfoListTableView = [[UITableView alloc] initWithFrame:self.view.bounds];
     _myInfoListTableView.dataSource = self;
     _myInfoListTableView.delegate = self;
     _myInfoListTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    _myInfoListTableView.scrollEnabled = NO;
+    _myInfoListTableView.tableHeaderView = [self createHeaderView];
     [self.view addSubview:_myInfoListTableView];
 }
 
@@ -116,20 +186,50 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-//    [cell.contentView addSubview:[Helper imageView:CGRectMake(10, 12, 20, 20) name:[_myInfoList[indexPath.row] objectForKey:@"image"]]];
-//    [cell.contentView addSubview:[Helper label:[_myInfoList[indexPath.row] objectForKey:@"name"] frame:CGRectMake(44, 0, 200, 44) font:[UIFont systemFontOfSize:14] textColor:[UIColor blackColor] textAligment:NSTextAlignmentLeft]];
-//    [cell.contentView addSubview:[Helper imageView:CGRectMake([Helper screenWidth]-17.5, 15, 7.5, 14) name:@"lm_cell_detail_indicator@2x.png"]];
-//    if (indexPath.row == 0 || indexPath.row == 3) {
-//        UIView *lineView = [Helper view:CGRectMake(0, 44, [Helper screenWidth], 5) backgroundColor:GRAYCOLOR];
-//        lineView.layer.borderColor = [LINECOLOR CGColor];
-//        lineView.layer.borderWidth = 0.5;
-//        [cell.contentView addSubview:lineView];
-//    }
-//    else{
-//        [cell.contentView addSubview:[Helper view:CGRectMake(0, 44, [Helper screenWidth], 0.5) backgroundColor:LINECOLOR]];
-//    }
+    cell.contentView.dk_backgroundColorPicker = DKColorWithColors([UIColor whiteColor], NIGHTBACKGROUNDCOLOR);
+    UIImageView *img = [Helper imageView:[_myInfoList[indexPath.row] objectForKey:@"image"]];
+    [cell.contentView addSubview:img];
+    [img mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(cell.contentView).offset(12);
+        make.left.equalTo(cell.contentView).offset(10);
+        make.size.sizeOffset(CGSizeMake(20, 20));
+    }];
+    
+    UILabel *lab = [Helper label:[_myInfoList[indexPath.row] objectForKey:@"name"] font:[UIFont systemFontOfSize:14] textColor:[UIColor blackColor] nightTextColor:[UIColor whiteColor] textAligment:NSTextAlignmentLeft];
+    [cell.contentView addSubview:lab];
+    [lab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(cell.contentView);
+        make.height.offset(44);
+        make.left.equalTo(img.mas_left).offset(14);
+    }];
+    
+    UIImageView *enterImg = [Helper imageView:@"lm_cell_detail_indicator@2x"];
+    [cell.contentView addSubview:enterImg];
+    [enterImg mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(cell.contentView).offset(15);
+        make.right.equalTo(cell.contentView).offset(-17.5);
+        make.size.sizeOffset(CGSizeMake(7.5, 14));
+    }];
+
+    if (indexPath.row == 0 || indexPath.row == 3) {
+        UIView *lineView = [Helper view:LINECOLOR nightColor:NIGHTLINECOLOR];
+        lineView.layer.borderColor = [[UIColor grayColor] CGColor];
+        lineView.layer.borderWidth = 0.5;
+        [cell.contentView addSubview:lineView];
+        [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.bottom.equalTo(cell.contentView);
+            make.height.offset(5);
+        }];
+    }
+    else{
+        UIView *lineView = [Helper view:LINECOLOR nightColor:NIGHTLINECOLOR];
+        [cell.contentView addSubview:lineView];
+        [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.bottom.equalTo(cell.contentView);
+            make.height.offset(0.5);
+        }];
+    }
     return cell;
 }
 

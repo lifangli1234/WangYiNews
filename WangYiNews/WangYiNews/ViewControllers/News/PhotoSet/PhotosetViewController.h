@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "PhotoSetModel.h"
+#import "NewsModel.h"
 
 @interface PhotosetViewController : UIViewController
 
-@property (nonatomic, strong) PhotoSetModel *photoSetModel;
-@property (nonatomic, strong) NSString *replyCount;
+@property (nonatomic, strong) NewsModel *newsModel;
 
 @end

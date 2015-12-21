@@ -171,15 +171,7 @@
     if (newsModel.skipType) {
         if ([newsModel.skipType isEqualToString:@"photoset"]) {
             PhotosetViewController *pvc = [[PhotosetViewController alloc] init];
-            NSArray *idArr = [newsModel.skipID componentsSeparatedByString:@"|"];
-            NSString *url = [NSString stringWithFormat:@"/photo/api/set/%@/%@.json",idArr[0],idArr[1]];
-            pvc.replyCount = [NSString stringWithFormat:@"%@",newsModel.replyCount];
-            [[NetworkTools sharedNetworkTools] GET:url parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-                PhotoSetModel *model = [PhotoSetModel objectWithKeyValues:responseObject];
-                [pvc setPhotoSetModel:model];
-            } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                NSLog(@"%@",error);
-            }];
+            pvc.newsModel = newsModel;
             [self.navigationController pushViewController:pvc animated:YES];
         }
         else if ([newsModel.skipType isEqualToString:@"special"]) {

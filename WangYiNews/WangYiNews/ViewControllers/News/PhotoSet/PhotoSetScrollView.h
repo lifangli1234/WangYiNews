@@ -12,7 +12,8 @@
 @interface PhotoSetScrollView : UIView<UIScrollViewDelegate>
 
 @property(nonatomic,strong)UIScrollView *photoSetScr;
-
--(instancetype)initPhotoSetScrollViewWithModel:(PhotoSetModel *)photoSetModel;
+@property(nonatomic,strong)NSMutableArray *imageArr;
+@property(nonatomic,strong)NSMutableArray *imageViewArr;
+@property(nonatomic,strong)PhotoSetModel *photoSetModel;
 
 @end

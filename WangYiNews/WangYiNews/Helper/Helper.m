@@ -82,42 +82,39 @@
     return  button;
 }
 
-+(UIButton *)button:(NSString *)title textColor:(UIColor *)color nightTextColor:(UIColor *)nightColor selectedTextColor:(UIColor *)selectedColor nightSelectedTextColor:(UIColor *)nightSelectedColor textFont:(UIFont *)font tag:(NSInteger)tag target:(id)target action:(SEL)sel
++(UIButton *)button:(NSString *)title textColor:(UIColor *)color nightTextColor:(UIColor *)nightColor textFont:(UIFont *)font tag:(NSInteger)tag target:(id)target action:(SEL)sel
 {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setTitle:title forState:UIControlStateNormal];
     [button dk_setTitleColorPicker:DKColorWithColors(color, nightColor) forState:UIControlStateNormal];
-    [button dk_setTitleColorPicker:DKColorWithColors(nightSelectedColor, selectedColor) forState:UIControlStateSelected];
     button.titleLabel.font = font;
     button.tag = tag;
     [button addTarget:target action:sel forControlEvents:UIControlEventTouchUpInside];
     return  button;
 }
 
--(void)createNavigationBarWithSuperView:(UIView *)view andTitle:(NSString *)title andTarget:(id)target andSel:(SEL)sel
++(UIView *)createNavigationBarWithTitle:(NSString *)title andTarget:(id)target andSel:(SEL)sel
 {
-    UIImageView *IV = [Helper imageView:@"top_navigation_background@2x"];
-    [view addSubview:IV];
-    [IV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.and.top.and.right.mas_equalTo(view);
-        make.height.offset(64);
-    }];
+    UIView *IV = [Helper view:BASERED nightColor:BASERED_NIGHT];
     
     UIButton *backBtn = [Helper button:@"top_navigation_back@2x" target:target action:sel tag:0];
-    [view addSubview:backBtn];
+    [IV addSubview:backBtn];
     [backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(view);
-        make.top.mas_equalTo(view).offset(20);
+        make.left.mas_equalTo(IV);
+        make.top.mas_equalTo(IV).offset(20);
         make.size.sizeOffset(CGSizeMake(45, 44));
     }];
     
     UILabel *titleLab = [Helper label:title font:TITLEFONT textColor:DAYBACKGROUNDCOLOR nightTextColor:NIGHTTEXTCOLOR textAligment:NSTextAlignmentCenter];
-    [view addSubview:titleLab];
+    [IV addSubview:titleLab];
     [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(backBtn.mas_right);
-        make.top.mas_equalTo(view).offset(20);
-        make.right.mas_equalTo(view).offset(45);
+        make.top.mas_equalTo(IV).offset(20);
+        make.right.mas_equalTo(IV).offset(-45);
+        make.height.offset(44);
     }];
+    
+    return IV;
 }
 
 +(NSMutableArray *)addUrlsWithArr:(NSMutableArray *)arr

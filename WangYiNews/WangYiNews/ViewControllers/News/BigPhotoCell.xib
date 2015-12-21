@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -17,7 +17,6 @@
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nx2-QE-Gh5">
                         <rect key="frame" x="8" y="5" width="42" height="20"/>
-                        <animations/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="icg-eN-47r"/>
                         </constraints>
@@ -27,14 +26,12 @@
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Zj6-ey-CLe">
                         <rect key="frame" x="8" y="30" width="304" height="110"/>
-                        <animations/>
                         <constraints>
                             <constraint firstAttribute="height" constant="110" id="CAF-mo-dKS"/>
                         </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kwc-DQ-q1h">
                         <rect key="frame" x="0.0" y="199" width="320" height="1"/>
-                        <animations/>
                         <color key="backgroundColor" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="Ke3-7Y-FmP"/>
@@ -42,7 +39,6 @@
                     </view>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D3x-iE-GZd">
                         <rect key="frame" x="294" y="173" width="18" height="18"/>
-                        <animations/>
                         <constraints>
                             <constraint firstAttribute="width" constant="18" id="GoV-Oc-N0d"/>
                             <constraint firstAttribute="height" constant="18" id="oit-Gz-dak"/>
@@ -50,14 +46,12 @@
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pyu-xS-ROh">
                         <rect key="frame" x="217" y="173" width="69" height="18"/>
-                        <animations/>
                         <constraints>
                             <constraint firstAttribute="height" constant="18" id="4wc-ul-jVW"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f3r-Y3-wCX">
                         <rect key="frame" x="244" y="170" width="42" height="21"/>
-                        <animations/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="ZeM-z8-mca"/>
                         </constraints>
@@ -67,7 +61,6 @@
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g1k-tC-Ez6">
                         <rect key="frame" x="8" y="145" width="304" height="41"/>
-                        <animations/>
                         <constraints>
                             <constraint firstAttribute="height" constant="41" id="CWC-XO-a0z"/>
                         </constraints>
@@ -76,7 +69,6 @@
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
-                <animations/>
                 <constraints>
                     <constraint firstItem="Zj6-ey-CLe" firstAttribute="trailing" secondItem="vt9-e5-XmF" secondAttribute="trailingMargin" id="3yR-RD-a8b"/>
                     <constraint firstAttribute="bottomMargin" secondItem="Kwc-DQ-q1h" secondAttribute="bottom" constant="-8" id="H9R-Xk-7Ig"/>
@@ -97,7 +89,6 @@
                     <constraint firstItem="D3x-iE-GZd" firstAttribute="trailing" secondItem="vt9-e5-XmF" secondAttribute="trailingMargin" id="wnF-Qc-d6X"/>
                 </constraints>
             </tableViewCellContentView>
-            <animations/>
             <connections>
                 <outlet property="descLabel" destination="g1k-tC-Ez6" id="FHf-Tt-pzD"/>
                 <outlet property="imgsrc" destination="Zj6-ey-CLe" id="BFd-K1-YAc"/>
