@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>DKNightVersion.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>MJExtension.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -37,12 +42,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>2602F3D0DAC534568B6AD7EEA0DD1959</key>
+		<key>0B8E303123265BE2CB7BA281F5A856A2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>52F43AA84120748FDE25075FB47CE065</key>
+		<key>2602F3D0DAC534568B6AD7EEA0DD1959</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -52,12 +57,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>963A62AFC87DA4D5B5240781C0EE3AA3</key>
+		<key>92D1EC9A2E447B51C3D15DA536194443</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>EEFECDDBFD8B7D128357E2E69DE2411E</key>
+		<key>C2C2EA0EF2C23E304388C66BA0F48EA9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CAFC4A5E71556EAA40232A1C938CBBDF</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -20,5 +20,6 @@
 #import "NetworkTools.h"
 #import "MJExtension.h"
 #import "MJRefresh.h"
+#import "DKNightVersion.h"
 
 #endif

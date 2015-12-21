@@ -13,7 +13,6 @@
 
 @interface SepecialViewController ()<UITableViewDataSource,UITableViewDelegate>
 
-@property (nonatomic, assign) BOOL isNightMode;
 @property (nonatomic, strong) NSString *moreStr;
 
 @end
@@ -27,11 +26,6 @@
     CGFloat headerViewHeight;
     CGFloat lastHeaderViewHeight;
     UIView *headerView;
-}
-
--(void)setIsNightMode:(BOOL)isNightMode
-{
-    _isNightMode = isNightMode;
 }
 
 -(void)setMoreStr:(NSString *)moreStr
@@ -48,7 +42,7 @@
     [self tableViewHeaderView];
     [self crateTableView];
     
-    UILabel *titleLab = [Helper label:_sepecialModel.sname font:[UIFont systemFontOfSize:18] textColor:[UIColor whiteColor] nightTextColor:[UIColor whiteColor] textAligment:NSTextAlignmentCenter isNightMode:self.isNightMode];
+    UILabel *titleLab = [Helper label:_sepecialModel.sname font:[UIFont systemFontOfSize:18] textColor:[UIColor whiteColor] nightTextColor:[UIColor whiteColor] textAligment:NSTextAlignmentCenter];
     [self.view addSubview:titleLab];
     [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.view).offset(20);
@@ -75,14 +69,14 @@
 
 -(void)createNavigation
 {
-    UIView *navView = [Helper view:BASERED nightColor:BASERED_NIGHT isNightMode:self.isNightMode];
+    UIView *navView = [Helper view:BASERED nightColor:BASERED_NIGHT];
     [self.view addSubview:navView];
     [navView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.and.top.mas_equalTo(self.view);
         make.height.offset(64);
     }];
     
-    UIButton *backBtn = [Helper button:@"top_navigation_back@2x.png" highlightedImage:@"top_navigation_back_highlighted@2x.png" nightNormalImage:@"night_top_navigation_back@2x.png" nightHighlightedImage:@"night_top_navigation_back_highlighted@2x.png" target:self action:@selector(backBtn) tag:0 isNightMode:self.isNightMode];
+    UIButton *backBtn = [Helper button:@"top_navigation_back@2x" target:self action:@selector(backBtn) tag:0];
     [self.view addSubview:backBtn];
     [backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.view).offset(0);
@@ -90,7 +84,7 @@
         make.size.sizeOffset(CGSizeMake(54, 44));
     }];
     
-    UIButton *shareBtn = [Helper button:@"top_navigation_shareicon@2x.png" highlightedImage:@"top_navigation_shareicon_highlighted@2x.png" nightNormalImage:@"night_top_navigation_shareicon@2x.png" nightHighlightedImage:@"night_top_navigation_shareicon_highlighted@2x.png" target:self action:@selector(shareBtn) tag:0 isNightMode:self.isNightMode];
+    UIButton *shareBtn = [Helper button:@"top_navigation_shareicon@2x" target:self action:@selector(shareBtn) tag:0];
     [self.view addSubview:shareBtn];
     [shareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(self.view).offset(0);
@@ -244,16 +238,16 @@
     CGFloat Width = 70;
     CGFloat Height = 30;
     if (_contentArr.count > 8 && index == 7) {
-        _moreLab = [Helper label:shortName font:[UIFont systemFontOfSize:13] textColor:[UIColor blackColor] nightTextColor:[UIColor whiteColor] textAligment:NSTextAlignmentCenter isNightMode:self.isNightMode];
+        _moreLab = [Helper label:shortName font:[UIFont systemFontOfSize:13] textColor:[UIColor blackColor] nightTextColor:[UIColor whiteColor] textAligment:NSTextAlignmentCenter];
         _moreLab.frame = CGRectMake(X, Y, Width, Height);
         [headerView addSubview:_moreLab];
     }
     else {
-        UILabel *shortNameLab = [Helper label:shortName font:[UIFont systemFontOfSize:13] textColor:[UIColor blackColor] nightTextColor:[UIColor whiteColor] textAligment:NSTextAlignmentCenter isNightMode:self.isNightMode];
+        UILabel *shortNameLab = [Helper label:shortName font:[UIFont systemFontOfSize:13] textColor:[UIColor blackColor] nightTextColor:[UIColor whiteColor] textAligment:NSTextAlignmentCenter];
         shortNameLab.frame = CGRectMake(X, Y, Width, Height);
         [headerView addSubview:shortNameLab];
     }
-    UIButton *shortNameBtn = [Helper button:@"specialcell_nav_btn@2x.png" highlightedImage:nil nightNormalImage:@"night_specialcell_nav_btn@2x.png" nightHighlightedImage:nil target:self action:@selector(shortNameBtnClick:) tag:index isNightMode:self.isNightMode];
+    UIButton *shortNameBtn = [Helper button:@"specialcell_nav_btn@2x" target:self action:@selector(shortNameBtnClick:) tag:index];
     shortNameBtn.frame = CGRectMake(X, Y, Width, Height);
     [headerView addSubview:shortNameBtn];
 }

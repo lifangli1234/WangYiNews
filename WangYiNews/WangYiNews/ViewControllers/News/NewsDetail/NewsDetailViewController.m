@@ -17,17 +17,11 @@
 
 @interface NewsDetailViewController ()
 
-@property (nonatomic, assign) BOOL isNightMode;
 @property (nonatomic, strong) NormalDetailModel *detail;
 
 @end
 
 @implementation NewsDetailViewController
-
--(void)setIsNightMode:(BOOL)isNightMode
-{
-    _isNightMode = isNightMode;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -46,7 +40,7 @@
 
 -(void)createNavigation
 {
-    UIButton *backBtn = [Helper button:@"icon_back@2x.png" highlightedImage:@"icon_back_highlighted@2x.png" nightNormalImage:@"night_icon_back@2x.png" nightHighlightedImage:@"night_icon_back_highlighted@2x.png" target:self action:@selector(backBtn) tag:0 isNightMode:self.isNightMode];
+    UIButton *backBtn = [Helper button:@"icon_back@2x" target:self action:@selector(backBtn) tag:0];
     [self.view addSubview:backBtn];
     [backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.view).offset(0);

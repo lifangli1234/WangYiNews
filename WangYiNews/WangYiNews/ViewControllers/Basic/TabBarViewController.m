@@ -11,19 +11,12 @@
 
 @interface TabBarViewController ()
 
-@property (nonatomic, assign) BOOL isNightMode;
-
 @end
 
 @implementation TabBarViewController
 {
     UIView *_tabBarView;
     UIButton *_customButton;
-}
-
--(void)setIsNightMode:(BOOL)isNightMode
-{
-    _isNightMode = isNightMode;
 }
 
 - (void)viewDidLoad {
@@ -38,8 +31,8 @@
 -(void)createTabBar
 {
     _tabBarView = [[UIView alloc] init];
-    _tabBarView.backgroundColor = self.isNightMode?NIGHTBACKGROUNDCOLOR:DAYBACKGROUNDCOLOR;
-    _tabBarView.layer.borderColor = [LINECOLOR CGColor];
+    _tabBarView.dk_backgroundColorPicker = DKColorWithColors(DAYBACKGROUNDCOLOR, NIGHTBACKGROUNDCOLOR);
+    _tabBarView.layer.borderColor = [Helper isNightMode]?[NIGHTLINECOLOR CGColor]:[LINECOLOR CGColor];
     _tabBarView.layer.borderWidth = 0.5;
     [self.view addSubview:_tabBarView];
     
@@ -61,7 +54,7 @@
     CGFloat customBtnH = 49;
     CGFloat customBtnX = customBtnW*index;
     
-    UILabel *lab = [Helper label:title font:[UIFont systemFontOfSize:12] textColor:[UIColor grayColor] nightTextColor:[UIColor lightGrayColor] textAligment:NSTextAlignmentCenter isNightMode:self.isNightMode];
+    UILabel *lab = [Helper label:title font:[UIFont systemFontOfSize:12] textColor:[UIColor grayColor] nightTextColor:[UIColor lightGrayColor] textAligment:NSTextAlignmentCenter];
     lab.frame = CGRectMake(customBtnX, 24, customBtnW, 25);
     lab.tag = index;
     [_tabBarView addSubview:lab];
@@ -69,8 +62,8 @@
     UIButton *customBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     customBtn.frame = CGRectMake(customBtnX, 0, customBtnW, customBtnH);
     customBtn.tag = index;
-    [customBtn setImage:[UIImage imageNamed:self.isNightMode?nightNormal:normal] forState:UIControlStateNormal];
-    [customBtn setImage:[UIImage imageNamed:self.isNightMode?nightSelected:selected] forState:UIControlStateDisabled];
+    [customBtn setImage:[UIImage imageNamed:[Helper isNightMode]?nightNormal:normal] forState:UIControlStateNormal];
+    [customBtn setImage:[UIImage imageNamed:[Helper isNightMode]?nightSelected:selected] forState:UIControlStateDisabled];
     [customBtn addTarget:self action:@selector(changeViewController:) forControlEvents:UIControlEventTouchDown];
     
     switch (index) {
@@ -105,7 +98,7 @@
                 ((UILabel *)subview).textColor = BASERED;
             }
             else{
-                ((UILabel *)subview).textColor = self.isNightMode?[UIColor lightGrayColor]:[UIColor grayColor];
+                ((UILabel *)subview).textColor = [Helper isNightMode]?[UIColor lightGrayColor]:[UIColor grayColor];
             }
         }
     }

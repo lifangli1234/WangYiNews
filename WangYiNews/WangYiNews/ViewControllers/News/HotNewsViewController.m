@@ -19,7 +19,6 @@
 
 @interface HotNewsViewController ()
 
-@property (nonatomic, assign) BOOL isNightMode;
 @property(nonatomic,assign)BOOL update;
 
 @end
@@ -58,14 +57,15 @@
 
 -(void)createNavigation
 {
-    _headerImage = [Helper imageView:@"todaynews_header_bg_day@2x.png" nightImage:@"todaynews_header_bg_night@2x.png" isNightMode:self.isNightMode];
+    _headerImage = [[UIImageView alloc] init];
+    _headerImage.dk_imagePicker = DKImageWithNames(@"todaynews_header_bg_day@2x.png", @"todaynews_header_bg_night@2x.png");
     [self.view addSubview:_headerImage];
     [_headerImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.and.top.equalTo(self.view);
         make.height.offset(130);
     }];
     
-    _headerTitle = [Helper imageView:@"todaynews_title_bg@2x.png" nightImage:@"todaynews_title_bg@2x.png" isNightMode:self.isNightMode];
+    _headerTitle = [Helper imageView:@"todaynews_title_bg@2x"];
     [self.view addSubview:_headerTitle];
     [_headerTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.offset(150);
@@ -74,7 +74,7 @@
         make.top.equalTo(self.view).offset(40);
     }];
     
-    _headerSubTitle = [Helper label:@"———— 聚焦今日时事 浓缩新闻精华 ————" font:[UIFont systemFontOfSize:12] textColor:[UIColor whiteColor] nightTextColor:[UIColor whiteColor] textAligment:NSTextAlignmentCenter isNightMode:self.isNightMode];
+    _headerSubTitle = [Helper label:@"———— 聚焦今日时事 浓缩新闻精华 ————" font:[UIFont systemFontOfSize:12] textColor:[UIColor whiteColor] nightTextColor:[UIColor whiteColor] textAligment:NSTextAlignmentCenter];
     [self.view addSubview:_headerSubTitle];
     [_headerSubTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view).offset(14);
@@ -83,7 +83,7 @@
         make.top.equalTo(self.view).offset(75);
     }];
     
-    UIButton *backBtn = [Helper button:@"weather_back@2x.png" highlightedImage:@"weather_back_highlight@2x.png" nightNormalImage:@"weather_back@2x.png" nightHighlightedImage:@"weather_back_highlight@2x.png" target:self action:@selector(todayNewsBack) tag:0 isNightMode:self.isNightMode];
+    UIButton *backBtn = [Helper button:@"weather_back@2x" target:self action:@selector(todayNewsBack) tag:0];
     [self.view addSubview:backBtn];
     [backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view).offset(10);

@@ -20,6 +20,12 @@ PODS:
   - AFNetworking/UIKit (2.5.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - DKNightVersion (1.0.1):
+    - DKNightVersion/Core (= 1.0.1)
+    - DKNightVersion/UIKit (= 1.0.1)
+  - DKNightVersion/Core (1.0.1)
+  - DKNightVersion/UIKit (1.0.1):
+    - DKNightVersion/Core
   - Masonry (0.6.2)
   - MJExtension (2.4.4)
   - pop (1.0.8)
@@ -29,6 +35,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
+  - DKNightVersion (~> 1.0.1)
   - Masonry
   - MJExtension
   - pop (~> 1.0)
@@ -36,6 +43,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
+  DKNightVersion: 1c9a2792dcf37c891f1ef2ed402de446703a1bf8
   Masonry: 362e8a1cc0beada4a4c4832d5e863da2a51533be
   MJExtension: fabc9e6084f14363ed6828490a98ee516c9cbbfe
   pop: bb773ae2c791ca2629de13b347e7a8b450fa6a57

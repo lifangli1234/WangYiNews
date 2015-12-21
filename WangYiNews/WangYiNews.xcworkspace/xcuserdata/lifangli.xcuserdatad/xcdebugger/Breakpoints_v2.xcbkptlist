@@ -6,48 +6,48 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "WangYiNews/ViewControllers/News/NewsDetail/NewsDetailViewController.m"
-            timestampString = "468211715.147866"
+            filePath = "WangYiNews/ViewControllers/News/NewsTableViewController.m"
+            timestampString = "472120809.798972"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "131"
-            endingLineNumber = "131"
-            landmarkName = "-setupBody:"
+            startingLineNumber = "168"
+            endingLineNumber = "168"
+            landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "WangYiNews/ViewControllers/News/NewsDetail/NewsDetailViewController.m"
-            timestampString = "468212697.611592"
+            filePath = "WangYiNews/ViewControllers/News/NewsTableViewController.m"
+            timestampString = "472120812.42289"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
-            landmarkName = "-setupBody:"
+            startingLineNumber = "173"
+            endingLineNumber = "173"
+            landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "WangYiNews/ViewControllers/News/NewsDetail/SepecialViewController.m"
-            timestampString = "468726704.880494"
+            filePath = "WangYiNews/ViewControllers/News/PhotoSet/PhotosetViewController.m"
+            timestampString = "472120983.955516"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "402"
-            endingLineNumber = "402"
-            landmarkName = "-shortNameBtnClick:"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "-setPhotoSetModel:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -32,27 +32,32 @@
     return [[UIScreen mainScreen] bounds].size.width;
 }
 
-+(BOOL)isNightMode:(BOOL)isNight
++(BOOL)isNightMode
 {
-    return isNight;
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isNightMode"] integerValue] == 1) {
+        return YES;
+    }
+    else
+        return NO;
 }
 
-+(UILabel*)label:(NSString *)title font:(UIFont *)font textColor:(UIColor *)color nightTextColor:(UIColor *)nightColor textAligment:(NSTextAlignment)alignment isNightMode:(BOOL)isNightMode
++(UILabel*)label:(NSString *)title font:(UIFont *)font textColor:(UIColor *)color nightTextColor:(UIColor *)nightColor textAligment:(NSTextAlignment)alignment
 {
     UILabel *label = [[UILabel alloc] init];
     label.backgroundColor = [UIColor clearColor];
     label.font = font;
     label.text = title;
     label.textAlignment = alignment;
-    label.textColor = isNightMode?nightColor:color;
+    label.dk_textColorPicker = DKColorWithColors(color, nightColor);
     return label;
 }
 
-+(UIImageView*)imageView:(NSString *)image nightImage:(NSString *)nightImage isNightMode:(BOOL)isNightMode
++(UIImageView*)imageView:(NSString *)image
 {
     UIImageView * imageView=nil;
     if (image) {
-        imageView=[[UIImageView alloc] initWithImage:[UIImage imageNamed:isNightMode?nightImage:image]];
+        imageView=[[UIImageView alloc] init];
+        SetImageViewImage(imageView, image);
     }
     else{
         imageView=[[UIImageView alloc] init];
@@ -60,44 +65,45 @@
     return imageView;
 }
 
-+(UIView *)view:(UIColor *)backgroundColor nightColor:(UIColor *)nightBackgroundColor isNightMode:(BOOL)isNightMode
++(UIView *)view:(UIColor *)backgroundColor nightColor:(UIColor *)nightBackgroundColor
 {
     UIView *view = [[UIView alloc] init];
-    view.backgroundColor = isNightMode?nightBackgroundColor:backgroundColor;
+    view.dk_backgroundColorPicker = DKColorWithColors(backgroundColor, nightBackgroundColor);
     return view;
 }
 
-+(UIButton *)button:(NSString *)normalImage highlightedImage:(NSString *)highlightedImage nightNormalImage:(NSString *)nightNormalImage nightHighlightedImage:(NSString *)nightHighlightedImage target:(id)target action:(SEL)sel tag:(NSInteger)tag isNightMode:(BOOL)isNightMode
++(UIButton *)button:(NSString *)image target:(id)target action:(SEL)sel tag:(NSInteger)tag
 {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setImage:[UIImage imageNamed:isNightMode?nightNormalImage:normalImage] forState:UIControlStateNormal];
-    [button setImage:[UIImage imageNamed:isNightMode?nightHighlightedImage:highlightedImage] forState:UIControlStateHighlighted];
+    SetButtonImage(button, image);
+    SetButtonImageHighlighted(button, image);
     button.tag = tag;
     [button addTarget:target action:sel forControlEvents:UIControlEventTouchUpInside];
     return  button;
 }
 
-+(UIButton *)button:(NSString *)title textColor:(UIColor *)color nightTextColor:(UIColor *)nightColor textFont:(UIFont *)font tag:(NSInteger)tag target:(id)target action:(SEL)sel isNightMode:(BOOL)isNightMode
++(UIButton *)button:(NSString *)title textColor:(UIColor *)color nightTextColor:(UIColor *)nightColor selectedTextColor:(UIColor *)selectedColor nightSelectedTextColor:(UIColor *)nightSelectedColor textFont:(UIFont *)font tag:(NSInteger)tag target:(id)target action:(SEL)sel
 {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setTitle:title forState:UIControlStateNormal];
-    [button setTitleColor:isNightMode?nightColor:color forState:UIControlStateNormal];
+    [button dk_setTitleColorPicker:DKColorWithColors(color, nightColor) forState:UIControlStateNormal];
+    [button dk_setTitleColorPicker:DKColorWithColors(nightSelectedColor, selectedColor) forState:UIControlStateSelected];
     button.titleLabel.font = font;
     button.tag = tag;
     [button addTarget:target action:sel forControlEvents:UIControlEventTouchUpInside];
     return  button;
 }
 
--(void)createNavigationBarWithSuperView:(UIView *)view andTitle:(NSString *)title andTarget:(id)target andSel:(SEL)sel isNightMode:(BOOL)isNightMode
+-(void)createNavigationBarWithSuperView:(UIView *)view andTitle:(NSString *)title andTarget:(id)target andSel:(SEL)sel
 {
-    UIImageView *IV = [Helper imageView:@"top_navigation_background@2x.png" nightImage:@"top_navigation_background@2x.png" isNightMode:isNightMode];
+    UIImageView *IV = [Helper imageView:@"top_navigation_background@2x"];
     [view addSubview:IV];
     [IV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.top.and.right.mas_equalTo(view);
         make.height.offset(64);
     }];
     
-    UIButton *backBtn = [Helper button:@"top_navigation_back@2x.png" highlightedImage:@"top_navigation_back_highlighted@2x.png" nightNormalImage:@"night_top_navigation_back@2x.png" nightHighlightedImage:@"night_top_navigation_back_highlighted@2x.png" target:target action:sel tag:0 isNightMode:isNightMode];
+    UIButton *backBtn = [Helper button:@"top_navigation_back@2x" target:target action:sel tag:0];
     [view addSubview:backBtn];
     [backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(view);
@@ -105,7 +111,7 @@
         make.size.sizeOffset(CGSizeMake(45, 44));
     }];
     
-    UILabel *titleLab = [Helper label:title font:TITLEFONT textColor:DAYBACKGROUNDCOLOR nightTextColor:NIGHTTEXTCOLOR textAligment:NSTextAlignmentCenter isNightMode:isNightMode];
+    UILabel *titleLab = [Helper label:title font:TITLEFONT textColor:DAYBACKGROUNDCOLOR nightTextColor:NIGHTTEXTCOLOR textAligment:NSTextAlignmentCenter];
     [view addSubview:titleLab];
     [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(backBtn.mas_right);

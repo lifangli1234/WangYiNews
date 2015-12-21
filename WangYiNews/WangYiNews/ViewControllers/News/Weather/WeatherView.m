@@ -12,12 +12,9 @@
 
 @interface WeatherView()
 
-@property(nonatomic, strong) UIButton *searchBtn;
-@property(nonatomic, strong) UIButton *headLineBtn;
-@property(nonatomic, strong) UIButton *offLineBtn;
+@property(nonatomic, strong) UILabel *nightLabel;
 @property(nonatomic, strong) UIButton *nightBtn;
-@property(nonatomic, strong) UIButton *scanBtn;
-@property(nonatomic, strong) UIButton *shareBtn;
+@property(nonatomic,assign,getter=isSwitchNightMode)BOOL switchNightMode;
 
 @end
 
@@ -36,7 +33,9 @@
 
 -(void)layoutSubviews
 {
+    self.dk_backgroundColorPicker = DKColorWithColors([UIColor whiteColor], [UIColor blackColor]);
     UIView *topView = [[UIView alloc] init];
+    topView.dk_backgroundColorPicker = DKColorWithColors([UIColor whiteColor], [UIColor blackColor]);
     [self addSubview:topView];
     [topView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.mas_equalTo(self);
@@ -68,7 +67,7 @@
     }];
     
     _lab3 = [[UILabel alloc] init];
-    _lab3.textColor = [UIColor grayColor];
+    _lab3.dk_textColorPicker = DKColorWithColors([UIColor grayColor], [UIColor lightGrayColor]);
     _lab3.font = [UIFont systemFontOfSize:16];
     [self addSubview:_lab3];
     [_lab3 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -78,7 +77,7 @@
     }];
     
     _lab4 = [[UILabel alloc] init];
-    _lab4.textColor = [UIColor darkGrayColor];
+    _lab4.dk_textColorPicker = DKColorWithColors([UIColor darkGrayColor], [UIColor whiteColor]);
     _lab4.font = [UIFont systemFontOfSize:15];
     [self addSubview:_lab4];
     [_lab4 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -88,7 +87,7 @@
     }];
     
     _lab5 = [[UILabel alloc] init];
-    _lab5.textColor = [UIColor darkGrayColor];
+    _lab5.dk_textColorPicker = DKColorWithColors([UIColor darkGrayColor], [UIColor whiteColor]);
     _lab5.font = [UIFont systemFontOfSize:15];
     [self addSubview:_lab5];
     [_lab5 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -106,7 +105,7 @@
     }];
     
     _lab6 = [[UILabel alloc] init];
-    _lab6.textColor = [UIColor darkGrayColor];
+    _lab6.dk_textColorPicker = DKColorWithColors([UIColor darkGrayColor], [UIColor whiteColor]);
     _lab6.font = [UIFont systemFontOfSize:15];
     _lab6.textAlignment = NSTextAlignmentRight;
     [self addSubview:_lab6];
@@ -117,7 +116,7 @@
     }];
     
     _lab7 = [[UILabel alloc] init];
-    _lab7.textColor = [UIColor darkGrayColor];
+    _lab7.dk_textColorPicker = DKColorWithColors([UIColor darkGrayColor], [UIColor whiteColor]);
     _lab7.font = [UIFont systemFontOfSize:15];
     _lab7.textAlignment = NSTextAlignmentRight;
     [self addSubview:_lab7];
@@ -129,7 +128,7 @@
     
     CGFloat Y = [Helper screenHeight]-410;
     UIView *midLine = [[UIView alloc] init];
-    midLine.backgroundColor = LINECOLOR;
+    midLine.dk_backgroundColorPicker = DKColorWithColors(LINECOLOR, NIGHTLINECOLOR);
     [self addSubview:midLine];
     [midLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self).offset(30);
@@ -235,39 +234,35 @@
     UILabel *titleLab = [[UILabel alloc] initWithFrame:CGRectMake((X+(80+([Helper screenWidth]-300)/2)*(index%3)), (Y+85)+140*(index/3), width, 30)];
     titleLab.text = title;
     titleLab.font = [UIFont systemFontOfSize:15];
-    titleLab.textColor = [UIColor darkGrayColor];
+    titleLab.dk_textColorPicker = DKColorWithColors([UIColor darkGrayColor], [UIColor whiteColor]);
     titleLab.textAlignment = NSTextAlignmentCenter;
     [self addSubview:titleLab];
     
     switch (index) {
         case 0:{
             btn.backgroundColor = [UIColor orangeColor];
-            self.searchBtn = btn;
         }
             break;
         case 1:{
             btn.backgroundColor = [UIColor redColor];
-            self.headLineBtn = btn;
         }
             break;
         case 2:{
             btn.backgroundColor = [UIColor orangeColor];
-            self.offLineBtn = btn;
         }
             break;
         case 3:{
             btn.backgroundColor = [UIColor cyanColor];
+            self.nightLabel = titleLab;
             self.nightBtn = btn;
         }
             break;
         case 4:{
             btn.backgroundColor = [UIColor blueColor];
-            self.scanBtn = btn;
         }
             break;
         case 5:{
             btn.backgroundColor = [UIColor greenColor];
-            self.shareBtn = btn;
         }
             break;
         default:
@@ -277,7 +272,27 @@
 
 -(void)btnClick:(UIButton *)btn
 {
-    
+    switch (btn.tag) {
+        case 3:
+        {
+            if (self.isSwitchNightMode) {
+                [DKNightVersionManager dawnComing];
+                self.nightLabel.text = @"夜间";
+                [self.nightBtn setImage:[UIImage imageNamed:@"pluginboard_icon_night@2x.png"] forState:UIControlStateNormal];
+            }
+            else{
+                [DKNightVersionManager nightFalling];
+                self.nightLabel.text = @"日间";
+                [self.nightBtn setImage:[UIImage imageNamed:@"pluginboard_icon_night@2x.png"] forState:UIControlStateNormal];
+            }
+            self.switchNightMode = !self.isSwitchNightMode;
+            [[NSUserDefaults standardUserDefaults] setBool:self.switchNightMode forKey:@"isNightMode"];
+        }
+            break;
+            
+        default:
+            break;
+    }
 }
 
 -(void)tapGesture

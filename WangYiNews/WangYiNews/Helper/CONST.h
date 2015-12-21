@@ -8,12 +8,17 @@
 
 #define BASEURL @"http://c.3g.163.com"
 
+#define SetButtonImage(button,imageName) [button setImage:[Helper isNightMode]?([UIImage imageNamed:[NSString stringWithFormat:@"night_%@",imageName]]?[UIImage imageNamed:[NSString stringWithFormat:@"night_%@",imageName]]:[UIImage imageNamed:imageName]):[UIImage imageNamed:imageName] forState:UIControlStateNormal]
+#define SetButtonImageHighlighted(button,imageName) [button setImage:[Helper isNightMode]?([UIImage imageNamed:[NSString stringWithFormat:@"night_%@_highlighted",imageName]]?[UIImage imageNamed:[NSString stringWithFormat:@"night_%@_highlighted",imageName]]:([UIImage imageNamed:[NSString stringWithFormat:@"%@_highlighted",imageName]]?[UIImage imageNamed:[NSString stringWithFormat:@"%@_highlighted",imageName]]:[UIImage imageNamed:imageName])):([UIImage imageNamed:[NSString stringWithFormat:@"%@_highlighted",imageName]]?[UIImage imageNamed:[NSString stringWithFormat:@"%@_highlighted",imageName]]:[UIImage imageNamed:imageName]) forState:UIControlStateNormal]
+#define SetImageViewImage(imageView,imageName) [imageView setDk_imagePicker:DKImageWithImages([UIImage imageNamed:imageName], [UIImage imageNamed:[NSString stringWithFormat:@"night_%@",imageName]]?[UIImage imageNamed:[NSString stringWithFormat:@"night_%@",imageName]]:[UIImage imageNamed:imageName])]
+
 #define DAYBACKGROUNDCOLOR [UIColor whiteColor]
 #define NIGHTBACKGROUNDCOLOR [UIColor colorWithRed:70.0/255.0 green:70.0/255.0 blue:70.0/255.0 alpha:1.0]
 #define NIGHTTEXTCOLOR [UIColor colorWithRed:205.0/255.0 green:205.0/255.0 blue:205.0/255.0 alpha:1.0]
 #define BASERED [UIColor colorWithRed:0.87 green:0.19 blue:0.19 alpha:1.0]
 #define BASERED_NIGHT [UIColor colorWithRed:0.71 green:0.18 blue:0.17 alpha:1.0]
 #define LINECOLOR [UIColor colorWithRed:225.0/255.0 green:225.0/255.0 blue:225.0/255.0 alpha:1.0]
+#define NIGHTLINECOLOR [UIColor colorWithRed:115.0/255.0 green:115.0/255.0 blue:115.0/255.0 alpha:1.0]
 #define GRAYCOLOR [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0]
 
 #define TITLEFONT [UIFont systemFontOfSize:18]

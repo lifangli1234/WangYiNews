@@ -14,17 +14,17 @@
 +(NSInteger)screenHeight;
 +(NSInteger)screenWidth;
 
-+(BOOL)isNightMode:(BOOL)isNight;
++(BOOL)isNightMode;
 
-+(UILabel *)label:(NSString *)title font:(UIFont *)font textColor:(UIColor *)color nightTextColor:(UIColor *)nightColor textAligment:(NSTextAlignment)alignment isNightMode:(BOOL)isNightMode;
-+(UIImageView *)imageView:(NSString *)image nightImage:(NSString *)nightImage isNightMode:(BOOL)isNightMode;
-+(UIView *)view:(UIColor *)backgroundColor nightColor:(UIColor *)nightBackgroundColor isNightMode:(BOOL)isNightMode;
-+(UIButton *)button:(NSString *)normalImage highlightedImage:(NSString *)highlightedImage nightNormalImage:(NSString *)nightNormalImage nightHighlightedImage:(NSString *)nightHighlightedImage target:(id)target action:(SEL)sel tag:(NSInteger)tag isNightMode:(BOOL)isNightMode;
-+(UIButton *)button:(NSString *)title textColor:(UIColor *)color nightTextColor:(UIColor *)nightColor textFont:(UIFont *)font tag:(NSInteger)tag target:(id)target action:(SEL)sel isNightMode:(BOOL)isNightMode;
++(UILabel *)label:(NSString *)title font:(UIFont *)font textColor:(UIColor *)color nightTextColor:(UIColor *)nightColor textAligment:(NSTextAlignment)alignment;
++(UIImageView *)imageView:(NSString *)image;
++(UIView *)view:(UIColor *)backgroundColor nightColor:(UIColor *)nightBackgroundColor;
++(UIButton *)button:(NSString *)image target:(id)target action:(SEL)sel tag:(NSInteger)tag;
++(UIButton *)button:(NSString *)title textColor:(UIColor *)color nightTextColor:(UIColor *)nightColor selectedTextColor:(UIColor *)selectedColor nightSelectedTextColor:(UIColor *)nightSelectedColor textFont:(UIFont *)font tag:(NSInteger)tag target:(id)target action:(SEL)sel;
 
 +(NSMutableArray *)addUrlsWithArr:(NSMutableArray *)arr;
 
--(void)createNavigationBarWithSuperView:(UIView *)view andTitle:(NSString *)title andTarget:(id)target andSel:(SEL)sel isNightMode:(BOOL)isNightMode;
+-(void)createNavigationBarWithSuperView:(UIView *)view andTitle:(NSString *)title andTarget:(id)target andSel:(SEL)sel;
 
 @end
 

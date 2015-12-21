@@ -19,7 +19,6 @@
 
 @property (nonatomic, strong) NSMutableArray *titleArray;
 @property (nonatomic, strong) NSMutableArray *titleAddedArray;
-@property (nonatomic, assign) BOOL isNightMode;
 @property (nonatomic, strong) UIButton *squareBtn;
 @property(nonatomic,assign,getter=isWeatherShow)BOOL weatherShow;
 
@@ -34,11 +33,6 @@
     WeatherView *_weatherView;
     UIImageView *_tran;
     WeatherModel *_weatherModel;
-}
-
--(void)setIsNightMode:(BOOL)isNightMode
-{
-    _isNightMode = isNightMode;
 }
 
 -(void)setTitleArray:(NSMutableArray *)titleArray
@@ -66,14 +60,14 @@
 #pragma mark -----------------navigation---------------
 -(void)createNavigation
 {
-    UIView *navView = [Helper view:BASERED nightColor:BASERED_NIGHT isNightMode:self.isNightMode];
+    UIView *navView = [Helper view:BASERED nightColor:BASERED_NIGHT];
     [self.view addSubview:navView];
     [navView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.and.top.mas_equalTo(self.view);
         make.height.offset(64);
     }];
     
-    UIButton *bellBtn = [Helper button:@"top_navi_bell_normal@2x.png" highlightedImage:@"top_navi_bell_highlight@2x.png" nightNormalImage:@"top_navi_bell_normal@2x.png" nightHighlightedImage:@"top_navi_bell_highlight@2x.png" target:self action:@selector(navigationBarItemClick:) tag:TOP_NAV_HOTNEWS_TAG isNightMode:self.isNightMode];
+    UIButton *bellBtn = [Helper button:@"top_navi_bell@2x" target:self action:@selector(navigationBarItemClick:) tag:TOP_NAV_HOTNEWS_TAG];
     [self.view addSubview:bellBtn];
     [bellBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.view).offset(14);
@@ -81,7 +75,7 @@
         make.size.sizeOffset(CGSizeMake(24, 24));
     }];
     
-    _squareBtn = [Helper button:@"top_navigation_square@2x.png" highlightedImage:@"top_navi_bell_highlight@2x.png" nightNormalImage:@"top_navi_bell_normal@2x.png" nightHighlightedImage:@"top_navi_bell_highlight@2x.png" target:self action:@selector(navigationBarItemClick:) tag:TOP_NAV_SQUARE_TAG isNightMode:self.isNightMode];
+    _squareBtn = [Helper button:@"top_navigation_square@2x" target:self action:@selector(navigationBarItemClick:) tag:TOP_NAV_SQUARE_TAG];
     [self.view addSubview:_squareBtn];
     [_squareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(self.view).offset(-14);
@@ -89,7 +83,7 @@
         make.size.sizeOffset(CGSizeMake(24, 24));
     }];
     
-    UIImageView *topImg = [Helper imageView:@"navbar_netease@2x.png" nightImage:@"navbar_netease@2x.png" isNightMode:self.isNightMode];
+    UIImageView *topImg = [Helper imageView:@"navbar_netease@2x"];
     [self.view addSubview:topImg];
     [topImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view);
@@ -148,7 +142,7 @@
 
 -(void)createScrollView
 {
-    UIView *titleView = [Helper view:DAYBACKGROUNDCOLOR nightColor:NIGHTBACKGROUNDCOLOR isNightMode:self.isNightMode];
+    UIView *titleView = [Helper view:DAYBACKGROUNDCOLOR nightColor:NIGHTBACKGROUNDCOLOR];
     [self.view addSubview:titleView];
     [titleView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.mas_equalTo(self.view);
@@ -156,7 +150,7 @@
         make.height.offset(40);
     }];
     
-    _upAndDownBtn = [Helper button:@"calendar_switch_down@2x.png" highlightedImage:nil nightNormalImage:nil nightHighlightedImage:nil target:self action:@selector(showNewsCategory) tag:0 isNightMode:self.isNightMode];
+    _upAndDownBtn = [Helper button:@"calendar_switch_down@2x" target:self action:@selector(showNewsCategory) tag:0];
     [titleView addSubview:_upAndDownBtn];
     [_upAndDownBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(titleView);

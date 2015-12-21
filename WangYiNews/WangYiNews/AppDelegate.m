@@ -37,6 +37,11 @@
     
     Tab.viewControllers = [NSArray arrayWithObjects:nvc, rvc, vvc, dvc, mvc, nil];
     
+    if ([Helper isNightMode]) {
+        [DKNightVersionManager nightFalling];
+    }
+    else
+        [DKNightVersionManager dawnComing];
     return YES;
 }
 
