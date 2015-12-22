@@ -20,8 +20,9 @@
 #define BASERED [UIColor colorWithRed:0.86 green:0.24 blue:0.24 alpha:1.0]
 #define BASERED_NIGHT [UIColor colorWithRed:0.62 green:0.16 blue:0.16 alpha:1.0]
 #define LINECOLOR [UIColor colorWithRed:0.89 green:0.89 blue:0.89 alpha:1.0]
-#define NIGHTLINECOLOR [UIColor colorWithRed:0.12 green:0.12 blue:0.12 alpha:1.0]
-#define GRAYCOLOR [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0]
+#define NIGHTLINECOLOR [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:1.0]
+#define GRAYCOLOR [UIColor colorWithRed:0.86 green:0.86 blue:0.86 alpha:1.0]
+#define NIGHTGRAYCOLOR [UIColor colorWithRed:0.76 green:0.76 blue:0.76 alpha:1.0]
 
 #define TITLEFONT [UIFont systemFontOfSize:18]
 #define MIDBUTTONFONT [UIFont systemFontOfSize:15]

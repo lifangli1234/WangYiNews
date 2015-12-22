@@ -50,7 +50,6 @@
     // Do any additional setup after loading the view.
     
     self.view.dk_backgroundColorPicker = DKColorWithColors([UIColor whiteColor], NIGHTBACKGROUNDCOLOR);
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
     [self createNavigation];
     [self createScrollView];

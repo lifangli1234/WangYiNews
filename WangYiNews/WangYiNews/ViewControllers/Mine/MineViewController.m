@@ -62,7 +62,7 @@
     UIButton *settingBtn = [Helper button:@"设置" textColor:[UIColor whiteColor] nightTextColor:[UIColor whiteColor] textFont:[UIFont systemFontOfSize:15] tag:0 target:self action:@selector(UserPreference)];
     [userHeader addSubview:settingBtn];
     [settingBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(userHeader).offset(-66);
+        make.right.equalTo(userHeader).offset(0);
         make.top.equalTo(userHeader).offset(25);
         make.size.sizeOffset(CGSizeMake(66, 25));
     }];
@@ -106,7 +106,7 @@
     [self addButton:@"金币" image:@"user_coin_icon@2x" superView:bottomView index:3 count:4 tag:USECOIN_TAG];
     
     UIView *lineView = [Helper view:LINECOLOR nightColor:NIGHTLINECOLOR];
-    lineView.layer.borderColor = [[UIColor grayColor] CGColor];
+    lineView.layer.borderColor = [Helper isNightMode]?[GRAYCOLOR CGColor]:[NIGHTGRAYCOLOR CGColor];
     lineView.layer.borderWidth = 0.5;
     [headerView addSubview:lineView];
     [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -121,15 +121,15 @@
 
 -(void)addButton:(NSString *)name image:(NSString *)imageName superView:(UIView *)superView index:(NSInteger)index count:(NSInteger)count tag:(NSInteger)tag
 {
-    CGFloat width = ([Helper screenWidth]-(count-1)*0.5)/count;
+    CGFloat width = ([Helper screenWidth]-(count-1))/count;
     
     UILabel *lab = [Helper label:name font:[UIFont systemFontOfSize:12] textColor:[UIColor darkGrayColor] nightTextColor:[UIColor lightGrayColor] textAligment:NSTextAlignmentCenter];
     [superView addSubview:lab];
     [lab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(superView);
+        make.bottom.equalTo(superView).offset(-5);
         make.height.offset(26);
         make.width.offset(width);
-        make.left.equalTo(superView).offset(width*index);
+        make.left.equalTo(superView).offset((width+1)*index);
     }];
     
     UIButton *btn = [Helper button:imageName target:self action:@selector(userAction:) tag:tag];
@@ -142,26 +142,26 @@
         make.width.equalTo(lab.mas_width);
     }];
     
-    UIView *line = [Helper view:LINECOLOR nightColor:NIGHTLINECOLOR];
+    UIView *line = [Helper view:GRAYCOLOR nightColor:NIGHTGRAYCOLOR];
     [superView addSubview:line];
     [line mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(btn.mas_right);
-        make.width.offset(0.5);
+        make.left.equalTo(lab.mas_right);
+        make.width.offset(1);
         make.top.bottom.equalTo(superView);
     }];
     
     switch (index) {
         case 0:
-            btn.contentEdgeInsets = UIEdgeInsetsMake(21, (([Helper screenWidth]-(count*0.5))/count-40)/2, 46, (([Helper screenWidth]-(count*0.5))/count-40)/2);
+            btn.contentEdgeInsets = UIEdgeInsetsMake(21, (([Helper screenWidth]-(count*1))/count-40)/2, 46, (([Helper screenWidth]-(count*1))/count-40)/2);
             break;
         case 1:
-            btn.contentEdgeInsets = UIEdgeInsetsMake(18, (([Helper screenWidth]-(count*0.5))/count-25)/2, 42, (([Helper screenWidth]-(count*0.5))/count-25)/2);
+            btn.contentEdgeInsets = UIEdgeInsetsMake(18, (([Helper screenWidth]-(count*1))/count-25)/2, 42, (([Helper screenWidth]-(count*1))/count-25)/2);
             break;
         case 2:
-            btn.contentEdgeInsets = UIEdgeInsetsMake(19, (([Helper screenWidth]-(count*0.5))/count-22)/2, 43, (([Helper screenWidth]-(count*0.5))/count-22)/2);
+            btn.contentEdgeInsets = UIEdgeInsetsMake(19, (([Helper screenWidth]-(count*1))/count-22)/2, 43, (([Helper screenWidth]-(count*1))/count-22)/2);
             break;
         case 3:
-            btn.contentEdgeInsets = UIEdgeInsetsMake(19, (([Helper screenWidth]-(count*0.5))/count-29)/2, 44, (([Helper screenWidth]-(count*0.5))/count-29)/2);
+            btn.contentEdgeInsets = UIEdgeInsetsMake(19, (([Helper screenWidth]-(count*1))/count-29)/2, 44, (([Helper screenWidth]-(count*1))/count-29)/2);
             break;
         default:
             break;
@@ -201,7 +201,7 @@
     [lab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(cell.contentView);
         make.height.offset(44);
-        make.left.equalTo(img.mas_left).offset(14);
+        make.left.equalTo(img.mas_right).offset(14);
     }];
     
     UIImageView *enterImg = [Helper imageView:@"lm_cell_detail_indicator@2x"];
@@ -214,19 +214,21 @@
 
     if (indexPath.row == 0 || indexPath.row == 3) {
         UIView *lineView = [Helper view:LINECOLOR nightColor:NIGHTLINECOLOR];
-        lineView.layer.borderColor = [[UIColor grayColor] CGColor];
+        lineView.layer.borderColor = [Helper isNightMode]?[GRAYCOLOR CGColor]:[NIGHTGRAYCOLOR CGColor];
         lineView.layer.borderWidth = 0.5;
         [cell.contentView addSubview:lineView];
         [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.bottom.equalTo(cell.contentView);
+            make.left.right.equalTo(cell.contentView);
+            make.bottom.equalTo(cell.contentView).offset(-0.5);
             make.height.offset(5);
         }];
     }
     else{
-        UIView *lineView = [Helper view:LINECOLOR nightColor:NIGHTLINECOLOR];
+        UIView *lineView = [Helper view:GRAYCOLOR nightColor:NIGHTGRAYCOLOR];
         [cell.contentView addSubview:lineView];
         [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.bottom.equalTo(cell.contentView);
+            make.left.right.equalTo(cell.contentView);
+            make.bottom.equalTo(cell.contentView).offset(-0.5);
             make.height.offset(0.5);
         }];
     }

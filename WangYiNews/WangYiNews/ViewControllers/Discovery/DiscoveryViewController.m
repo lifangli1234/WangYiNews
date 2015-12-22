@@ -28,12 +28,12 @@
     UIView *IV = [Helper view:BASERED nightColor:BASERED_NIGHT];
     [self.view addSubview:IV];
     [IV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self);
-        make.left.right.equalTo(self);
+        make.top.equalTo(self.view);
+        make.left.right.equalTo(self.view);
         make.height.offset(64);
     }];
     
-    UILabel *titleLab = [Helper label:@"发现" font:TITLEFONT textColor:DAYBACKGROUNDCOLOR nightTextColor:NIGHTTEXTCOLOR textAligment:NSTextAlignmentCenter];
+    UILabel *titleLab = [Helper label:@"发现" font:TITLEFONT textColor:[UIColor whiteColor] nightTextColor:[UIColor whiteColor] textAligment:NSTextAlignmentCenter];
     [IV addSubview:titleLab];
     [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(IV).offset(20);

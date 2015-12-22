@@ -140,6 +140,9 @@
 		4012B8CA1BE6F6D20057C8A2 /* contentview_commentbacky_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4012B8C91BE6F6D20057C8A2 /* contentview_commentbacky_selected@2x.png */; };
 		4012B8CC1BE6F6EA0057C8A2 /* contentview_commentbacky@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4012B8CB1BE6F6EA0057C8A2 /* contentview_commentbacky@2x.png */; };
 		4012B8CF1BE6F7BF0057C8A2 /* NSObject+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4012B8CE1BE6F7BF0057C8A2 /* NSObject+Extension.m */; };
+		401CCA721C2945EF0023B8A4 /* VideoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 401CCA6D1C2945EF0023B8A4 /* VideoModel.m */; };
+		401CCA731C2945EF0023B8A4 /* AudioModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 401CCA6F1C2945EF0023B8A4 /* AudioModel.m */; };
+		401CCA741C2945EF0023B8A4 /* AudioSubModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 401CCA711C2945EF0023B8A4 /* AudioSubModel.m */; };
 		40250C0A1BE88F8600CFB7F9 /* night_photoset_list_cell_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 40250C081BE88F8600CFB7F9 /* night_photoset_list_cell_icon@2x.png */; };
 		40250C0B1BE88F8600CFB7F9 /* photoset_list_cell_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 40250C091BE88F8600CFB7F9 /* photoset_list_cell_icon@2x.png */; };
 		40250C0D1BE89CAB00CFB7F9 /* SepecialBasic.xib in Resources */ = {isa = PBXBuildFile; fileRef = 40250C0C1BE89CAB00CFB7F9 /* SepecialBasic.xib */; };
@@ -602,6 +605,12 @@
 		4012B8CB1BE6F6EA0057C8A2 /* contentview_commentbacky@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "contentview_commentbacky@2x.png"; sourceTree = "<group>"; };
 		4012B8CD1BE6F7BF0057C8A2 /* NSObject+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Extension.h"; sourceTree = "<group>"; };
 		4012B8CE1BE6F7BF0057C8A2 /* NSObject+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Extension.m"; sourceTree = "<group>"; };
+		401CCA6C1C2945EF0023B8A4 /* VideoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoModel.h; sourceTree = "<group>"; };
+		401CCA6D1C2945EF0023B8A4 /* VideoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoModel.m; sourceTree = "<group>"; };
+		401CCA6E1C2945EF0023B8A4 /* AudioModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioModel.h; sourceTree = "<group>"; };
+		401CCA6F1C2945EF0023B8A4 /* AudioModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioModel.m; sourceTree = "<group>"; };
+		401CCA701C2945EF0023B8A4 /* AudioSubModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioSubModel.h; sourceTree = "<group>"; };
+		401CCA711C2945EF0023B8A4 /* AudioSubModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioSubModel.m; sourceTree = "<group>"; };
 		40250C081BE88F8600CFB7F9 /* night_photoset_list_cell_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "night_photoset_list_cell_icon@2x.png"; sourceTree = "<group>"; };
 		40250C091BE88F8600CFB7F9 /* photoset_list_cell_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photoset_list_cell_icon@2x.png"; sourceTree = "<group>"; };
 		40250C0C1BE89CAB00CFB7F9 /* SepecialBasic.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SepecialBasic.xib; sourceTree = "<group>"; };
@@ -1252,6 +1261,12 @@
 		404FA89F1BD4B8DB00FCEC69 /* Video */ = {
 			isa = PBXGroup;
 			children = (
+				401CCA6C1C2945EF0023B8A4 /* VideoModel.h */,
+				401CCA6D1C2945EF0023B8A4 /* VideoModel.m */,
+				401CCA6E1C2945EF0023B8A4 /* AudioModel.h */,
+				401CCA6F1C2945EF0023B8A4 /* AudioModel.m */,
+				401CCA701C2945EF0023B8A4 /* AudioSubModel.h */,
+				401CCA711C2945EF0023B8A4 /* AudioSubModel.m */,
 				406363FE1BD5CB8100202C16 /* VideoViewController.h */,
 				406363FF1BD5CB8100202C16 /* VideoViewController.m */,
 			);
@@ -2210,6 +2225,7 @@
 				4012B86F1BE4A0BC0057C8A2 /* MGTemplateStandardMarkers.m in Sources */,
 				404FA85F1BD4839200FCEC69 /* AppDelegate.m in Sources */,
 				4012B8151BE32EA80057C8A2 /* SepecialModel.m in Sources */,
+				401CCA741C2945EF0023B8A4 /* AudioSubModel.m in Sources */,
 				407FAE301BDF490A004DA6F1 /* NewsCategoryTitle.m in Sources */,
 				4012B8071BE2F98A0057C8A2 /* NewsDetailViewController.m in Sources */,
 				40ED62361BF2FF8900D2504C /* PhotoSetModel.m in Sources */,
@@ -2220,6 +2236,7 @@
 				40E007031BD71F92005ADE78 /* NetworkTools.m in Sources */,
 				4012B8481BE4652E0057C8A2 /* SepecialCell.m in Sources */,
 				40A81D351BDB5DB1008A315E /* NewsCell.m in Sources */,
+				401CCA731C2945EF0023B8A4 /* AudioModel.m in Sources */,
 				40A81D691BDB79EB008A315E /* UIView+MJExtension.m in Sources */,
 				4012B8211BE3469C0057C8A2 /* VideoRecommendModel.m in Sources */,
 				406364001BD5CB8100202C16 /* VideoViewController.m in Sources */,
@@ -2242,6 +2259,7 @@
 				4012B72A1BE1B09B0057C8A2 /* WeatherView.m in Sources */,
 				404FA8AD1BD4B98000FCEC69 /* TabBarViewController.m in Sources */,
 				407FAE331BDF5250004DA6F1 /* ChannelModel.m in Sources */,
+				401CCA721C2945EF0023B8A4 /* VideoModel.m in Sources */,
 				40A81D641BDB79EB008A315E /* MJRefreshConst.m in Sources */,
 				4012B86D1BE4A0BC0057C8A2 /* MGTemplateEngine.m in Sources */,
 				4012B7241BE1AE200057C8A2 /* WeatherModel.m in Sources */,
