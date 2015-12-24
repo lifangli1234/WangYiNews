@@ -18,7 +18,7 @@
 #define VIDEOSUBURL @"/nc/video/home/"
 #define AUDIOSUBURL @"/nc/topicset/ios/radio/index.html"
 
-@interface VideoViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface VideoViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 
 @property(nonatomic,strong) NSMutableArray *contentListArr;
 @property(nonatomic,strong) NSMutableArray *titleListArr;
@@ -353,6 +353,7 @@
     _contentScr.dk_backgroundColorPicker = DKColorWithColors([UIColor grayColor], NIGHTBACKGROUNDCOLOR);
     _contentScr.contentSize = CGSizeMake([Helper screenWidth]*2, [Helper screenHeight]-64-49);
     _contentScr.pagingEnabled = YES;
+    _contentScr.delegate = self;
     _contentScr.showsHorizontalScrollIndicator = NO;
     _contentScr.showsVerticalScrollIndicator = NO;
     _contentScr.bounces = NO;
@@ -420,7 +421,31 @@
 #pragma mark----------------scrollViewDelegate------------
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    
+    NSInteger index = scrollView.contentOffset.x/[Helper screenWidth];
+    switch (index) {
+        case 0:
+        {
+            _videoBtn.selected = YES;
+            _audioBtn.selected = NO;
+            [_btnBackView mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(segmentView);
+            }];
+            [_btnBackView layoutIfNeeded];
+        }
+            break;
+        case 1:
+        {
+            _videoBtn.selected = NO;
+            _audioBtn.selected = YES;
+            [_btnBackView mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(segmentView).offset(100);
+            }];
+            [_btnBackView layoutIfNeeded];
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
