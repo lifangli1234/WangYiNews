@@ -13,6 +13,7 @@
 #import "VideoTitleModel.h"
 #import "VideoContentModel.h"
 #import "VideoCell.h"
+#import "AudioCell.h"
 
 #define VIDEOSUBURL @"/nc/video/home/"
 #define AUDIOSUBURL @"/nc/topicset/ios/radio/index.html"
@@ -21,6 +22,7 @@
 
 @property(nonatomic,strong) NSMutableArray *contentListArr;
 @property(nonatomic,strong) NSMutableArray *titleListArr;
+@property(nonatomic,strong) NSMutableArray *radioListArr;
 @property(nonatomic,assign)BOOL update;
 
 @end
@@ -51,6 +53,14 @@
         _contentListArr = [[NSMutableArray alloc] init];
     }
     return _contentListArr;
+}
+
+-(NSMutableArray *)radioListArr
+{
+    if (_radioListArr == nil) {
+        _radioListArr = [[NSMutableArray alloc] init];
+    }
+    return _radioListArr;
 }
 
 - (void)viewDidLoad {
@@ -111,12 +121,14 @@
                 [self.contentListArr addObjectsFromArray:videoModel.videoList];
                 [tableView footerEndRefreshing];
             }
-            [tableView reloadData];
         }
         else{
-            //AudioModel *audioModel = [AudioModel objectWithKeyValues:responseObject];
+            [self.radioListArr removeAllObjects];
+            NSArray *arr = [responseObject objectForKey:@"cList"];
+            [self.radioListArr addObjectsFromArray:arr];
+            [tableView headerEndRefreshing];
         }
-        
+        [tableView reloadData];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"%@",error);
         [tableView headerEndRefreshing];
@@ -358,34 +370,51 @@
 #pragma mark----------------tableViewDelegate------------
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _contentListArr.count;
-}
-
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
+    if (tableView == _videoTableView) {
+        return _contentListArr.count;
+    }
+    else
+        return _radioListArr.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellName = @"cell";
     
-    VideoCell *cell = [tableView dequeueReusableCellWithIdentifier:cellName];
-    if (cell == nil) {
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"VideoCell" owner:self options:nil] lastObject];
+    if (tableView == _videoTableView) {
+        VideoCell *cell = [tableView dequeueReusableCellWithIdentifier:cellName];
+        if (cell == nil) {
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"VideoCell" owner:self options:nil] lastObject];
+        }
+        
+        NSDictionary *dic = [_contentListArr objectAtIndex:indexPath.row];
+        VideoContentModel *vcm = [VideoContentModel objectWithKeyValues:dic];
+        vcm.desc = [dic objectForKey:@"description"];
+        [cell setVideoContentModel:vcm];
+        
+        return cell;
     }
-    
-    NSDictionary *dic = [_contentListArr objectAtIndex:indexPath.row];
-    VideoContentModel *vcm = [VideoContentModel objectWithKeyValues:dic];
-    vcm.desc = [dic objectForKey:@"description"];
-    [cell setVideoContentModel:vcm];
-    
-    return cell;
+    else{
+        AudioCell *cell = [tableView dequeueReusableCellWithIdentifier:cellName];
+        if (cell == nil) {
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"AudioCell" owner:self options:nil] lastObject];
+        }
+        
+        NSDictionary *dic = [_radioListArr objectAtIndex:indexPath.row];
+        AudioModel *acm = [AudioModel objectWithKeyValues:dic];
+        [cell setAudioModel:acm];
+        return cell;
+    }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 318;
+    if (tableView == _videoTableView) {
+        return 318;
+    }
+    else{
+        return 133 + ([Helper screenWidth]-50)/3;
+    }
 }
 
 #pragma mark----------------scrollViewDelegate------------

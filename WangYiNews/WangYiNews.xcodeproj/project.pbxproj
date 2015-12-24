@@ -375,6 +375,9 @@
 		40A81D681BDB79EB008A315E /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A81D5F1BDB79EB008A315E /* UIScrollView+MJRefresh.m */; };
 		40A81D691BDB79EB008A315E /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A81D611BDB79EB008A315E /* UIView+MJExtension.m */; };
 		40E007031BD71F92005ADE78 /* NetworkTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 40E007021BD71F92005ADE78 /* NetworkTools.m */; };
+		40E1B12D1C2B8F06006C2D2D /* RadioModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 40E1B12C1C2B8F06006C2D2D /* RadioModel.m */; };
+		40E1B1311C2B9424006C2D2D /* AudioCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 40E1B12F1C2B9424006C2D2D /* AudioCell.m */; };
+		40E1B1321C2B9424006C2D2D /* AudioCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 40E1B1301C2B9424006C2D2D /* AudioCell.xib */; };
 		40E4DBD91BE9C5A300BFBCFF /* specialcell_nav_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 40E4DBD81BE9C5A300BFBCFF /* specialcell_nav_btn@2x.png */; };
 		40E4DBDB1BE9C94300BFBCFF /* night_specialcell_nav_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 40E4DBDA1BE9C94300BFBCFF /* night_specialcell_nav_btn@2x.png */; };
 		40E5D84A1BE06D42008A62E4 /* calendar_switch_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 40E5D8481BE06D42008A62E4 /* calendar_switch_down@2x.png */; };
@@ -985,6 +988,11 @@
 		40A81D611BDB79EB008A315E /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
 		40E007011BD71F92005ADE78 /* NetworkTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkTools.h; sourceTree = "<group>"; };
 		40E007021BD71F92005ADE78 /* NetworkTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkTools.m; sourceTree = "<group>"; };
+		40E1B12B1C2B8F06006C2D2D /* RadioModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadioModel.h; sourceTree = "<group>"; };
+		40E1B12C1C2B8F06006C2D2D /* RadioModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadioModel.m; sourceTree = "<group>"; };
+		40E1B12E1C2B9424006C2D2D /* AudioCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioCell.h; sourceTree = "<group>"; };
+		40E1B12F1C2B9424006C2D2D /* AudioCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioCell.m; sourceTree = "<group>"; };
+		40E1B1301C2B9424006C2D2D /* AudioCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AudioCell.xib; sourceTree = "<group>"; };
 		40E4DBD81BE9C5A300BFBCFF /* specialcell_nav_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "specialcell_nav_btn@2x.png"; sourceTree = "<group>"; };
 		40E4DBDA1BE9C94300BFBCFF /* night_specialcell_nav_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "night_specialcell_nav_btn@2x.png"; sourceTree = "<group>"; };
 		40E5D8481BE06D42008A62E4 /* calendar_switch_down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendar_switch_down@2x.png"; sourceTree = "<group>"; };
@@ -1592,6 +1600,9 @@
 		404FA89F1BD4B8DB00FCEC69 /* Video */ = {
 			isa = PBXGroup;
 			children = (
+				40E1B12E1C2B9424006C2D2D /* AudioCell.h */,
+				40E1B12F1C2B9424006C2D2D /* AudioCell.m */,
+				40E1B1301C2B9424006C2D2D /* AudioCell.xib */,
 				40097AC11C2A76BA00D87458 /* VideoCell.h */,
 				40097AC21C2A76BA00D87458 /* VideoCell.m */,
 				40097AC31C2A76BA00D87458 /* VideoCell.xib */,
@@ -1607,6 +1618,8 @@
 				40097ABC1C2A3ADA00D87458 /* VideoTitleModel.m */,
 				40097ABE1C2A3AF100D87458 /* VideoContentModel.h */,
 				40097ABF1C2A3AF100D87458 /* VideoContentModel.m */,
+				40E1B12B1C2B8F06006C2D2D /* RadioModel.h */,
+				40E1B12C1C2B8F06006C2D2D /* RadioModel.m */,
 			);
 			path = Video;
 			sourceTree = "<group>";
@@ -2093,6 +2106,7 @@
 				TargetAttributes = {
 					404FA8551BD4839200FCEC69 = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = 69R9Y4CDGR;
 					};
 					404FA8711BD4839200FCEC69 = {
 						CreatedOnToolsVersion = 6.4;
@@ -2137,6 +2151,7 @@
 				4063647B1BD6201500202C16 /* night_top_navigation_plusicon_highlighted@2x.png in Resources */,
 				40FBAB021C27E9B10090716B /* user_missiondetail_prizeBG@2x.png in Resources */,
 				40FBAAE71C27E9B10090716B /* user_favor_circle@2x.png in Resources */,
+				40E1B1321C2B9424006C2D2D /* AudioCell.xib in Resources */,
 				40097BCE1C2AA8FE00D87458 /* night_audio_block_bg@2x.png in Resources */,
 				40FBAAF31C27E9B10090716B /* user_mission_explain_4_1@2x.png in Resources */,
 				4012B7891BE1B5860057C8A2 /* rain_heavyx.bundle in Resources */,
@@ -2686,6 +2701,7 @@
 				406364001BD5CB8100202C16 /* VideoViewController.m in Sources */,
 				404FA8A21BD4B90C00FCEC69 /* MineViewController.m in Sources */,
 				4012B81E1BE333E80057C8A2 /* SepecialViewController.m in Sources */,
+				40E1B1311C2B9424006C2D2D /* AudioCell.m in Sources */,
 				40A81D661BDB79EB008A315E /* MJRefreshHeaderView.m in Sources */,
 				40A81D671BDB79EB008A315E /* UIScrollView+MJExtension.m in Sources */,
 				40A81D681BDB79EB008A315E /* UIScrollView+MJRefresh.m in Sources */,
@@ -2716,6 +2732,7 @@
 				406363FA1BD5CB6500202C16 /* ReadingViewController.m in Sources */,
 				4012B8701BE4A0BC0057C8A2 /* NSArray_DeepMutableCopy.m in Sources */,
 				4012B8C81BE6F2C80057C8A2 /* NormalVideoModel.m in Sources */,
+				40E1B12D1C2B8F06006C2D2D /* RadioModel.m in Sources */,
 				4004AFB91C23FBC200EF3954 /* PhotoSetScrollView.m in Sources */,
 				4012B81B1BE330930057C8A2 /* SepecialContentModel.m in Sources */,
 			);
@@ -2844,12 +2861,15 @@
 			baseConfigurationReference = 9FF851EC6EDCB35FF4E4AB8C /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "/Users/lifangli/Documents/workspace/网易/WangYiNews/WangYiNews/WangYiNews/PrefixHeader.pch";
 				INFOPLIST_FILE = WangYiNews/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -2858,12 +2878,15 @@
 			baseConfigurationReference = 31EF740E1ABB63C277B7C183 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "/Users/lifangli/Documents/workspace/网易/WangYiNews/WangYiNews/WangYiNews/PrefixHeader.pch";
 				INFOPLIST_FILE = WangYiNews/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

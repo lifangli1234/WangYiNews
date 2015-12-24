@@ -10,7 +10,8 @@
 
 @interface AudioModel : NSObject
 
-@property (nonatomic, strong) NSString *cName;
+@property (nonatomic, strong) NSString *cid;
+@property (nonatomic, strong) NSString *cname;
 @property (nonatomic, strong) NSMutableArray *tList;
 
 + (instancetype)audioModelWithDict:(NSDictionary *)dict;
