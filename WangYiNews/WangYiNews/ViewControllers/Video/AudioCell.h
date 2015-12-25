@@ -9,8 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "AudioModel.h"
 
+@protocol AudioCellDelegate;
+
 @interface AudioCell : UITableViewCell
 
+@property (weak, nonatomic) id<AudioCellDelegate> delegate;
 @property (strong, nonatomic) AudioModel *audioModel;
 @property (weak, nonatomic) IBOutlet UIImageView *catergoryImg;
 @property (weak, nonatomic) IBOutlet UILabel *catergoryName;
@@ -40,4 +43,18 @@
 @property (weak, nonatomic) IBOutlet UIButton *playBtn2;
 @property (weak, nonatomic) IBOutlet UIButton *playBtn3;
 @property (weak, nonatomic) IBOutlet UIButton *catergortBtn;
+- (IBAction)catergoryBtn:(id)sender;
+- (IBAction)playBtn1:(id)sender;
+- (IBAction)playBtn2:(id)sender;
+- (IBAction)playBtn3:(id)sender;
+
+@end
+
+@protocol AudioCellDelegate <NSObject>
+
+-(void)audioCellCatergoryBtnClick:(NSInteger)tag;
+-(void)audioCellPlayBtn1Click:(NSInteger)tag;
+-(void)audioCellPlayBtn2Click:(NSInteger)tag;
+-(void)audioCellPlayBtn3Click:(NSInteger)tag;
+
 @end

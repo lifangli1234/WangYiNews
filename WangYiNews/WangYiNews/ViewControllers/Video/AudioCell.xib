@@ -142,21 +142,33 @@
                         <rect key="frame" x="28" y="70" width="46" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <action selector="playBtn1:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="xr4-zb-9ar"/>
+                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ayq-OS-ki9">
                         <rect key="frame" x="139" y="75" width="46" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <action selector="playBtn2:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="tu7-UC-bzR"/>
+                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="iTD-sD-jnD">
                         <rect key="frame" x="220" y="75" width="46" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <action selector="playBtn3:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="XOg-5n-F2k"/>
+                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="r8V-ms-jto">
                         <rect key="frame" x="84" y="0.0" width="46" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <action selector="catergoryBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="I2S-k5-wgA"/>
+                        </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MN5-cP-mcJ">
                         <rect key="frame" x="220" y="155" width="90" height="32"/>
@@ -181,7 +193,7 @@
                 <outlet property="img1" destination="lUe-sp-dOa" id="iFW-zk-1D5"/>
                 <outlet property="img2" destination="DVq-B5-97b" id="Hmy-LC-g2k"/>
                 <outlet property="img3" destination="KmP-gI-o3b" id="sXN-wW-trl"/>
-                <outlet property="playBtn1" destination="vec-EZ-Pxp" id="tHk-kb-2BP"/>
+                <outlet property="playBtn1" destination="vec-EZ-Pxp" id="gaG-Qe-19v"/>
                 <outlet property="playBtn2" destination="ayq-OS-ki9" id="ToQ-tL-jez"/>
                 <outlet property="playBtn3" destination="iTD-sD-jnD" id="vFg-bS-8r6"/>
                 <outlet property="playCount1" destination="q5V-JU-LJQ" id="nQY-ub-5KN"/>

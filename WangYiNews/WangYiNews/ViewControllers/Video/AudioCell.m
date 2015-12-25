@@ -75,9 +75,9 @@
     self.bottomLine.layer.borderColor = [Helper isNightMode]?NIGHTGRAYCOLOR.CGColor:GRAYCOLOR.CGColor;
     self.bottomLine.layer.borderWidth = 0.5;
     SetImageViewImage(self.enterImg, @"lm_cell_detail_indicator@2x");
-    SetImageViewImage(self.playImg1, @"audionews_index_play@2x");
-    SetImageViewImage(self.playImg2, @"audionews_index_play@2x");
-    SetImageViewImage(self.playImg3, @"audionews_index_play@2x");
+    SetImageViewImage(self.playImg1, @"contentview_play@2x");
+    SetImageViewImage(self.playImg2, @"contentview_play@2x");
+    SetImageViewImage(self.playImg3, @"contentview_play@2x");
     SetImageViewImage(self.tag1, @"audionews_index_tag@2x");
     SetImageViewImage(self.tag2, @"audionews_index_tag@2x");
     SetImageViewImage(self.tag3, @"audionews_index_tag@2x");
@@ -141,12 +141,15 @@
     }];
     [self.playImg1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self.img1);
+        make.size.sizeOffset(CGSizeMake(50, 50));
     }];
     [self.playImg2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self.img2);
+        make.size.sizeOffset(CGSizeMake(50, 50));
     }];
     [self.playImg3 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self.img3);
+        make.size.sizeOffset(CGSizeMake(50, 50));
     }];
     [self.title1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.img1.mas_left);
@@ -236,4 +239,27 @@
     }];
 }
 
+- (IBAction)catergoryBtn:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(audioCellCatergoryBtnClick:)]) {
+        [self.delegate audioCellCatergoryBtnClick:((UIButton *)sender).tag];
+    }
+}
+
+- (IBAction)playBtn1:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(audioCellPlayBtn1Click:)]) {
+        [self.delegate audioCellPlayBtn1Click:((UIButton *)sender).tag];
+    }
+}
+
+- (IBAction)playBtn2:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(audioCellPlayBtn2Click:)]) {
+        [self.delegate audioCellPlayBtn2Click:((UIButton *)sender).tag];
+    }
+}
+
+- (IBAction)playBtn3:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(audioCellPlayBtn3Click:)]) {
+        [self.delegate audioCellPlayBtn3Click:((UIButton *)sender).tag];
+    }
+}
 @end

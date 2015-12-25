@@ -249,6 +249,10 @@
 		401CCA721C2945EF0023B8A4 /* VideoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 401CCA6D1C2945EF0023B8A4 /* VideoModel.m */; };
 		401CCA731C2945EF0023B8A4 /* AudioModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 401CCA6F1C2945EF0023B8A4 /* AudioModel.m */; };
 		401CCA741C2945EF0023B8A4 /* AudioSubModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 401CCA711C2945EF0023B8A4 /* AudioSubModel.m */; };
+		401E78EB1C2CDEE000431300 /* CatergoryVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 401E78EA1C2CDEE000431300 /* CatergoryVideoViewController.m */; };
+		401E7A851C2D2ADD00431300 /* CatergoryRadioCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 401E7A831C2D2ADD00431300 /* CatergoryRadioCell.m */; };
+		401E7A861C2D2ADD00431300 /* CatergoryRadioCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 401E7A841C2D2ADD00431300 /* CatergoryRadioCell.xib */; };
+		401E7A881C2D2F1100431300 /* contentview_play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 401E7A871C2D2F1100431300 /* contentview_play@2x.png */; };
 		40250C0A1BE88F8600CFB7F9 /* night_photoset_list_cell_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 40250C081BE88F8600CFB7F9 /* night_photoset_list_cell_icon@2x.png */; };
 		40250C0B1BE88F8600CFB7F9 /* photoset_list_cell_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 40250C091BE88F8600CFB7F9 /* photoset_list_cell_icon@2x.png */; };
 		40250C0D1BE89CAB00CFB7F9 /* SepecialBasic.xib in Resources */ = {isa = PBXBuildFile; fileRef = 40250C0C1BE89CAB00CFB7F9 /* SepecialBasic.xib */; };
@@ -829,6 +833,12 @@
 		401CCA6F1C2945EF0023B8A4 /* AudioModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioModel.m; sourceTree = "<group>"; };
 		401CCA701C2945EF0023B8A4 /* AudioSubModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioSubModel.h; sourceTree = "<group>"; };
 		401CCA711C2945EF0023B8A4 /* AudioSubModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioSubModel.m; sourceTree = "<group>"; };
+		401E78E91C2CDEE000431300 /* CatergoryVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatergoryVideoViewController.h; sourceTree = "<group>"; };
+		401E78EA1C2CDEE000431300 /* CatergoryVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatergoryVideoViewController.m; sourceTree = "<group>"; };
+		401E7A821C2D2ADD00431300 /* CatergoryRadioCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatergoryRadioCell.h; sourceTree = "<group>"; };
+		401E7A831C2D2ADD00431300 /* CatergoryRadioCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatergoryRadioCell.m; sourceTree = "<group>"; };
+		401E7A841C2D2ADD00431300 /* CatergoryRadioCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CatergoryRadioCell.xib; sourceTree = "<group>"; };
+		401E7A871C2D2F1100431300 /* contentview_play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "contentview_play@2x.png"; sourceTree = "<group>"; };
 		40250C081BE88F8600CFB7F9 /* night_photoset_list_cell_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "night_photoset_list_cell_icon@2x.png"; sourceTree = "<group>"; };
 		40250C091BE88F8600CFB7F9 /* photoset_list_cell_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photoset_list_cell_icon@2x.png"; sourceTree = "<group>"; };
 		40250C0C1BE89CAB00CFB7F9 /* SepecialBasic.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SepecialBasic.xib; sourceTree = "<group>"; };
@@ -1238,6 +1248,7 @@
 		40097B621C2AA8FD00D87458 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				401E7A871C2D2F1100431300 /* contentview_play@2x.png */,
 				40097B631C2AA8FE00D87458 /* audio_block_bg@2x.png */,
 				40097B641C2AA8FE00D87458 /* audio_button_bg@2x.png */,
 				40097B651C2AA8FE00D87458 /* audio_button_bg_highlighted@2x.png */,
@@ -1620,6 +1631,11 @@
 				40097ABF1C2A3AF100D87458 /* VideoContentModel.m */,
 				40E1B12B1C2B8F06006C2D2D /* RadioModel.h */,
 				40E1B12C1C2B8F06006C2D2D /* RadioModel.m */,
+				401E78E91C2CDEE000431300 /* CatergoryVideoViewController.h */,
+				401E78EA1C2CDEE000431300 /* CatergoryVideoViewController.m */,
+				401E7A821C2D2ADD00431300 /* CatergoryRadioCell.h */,
+				401E7A831C2D2ADD00431300 /* CatergoryRadioCell.m */,
+				401E7A841C2D2ADD00431300 /* CatergoryRadioCell.xib */,
 			);
 			path = Video;
 			sourceTree = "<group>";
@@ -2234,6 +2250,7 @@
 				406364921BD6201500202C16 /* top_navigation_plusicon_highlighted@2x.png in Resources */,
 				40A81D4C1BDB6F11008A315E /* weather_back_highlight@2x.png in Resources */,
 				40FBAAEF1C27E9B10090716B /* user_message_icon@2x.png in Resources */,
+				401E7A881C2D2F1100431300 /* contentview_play@2x.png in Resources */,
 				40FBAB251C27E9B10090716B /* usercenter_hd_cover_small_0@2x.png in Resources */,
 				40FBAADF1C27E9B10090716B /* user_coin_mission_border@2x.png in Resources */,
 				40097B0B1C2A842700D87458 /* video_list_cell_count@2x.png in Resources */,
@@ -2540,6 +2557,7 @@
 				40097BB51C2AA8FE00D87458 /* audionews_downloads_empty_icon@2x.png in Resources */,
 				40FBAB0D1C27E9B10090716B /* user_set_icon_mall@2x.png in Resources */,
 				40FBAB2E1C27E9B10090716B /* usercenter_hd_mycomments.png in Resources */,
+				401E7A861C2D2ADD00431300 /* CatergoryRadioCell.xib in Resources */,
 				40FBAAF71C27E9B10090716B /* user_mission_finish_icon@2x.png in Resources */,
 				4063646B1BD6201500202C16 /* navbar_netease@2x.png in Resources */,
 				4063646E1BD6201500202C16 /* night_navbar_left_more@2x.png in Resources */,
@@ -2703,6 +2721,7 @@
 				4012B81E1BE333E80057C8A2 /* SepecialViewController.m in Sources */,
 				40E1B1311C2B9424006C2D2D /* AudioCell.m in Sources */,
 				40A81D661BDB79EB008A315E /* MJRefreshHeaderView.m in Sources */,
+				401E7A851C2D2ADD00431300 /* CatergoryRadioCell.m in Sources */,
 				40A81D671BDB79EB008A315E /* UIScrollView+MJExtension.m in Sources */,
 				40A81D681BDB79EB008A315E /* UIScrollView+MJRefresh.m in Sources */,
 				4063649F1BD625E300202C16 /* NewsTableViewController.m in Sources */,
@@ -2719,6 +2738,7 @@
 				4012B72A1BE1B09B0057C8A2 /* WeatherView.m in Sources */,
 				40097AC41C2A76BA00D87458 /* VideoCell.m in Sources */,
 				404FA8AD1BD4B98000FCEC69 /* TabBarViewController.m in Sources */,
+				401E78EB1C2CDEE000431300 /* CatergoryVideoViewController.m in Sources */,
 				407FAE331BDF5250004DA6F1 /* ChannelModel.m in Sources */,
 				401CCA721C2945EF0023B8A4 /* VideoModel.m in Sources */,
 				40A81D641BDB79EB008A315E /* MJRefreshConst.m in Sources */,

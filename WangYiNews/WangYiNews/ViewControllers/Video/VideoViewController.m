@@ -14,11 +14,12 @@
 #import "VideoContentModel.h"
 #import "VideoCell.h"
 #import "AudioCell.h"
+#import "CatergoryVideoViewController.h"
 
 #define VIDEOSUBURL @"/nc/video/home/"
 #define AUDIOSUBURL @"/nc/topicset/ios/radio/index.html"
 
-@interface VideoViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
+@interface VideoViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,AudioCellDelegate>
 
 @property(nonatomic,strong) NSMutableArray *contentListArr;
 @property(nonatomic,strong) NSMutableArray *titleListArr;
@@ -404,6 +405,11 @@
         NSDictionary *dic = [_radioListArr objectAtIndex:indexPath.row];
         AudioModel *acm = [AudioModel objectWithKeyValues:dic];
         [cell setAudioModel:acm];
+        cell.delegate = self;
+        cell.catergortBtn.tag = indexPath.row;
+        cell.playBtn1.tag = indexPath.row;
+        cell.playBtn2.tag = indexPath.row;
+        cell.playBtn3.tag = indexPath.row;
         return cell;
     }
 }
@@ -485,5 +491,16 @@
 
 -(void)videoCatergory
 {}
+
+#pragma mark----------------audioCellDelegate------------
+-(void)audioCellCatergoryBtnClick:(NSInteger)tag
+{
+    NSDictionary *dic = [_radioListArr objectAtIndex:tag];
+    AudioModel *acm = [AudioModel objectWithKeyValues:dic];
+    CatergoryVideoViewController *cvvc = [[CatergoryVideoViewController alloc] init];
+    cvvc.cid = acm.cid;
+    cvvc.cname = acm.cname;
+    [self.navigationController pushViewController:cvvc animated:YES];
+}
 
 @end
