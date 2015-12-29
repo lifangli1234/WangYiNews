@@ -44,7 +44,7 @@
     [self creatButton:@"tabbar_icon_news_normal@2x.png" select:@"tabbar_icon_news_highlight@2x.png" nightNormal:@"night_tabbar_icon_news_normal@2x.png" nightSelected:@"night_tabbar_icon_news_highlight@2x.png" title:@"新闻" index:0];
     [self creatButton:@"tabbar_icon_reader_normal@2x.png" select:@"tabbar_icon_reader_highlight@2x.png" nightNormal:@"night_tabbar_icon_reader_normal@2x.png" nightSelected:@"night_tabbar_icon_reader_highlight@2x.png" title:@"阅读" index:1];
     [self creatButton:@"tabbar_icon_media_normal@2x.png" select:@"tabbar_icon_media_highlight@2x.png" nightNormal:@"night_tabbar_icon_media_normal@2x.png" nightSelected:@"night_tabbar_icon_media_highlight@2x.png" title:@"视听" index:2];
-    [self creatButton:@"tabbar_icon_found_normal@2x.png" select:@"tabbar_icon_found_highlight@2x.png" nightNormal:@"night_tabbar_icon_found_normal@2x.png" nightSelected:@"night_tabbar_icon_found_highlight@2x.png" title:@"发现" index:3];
+    [self creatButton:@"tabbar_icon_bar_normal@2x.png" select:@"tabbar_icon_bar_highlight@2x.png" nightNormal:@"night_tabbar_icon_bar_normal@2x.png" nightSelected:@"night_tabbar_icon_bar_highlight@2x.png" title:@"话题" index:3];
     [self creatButton:@"tabbar_icon_me_normal@2x.png" select:@"tabbar_icon_me_highlight@2x.png" nightNormal:@"night_tabbar_icon_me_normal@2x.png" nightSelected:@"night_tabbar_icon_me_highlight@2x.png" title:@"我" index:4];
 }
 
@@ -79,7 +79,7 @@
             customBtn.contentEdgeInsets = UIEdgeInsetsMake(6.5, (customBtnW-19)/2, 23.5, (customBtnW-19)/2);
             break;
         case 3:
-            customBtn.contentEdgeInsets = UIEdgeInsetsMake(5.5, (customBtnW-16)/2, 22.5, (customBtnW-16)/2);
+            customBtn.contentEdgeInsets = UIEdgeInsetsMake(5.5, (customBtnW-18)/2, 22.5, (customBtnW-18)/2);
             break;
         case 4:
             customBtn.contentEdgeInsets = UIEdgeInsetsMake(6.5, (customBtnW-19)/2, 23.5, (customBtnW-19)/2);

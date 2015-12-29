@@ -12,5 +12,6 @@
 
 @property(nonatomic,strong)NSString *cid;
 @property(nonatomic,strong)NSString *cname;
+@property(nonatomic,strong)NSString *type;
 
 @end

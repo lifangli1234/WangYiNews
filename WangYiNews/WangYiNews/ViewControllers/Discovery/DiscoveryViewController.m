@@ -33,7 +33,7 @@
         make.height.offset(64);
     }];
     
-    UILabel *titleLab = [Helper label:@"发现" font:TITLEFONT textColor:[UIColor whiteColor] nightTextColor:[UIColor whiteColor] textAligment:NSTextAlignmentCenter];
+    UILabel *titleLab = [Helper label:@"问吧" font:TITLEFONT textColor:[UIColor whiteColor] nightTextColor:[UIColor whiteColor] textAligment:NSTextAlignmentCenter];
     [IV addSubview:titleLab];
     [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(IV).offset(20);

@@ -9,6 +9,8 @@
 #import "CatergoryVideoViewController.h"
 #import "CatergoryRadioCell.h"
 #import "AudioSubModel.h"
+#import "VideoContentModel.h"
+#import "VideoCell.h"
 
 @interface CatergoryVideoViewController ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -49,12 +51,14 @@
 #pragma mark----------------request------------
 -(void)loadData
 {
-    [self loadDataWithType:1 url:[NSString stringWithFormat:@"/nc/topicset/ios/radio/%@/%d-20.html",self.cid,0]];
+    NSString *url = [self.type isEqualToString:@"radio"]?[NSString stringWithFormat:@"/nc/topicset/ios/radio/%@/%d-20.html",self.cid,0]:[NSString stringWithFormat:@"/nc/video/list/%@/y/%d-10.html",self.cid,0];
+    [self loadDataWithType:1 url:url];
 }
 
 -(void)loadMoreData
 {
-    [self loadDataWithType:2 url:[NSString stringWithFormat:@"/nc/topicset/ios/radio/%@/%d-20.html",self.cid,count]];
+    NSString *url = [self.type isEqualToString:@"radio"]?[NSString stringWithFormat:@"/nc/topicset/ios/radio/%@/%d-20.html",self.cid,count]:[NSString stringWithFormat:@"/nc/video/list/%@/y/%d-10.html",self.cid,count];
+    [self loadDataWithType:2 url:url];
     count++;
 }
 
@@ -63,11 +67,11 @@
     [[[NetworkTools sharedNetworkTools] GET:url parameters:nil success:^(NSURLSessionDataTask *task, NSDictionary* responseObject) {
         if (type == 1) {
             [self.listArr removeAllObjects];
-            [self.listArr addObjectsFromArray:[responseObject objectForKey:@"tList"]];
+            [self.listArr addObjectsFromArray:[responseObject objectForKey:[self.type isEqualToString:@"radio"]?@"tList":self.cid]];
             [_radioListTableView headerEndRefreshing];
         }
         else if (type == 2){
-            [self.listArr addObjectsFromArray:[responseObject objectForKey:@"tList"]];
+            [self.listArr addObjectsFromArray:[responseObject objectForKey:[self.type isEqualToString:@"radio"]?@"tList":self.cid]];
             [_radioListTableView footerEndRefreshing];
         }
         [_radioListTableView reloadData];
@@ -111,21 +115,35 @@
 {
     static NSString *cellName = @"cell";
     
-    CatergoryRadioCell *cell = [tableView dequeueReusableCellWithIdentifier:cellName];
-    if (cell == nil) {
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"CatergoryRadioCell" owner:self options:nil] lastObject];
-    }
-    
     NSDictionary *dic = [self.listArr objectAtIndex:indexPath.row];
-    AudioSubModel *am = [AudioSubModel objectWithKeyValues:dic];
-    [cell setAudioSubModle:am];
-    
-    return cell;
+    if ([self.type isEqualToString:@"radio"]) {
+        CatergoryRadioCell *cell = [tableView dequeueReusableCellWithIdentifier:cellName];
+        if (cell == nil) {
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"CatergoryRadioCell" owner:self options:nil] lastObject];
+        }
+        
+        AudioSubModel *am = [AudioSubModel objectWithKeyValues:dic];
+        [cell setAudioSubModle:am];
+        
+        return cell;
+    }
+    else{
+        VideoCell *cell = [tableView dequeueReusableCellWithIdentifier:cellName];
+        if (cell == nil) {
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"VideoCell" owner:self options:nil] lastObject];
+        }
+        
+        VideoContentModel *vcm = [VideoContentModel objectWithKeyValues:dic];
+        vcm.desc = [dic objectForKey:@"description"];
+        [cell setVideoContentModel:vcm];
+        
+        return cell;
+    }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 106.0f;
+    return [self.type isEqualToString:@"radio"]?106.0f:318.0f;
 }
 
 #pragma mark----------------btnAction------------

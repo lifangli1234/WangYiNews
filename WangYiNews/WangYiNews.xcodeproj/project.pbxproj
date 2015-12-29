@@ -11,6 +11,10 @@
 		400086261BDDB2EA0030BE78 /* cola_bubble_red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 400086241BDDB2EA0030BE78 /* cola_bubble_red@2x.png */; };
 		400086281BDDC7530030BE78 /* HotBigCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 400086271BDDC7530030BE78 /* HotBigCell.xib */; };
 		400086541BDE00510030BE78 /* 223.png in Resources */ = {isa = PBXBuildFile; fileRef = 400086531BDE00510030BE78 /* 223.png */; };
+		400378FC1C3288DA004F8274 /* night_tabbar_icon_bar_highlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 400378F81C3288DA004F8274 /* night_tabbar_icon_bar_highlight@2x.png */; };
+		400378FD1C3288DA004F8274 /* night_tabbar_icon_bar_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 400378F91C3288DA004F8274 /* night_tabbar_icon_bar_normal@2x.png */; };
+		400378FE1C3288DA004F8274 /* tabbar_icon_bar_highlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 400378FA1C3288DA004F8274 /* tabbar_icon_bar_highlight@2x.png */; };
+		400378FF1C3288DA004F8274 /* tabbar_icon_bar_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 400378FB1C3288DA004F8274 /* tabbar_icon_bar_normal@2x.png */; };
 		4004AFB91C23FBC200EF3954 /* PhotoSetScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4004AFB81C23FBC200EF3954 /* PhotoSetScrollView.m */; };
 		400828731BF5D9030078FDFA /* icon_star_full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4008286C1BF5D9030078FDFA /* icon_star_full@2x.png */; };
 		400828741BF5D9030078FDFA /* icon_star_yellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4008286D1BF5D9030078FDFA /* icon_star_yellow@2x.png */; };
@@ -564,6 +568,10 @@
 		400086241BDDB2EA0030BE78 /* cola_bubble_red@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cola_bubble_red@2x.png"; sourceTree = "<group>"; };
 		400086271BDDC7530030BE78 /* HotBigCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HotBigCell.xib; sourceTree = "<group>"; };
 		400086531BDE00510030BE78 /* 223.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 223.png; sourceTree = "<group>"; };
+		400378F81C3288DA004F8274 /* night_tabbar_icon_bar_highlight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "night_tabbar_icon_bar_highlight@2x.png"; sourceTree = "<group>"; };
+		400378F91C3288DA004F8274 /* night_tabbar_icon_bar_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "night_tabbar_icon_bar_normal@2x.png"; sourceTree = "<group>"; };
+		400378FA1C3288DA004F8274 /* tabbar_icon_bar_highlight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_icon_bar_highlight@2x.png"; sourceTree = "<group>"; };
+		400378FB1C3288DA004F8274 /* tabbar_icon_bar_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_icon_bar_normal@2x.png"; sourceTree = "<group>"; };
 		4004AFB71C23FBC200EF3954 /* PhotoSetScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoSetScrollView.h; sourceTree = "<group>"; };
 		4004AFB81C23FBC200EF3954 /* PhotoSetScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoSetScrollView.m; sourceTree = "<group>"; };
 		4008286C1BF5D9030078FDFA /* icon_star_full@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_star_full@2x.png"; sourceTree = "<group>"; };
@@ -1744,6 +1752,10 @@
 		406364021BD5E1C400202C16 /* Tabbar */ = {
 			isa = PBXGroup;
 			children = (
+				400378F81C3288DA004F8274 /* night_tabbar_icon_bar_highlight@2x.png */,
+				400378F91C3288DA004F8274 /* night_tabbar_icon_bar_normal@2x.png */,
+				400378FA1C3288DA004F8274 /* tabbar_icon_bar_highlight@2x.png */,
+				400378FB1C3288DA004F8274 /* tabbar_icon_bar_normal@2x.png */,
 				406364031BD5E1C400202C16 /* night_tabbar_icon_found_highlight@2x.png */,
 				406364041BD5E1C400202C16 /* night_tabbar_icon_found_normal@2x.png */,
 				406364051BD5E1C400202C16 /* night_tabbar_icon_me_highlight@2x.png */,
@@ -2415,6 +2427,7 @@
 				40097AEF1C2A842600D87458 /* cell_tag_video@2x.png in Resources */,
 				40097BDB1C2AA8FE00D87458 /* night_audionews_indexheader_download@2x.png in Resources */,
 				40FBAB161C27E9B10090716B /* user_weiboimage_netease@2x.png in Resources */,
+				400378FF1C3288DA004F8274 /* tabbar_icon_bar_normal@2x.png in Resources */,
 				40097B011C2A842600D87458 /* video_category_comment@2x.png in Resources */,
 				406364321BD5E1C400202C16 /* tabbar_shadow@2x.png in Resources */,
 				40FBAB181C27E9B10090716B /* user_weiboimage_sina@2x.png in Resources */,
@@ -2493,6 +2506,7 @@
 				4012B7B41BE1B5860057C8A2 /* weather_hdcover_rain@2x.png in Resources */,
 				4012B7B01BE1B5860057C8A2 /* weather_hd_location.png in Resources */,
 				40097AF31C2A842600D87458 /* night_video_category_share@2x.png in Resources */,
+				400378FC1C3288DA004F8274 /* night_tabbar_icon_bar_highlight@2x.png in Resources */,
 				40FBAB261C27E9B10090716B /* usercenter_hd_cover_small_1@2x.png in Resources */,
 				4012B7D71BE1B6D40057C8A2 /* pluginboard_icon_message@2x.png in Resources */,
 				40FBAB2F1C27E9B10090716B /* usercenter_hd_mycomments@2x.png in Resources */,
@@ -2526,6 +2540,7 @@
 				40250C0F1BE89CDD00CFB7F9 /* SepecialImages.xib in Resources */,
 				400828731BF5D9030078FDFA /* icon_star_full@2x.png in Resources */,
 				40097BC51C2AA8FE00D87458 /* audionews_playlist_duration@2x.png in Resources */,
+				400378FD1C3288DA004F8274 /* night_tabbar_icon_bar_normal@2x.png in Resources */,
 				40FBAAAC1C27E9B10090716B /* night_user_comment_circle@2x.png in Resources */,
 				406364281BD5E1C400202C16 /* tabbar_icon_found_highlight@2x.png in Resources */,
 				4063641C1BD5E1C400202C16 /* night_tabbar_icon_found_normal@2x.png in Resources */,
@@ -2572,6 +2587,7 @@
 				40097AF81C2A842600D87458 /* night_video_list_cell_bar@2x.png in Resources */,
 				40097BBB1C2AA8FE00D87458 /* audionews_indexheader_download@2x.png in Resources */,
 				40097BC71C2AA8FE00D87458 /* audionews_playlist_playing02@2x.png in Resources */,
+				400378FE1C3288DA004F8274 /* tabbar_icon_bar_highlight@2x.png in Resources */,
 				40A81D4D1BDB6F11008A315E /* weather_back@2x.png in Resources */,
 				40FBAAE91C27E9B10090716B /* user_gender_female@2x.png in Resources */,
 				40097AF51C2A842600D87458 /* night_video_cell_play@2x.png in Resources */,

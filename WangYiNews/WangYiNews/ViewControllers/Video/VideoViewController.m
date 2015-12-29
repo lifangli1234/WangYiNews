@@ -238,10 +238,10 @@
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.backgroundColor = [UIColor clearColor];
     btn.tag = VIDEOTITLEVIEWBUTTON_TAG+index;
-    [btn addTarget:self action:@selector(videoCatergory) forControlEvents:UIControlEventTouchUpInside];
+    [btn addTarget:self action:@selector(videoCatergory:) forControlEvents:UIControlEventTouchUpInside];
     [superView addSubview:btn];
     [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(superView);
+        make.left.equalTo(lab.mas_left);
         make.top.equalTo(superView);
         make.bottom.equalTo(superView).offset(-5);
         make.width.equalTo(lab.mas_width);
@@ -489,8 +489,16 @@
     }
 }
 
--(void)videoCatergory
-{}
+-(void)videoCatergory:(UIButton *)btn
+{
+    NSDictionary *dic = [_titleListArr objectAtIndex:btn.tag-VIDEOTITLEVIEWBUTTON_TAG];
+    VideoTitleModel *vtm = [VideoTitleModel objectWithKeyValues:dic];
+    CatergoryVideoViewController *cvvc = [[CatergoryVideoViewController alloc] init];
+    cvvc.cid = vtm.sid;
+    cvvc.cname = vtm.title;
+    cvvc.type = @"video";
+    [self.navigationController pushViewController:cvvc animated:YES];
+}
 
 #pragma mark----------------audioCellDelegate------------
 -(void)audioCellCatergoryBtnClick:(NSInteger)tag
@@ -500,6 +508,7 @@
     CatergoryVideoViewController *cvvc = [[CatergoryVideoViewController alloc] init];
     cvvc.cid = acm.cid;
     cvvc.cname = acm.cname;
+    cvvc.type = @"radio";
     [self.navigationController pushViewController:cvvc animated:YES];
 }
 
