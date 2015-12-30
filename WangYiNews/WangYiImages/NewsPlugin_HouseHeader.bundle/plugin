@@ -1,0 +1,12 @@
+{
+    "id": "HouseHeader",
+    "entries": [
+        {
+            "type": "header",
+            "params": {
+                "desc":"楼盘大全、购房直通车",
+                "tid":"T1348654085632"
+            }
+        }
+    ]
+}

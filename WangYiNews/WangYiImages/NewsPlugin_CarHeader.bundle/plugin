@@ -1,0 +1,13 @@
+{
+    "id": "CarHeader",
+    "entries": [
+        {
+            "type": "header",
+            "params": {
+                "desc":"汽车大全、值得买、贷款购车",
+                "tid": "T1348654060988",
+                "viewHeight": 61
+            }
+        }
+    ]
+}

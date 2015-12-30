@@ -22,9 +22,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.view.backgroundColor = [UIColor whiteColor];
-   // [[[Helper alloc] init] createNavigationBarWithSuperView:self.view andTitle:@"登录网易新闻" andTarget:self andSel:@selector(loginPageBack)];
-    //[self loadUI];
+    self.view.dk_backgroundColorPicker = DKColorWithColors([UIColor whiteColor], NIGHTBACKGROUNDCOLOR);
+    [self createNavigationBar];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,6 +32,15 @@
 }
 
 #pragma mark -----------------UI--------------
+-(void)createNavigationBar
+{
+    UIView *nav = [Helper createNavigationBarWithTitle:@"登录网易新闻" andTarget:self andSel:@selector(loginPageBack)];
+    [self.view addSubview:nav];
+    [nav mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.top.equalTo(self.view);
+        make.height.offset(64);
+    }];
+}
 /*-(void)loadUI
 {
    // [self.view addSubview:[Helper imageView:CGRectMake(15, 84, 30, 30) name:@"login_username_icon@2x.png"]];

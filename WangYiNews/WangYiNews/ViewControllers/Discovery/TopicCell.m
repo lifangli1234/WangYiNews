@@ -30,7 +30,7 @@
     self.attentionNum.text = [NSString stringWithFormat:@"%@ 关注",expertModel.concernCount];
     self.catergory.text = expertModel.classification;
     self.sepLine.dk_imagePicker = DKImageWithNames(@"qa_cell_tail@2x", @"night_qa_cell_tail@2x");
-    
+    [self.attentionBtn setTitle:@"关注" forState:UIControlStateNormal];
     [self subViewLayout:expertModel.state];
 }
 
@@ -46,6 +46,11 @@
     self.endAsk.layer.borderWidth = 0.5;
     self.userDesc.numberOfLines = 0;
     self.userDesc.lineBreakMode = NSLineBreakByWordWrapping;
+    [self.attentionBtn setTitleColor:[UIColor colorWithRed:0.86 green:0.34 blue:0.34 alpha:1.00] forState:UIControlStateNormal];
+    self.attentionBtn.layer.borderColor = [UIColor colorWithRed:0.96 green:0.84 blue:0.84 alpha:1.00].CGColor;
+    self.attentionBtn.layer.borderWidth = 0.5;
+    self.attentionBtn.layer.cornerRadius = 25/2;
+    self.attentionBtn.contentEdgeInsets = UIEdgeInsetsMake(0, 11, 0, 0);
     self.bootomLine.dk_backgroundColorPicker = DKColorWithColors(LINECOLOR, NIGHTLINECOLOR);
     self.userDesc.dk_textColorPicker = DKColorWithColors([UIColor blackColor], [UIColor whiteColor]);
     self.endAsk.dk_textColorPicker = DKColorWithColors([UIColor blackColor], [UIColor whiteColor]);
@@ -67,21 +72,22 @@
         make.centerY.equalTo(self.headerImg);
     }];
     self.cellHeight = self.cellHeight+175;
-    //[titleContent boundingRectWithSize:CGSizeMake(kScreen_Width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size;
-    CGSize descSize = [self.userDesc.text sizeWithFont:[UIFont systemFontOfSize:17]
-                                     constrainedToSize:CGSizeMake([Helper screenWidth]-30, 50000)
-                                         lineBreakMode:NSLineBreakByWordWrapping];
+    CGSize descSize = [self.userDesc.text boundingRectWithSize:CGSizeMake([Helper screenWidth]-30, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:self.userDesc.font} context:nil].size;
     [self.userDesc mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self).offset(15);
         make.right.equalTo(self).offset(-15);
         make.top.equalTo(self.bigImg.mas_bottom).offset(8);
-        make.height.offset(80);
     }];
-    self.cellHeight = self.cellHeight+8+80;
+    self.cellHeight = self.cellHeight+8+descSize.height;
     [self.attentionBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self).offset(-15);
         make.top.equalTo(self.userDesc.mas_bottom).offset(8);
-        make.size.sizeOffset(CGSizeMake(60, 30));
+        make.size.sizeOffset(CGSizeMake(60, 25));
+    }];
+    [self.addImg mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.attentionBtn).offset(-16);
+        make.centerY.equalTo(self.attentionBtn);
+        make.size.sizeOffset(CGSizeMake(13, 13));
     }];
     if ([state intValue] == 1) {
         self.endAsk.hidden = YES;
@@ -130,7 +136,12 @@
         make.left.right.equalTo(self);
         make.height.offset(5);
     }];
-    self.cellHeight = self.cellHeight+51;
+    self.cellHeight = self.cellHeight+46;
 }
 
+- (IBAction)addOrRemoveToAttention:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(topicCellAddOrRemoveToAttention:)]) {
+        [self.delegate topicCellAddOrRemoveToAttention:self];
+    }
+}
 @end

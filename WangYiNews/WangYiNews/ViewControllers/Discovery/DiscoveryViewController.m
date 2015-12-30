@@ -7,9 +7,9 @@
 //
 
 #import "DiscoveryViewController.h"
-#import "TopicCell.h"
 #import "TopicModel.h"
 #import "ExpertModel.h"
+#import "LoginViewController.h"
 
 @interface DiscoveryViewController ()
 
@@ -47,6 +47,7 @@
 -(void)loadMoreData
 {
     [self loadDataWithType:2 url:[NSString stringWithFormat:@"/newstopic/list/expert/%ld-10.html",count]];
+    count++;
 }
 
 -(void)loadDataWithType:(NSInteger)type url:(NSString *)url
@@ -118,7 +119,8 @@
     [self.view addSubview:_listTableView];
     [_listTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view).offset(64);
-        make.left.right.bottom.equalTo(self.view);
+        make.left.right.equalTo(self.view);
+        make.bottom.equalTo(self.view).offset(-49);
     }];
 }
 
@@ -135,6 +137,7 @@
         cell = [[[NSBundle mainBundle] loadNibNamed:@"TopicCell" owner:self options:nil] lastObject];
     }
     
+    cell.delegate = self;
     NSDictionary *dic = [_topicArr objectAtIndex:indexPath.row];
     ExpertModel *em = [ExpertModel objectWithKeyValues:dic];
     em.desc = [dic objectForKey:@"description"];
@@ -159,6 +162,13 @@
 {}
 
 -(void)loginBtn
-{}
+{
+    [self.navigationController pushViewController:[[LoginViewController alloc] init] animated:YES];
+}
+
+-(void)topicCellAddOrRemoveToAttention:(TopicCell *)topicCell
+{
+    [self loginBtn];
+}
 
 @end

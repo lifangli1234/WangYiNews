@@ -62,19 +62,27 @@
                         <rect key="frame" x="108" y="161" width="11" height="29"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2L2-79-A40">
-                        <rect key="frame" x="266" y="160" width="46" height="30"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="2L2-79-A40">
+                        <rect key="frame" x="250" y="161" width="62" height="26"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <state key="normal" title="Button"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <connections>
+                            <action selector="addOrRemoveToAttention:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="exw-QB-H4w"/>
+                        </connections>
                     </button>
                     <view contentMode="scaleToFill" id="J9U-ji-jwf">
                         <rect key="frame" x="0.0" y="204" width="320" height="9"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="concern_icon@2x.png" id="0Bn-Oj-sul">
+                        <rect key="frame" x="235" y="174" width="29" height="31"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
                 </subviews>
             </tableViewCellContentView>
             <connections>
+                <outlet property="addImg" destination="0Bn-Oj-sul" id="q8y-6Z-Pkc"/>
                 <outlet property="attentionBtn" destination="2L2-79-A40" id="0Ns-3a-Q8L"/>
                 <outlet property="attentionNum" destination="bS9-2i-Wqs" id="jOR-hT-5kz"/>
                 <outlet property="bigImg" destination="sYt-D6-uKt" id="OS3-3Y-6k6"/>
@@ -89,4 +97,7 @@
             <point key="canvasLocation" x="511" y="168"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="concern_icon@2x.png" width="190" height="190"/>
+    </resources>
 </document>
