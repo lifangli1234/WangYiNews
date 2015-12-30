@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DiscoveryViewController : UIViewController
+@interface DiscoveryViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 
 @end
