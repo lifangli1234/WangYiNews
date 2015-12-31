@@ -16,6 +16,11 @@
 		400378FE1C3288DA004F8274 /* tabbar_icon_bar_highlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 400378FA1C3288DA004F8274 /* tabbar_icon_bar_highlight@2x.png */; };
 		400378FF1C3288DA004F8274 /* tabbar_icon_bar_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 400378FB1C3288DA004F8274 /* tabbar_icon_bar_normal@2x.png */; };
 		4004AFB91C23FBC200EF3954 /* PhotoSetScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4004AFB81C23FBC200EF3954 /* PhotoSetScrollView.m */; };
+		4005A59E1C3509CA005DA585 /* headex_button_highlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4005A59C1C3509CA005DA585 /* headex_button_highlighted@2x.png */; };
+		4005A59F1C3509CA005DA585 /* headex_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4005A59D1C3509CA005DA585 /* headex_button@2x.png */; };
+		4005A5A11C351316005DA585 /* share_platform_wechat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4005A5A01C351316005DA585 /* share_platform_wechat@2x.png */; };
+		4005A5A31C35132C005DA585 /* share_platform_sina@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4005A5A21C35132C005DA585 /* share_platform_sina@2x.png */; };
+		4005A5A51C351338005DA585 /* share_platform_qqfriends@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4005A5A41C351338005DA585 /* share_platform_qqfriends@2x.png */; };
 		400828731BF5D9030078FDFA /* icon_star_full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4008286C1BF5D9030078FDFA /* icon_star_full@2x.png */; };
 		400828741BF5D9030078FDFA /* icon_star_yellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4008286D1BF5D9030078FDFA /* icon_star_yellow@2x.png */; };
 		400828751BF5D9030078FDFA /* icon_star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4008286E1BF5D9030078FDFA /* icon_star@2x.png */; };
@@ -636,6 +641,11 @@
 		400378FB1C3288DA004F8274 /* tabbar_icon_bar_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_icon_bar_normal@2x.png"; sourceTree = "<group>"; };
 		4004AFB71C23FBC200EF3954 /* PhotoSetScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoSetScrollView.h; sourceTree = "<group>"; };
 		4004AFB81C23FBC200EF3954 /* PhotoSetScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoSetScrollView.m; sourceTree = "<group>"; };
+		4005A59C1C3509CA005DA585 /* headex_button_highlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "headex_button_highlighted@2x.png"; sourceTree = "<group>"; };
+		4005A59D1C3509CA005DA585 /* headex_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "headex_button@2x.png"; sourceTree = "<group>"; };
+		4005A5A01C351316005DA585 /* share_platform_wechat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share_platform_wechat@2x.png"; sourceTree = "<group>"; };
+		4005A5A21C35132C005DA585 /* share_platform_sina@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share_platform_sina@2x.png"; sourceTree = "<group>"; };
+		4005A5A41C351338005DA585 /* share_platform_qqfriends@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share_platform_qqfriends@2x.png"; sourceTree = "<group>"; };
 		4008286C1BF5D9030078FDFA /* icon_star_full@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_star_full@2x.png"; path = "../icon_star_full@2x.png"; sourceTree = "<group>"; };
 		4008286D1BF5D9030078FDFA /* icon_star_yellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_star_yellow@2x.png"; path = "../icon_star_yellow@2x.png"; sourceTree = "<group>"; };
 		4008286E1BF5D9030078FDFA /* icon_star@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_star@2x.png"; path = "../icon_star@2x.png"; sourceTree = "<group>"; };
@@ -2122,6 +2132,11 @@
 		40FBAA001C27E9B00090716B /* User */ = {
 			isa = PBXGroup;
 			children = (
+				4005A5A41C351338005DA585 /* share_platform_qqfriends@2x.png */,
+				4005A5A21C35132C005DA585 /* share_platform_sina@2x.png */,
+				4005A5A01C351316005DA585 /* share_platform_wechat@2x.png */,
+				4005A59C1C3509CA005DA585 /* headex_button_highlighted@2x.png */,
+				4005A59D1C3509CA005DA585 /* headex_button@2x.png */,
 				40FBAB351C27EA680090716B /* lm_cell_detail_indicator@2x.png */,
 				40FBAB361C27EA690090716B /* night_lm_cell_detail_indicator@2x.png */,
 				40FBAA011C27E9B00090716B /* login_forgot_button@2x.png */,
@@ -2473,6 +2488,7 @@
 				40FBAAD41C27E9B10090716B /* night_usercenter_hd_avatar_default.png in Resources */,
 				40FBAB0C1C27E9B10090716B /* user_set_icon_mail@2x.png in Resources */,
 				40097B141C2A842700D87458 /* video_play_big@2x.png in Resources */,
+				4005A59F1C3509CA005DA585 /* headex_button@2x.png in Resources */,
 				40FBAB071C27E9B10090716B /* user_prize_more@2x.png in Resources */,
 				4012B7B51BE1B5860057C8A2 /* weather_hdcover_sand@2x.png in Resources */,
 				40FBAAC51C27E9B10090716B /* night_user_mission_progress_bg_1@2x.png in Resources */,
@@ -2632,6 +2648,7 @@
 				404FA8681BD4839200FCEC69 /* Main.storyboard in Resources */,
 				40E818A21C33D765003077FD /* concerned_border@2x.png in Resources */,
 				4012B7741BE1B5860057C8A2 /* night_rain_and_snow_mini@2x.png in Resources */,
+				4005A5A11C351316005DA585 /* share_platform_wechat@2x.png in Resources */,
 				40E818531C336FC2003077FD /* search_icon@2x.png in Resources */,
 				40FBAAFD1C27E9B10090716B /* user_mission_progress_bg_2@2x.png in Resources */,
 				40097BAE1C2AA8FE00D87458 /* audio_comment_progress_cut_cover@2x.png in Resources */,
@@ -2670,6 +2687,7 @@
 				400378FF1C3288DA004F8274 /* tabbar_icon_bar_normal@2x.png in Resources */,
 				40097B011C2A842600D87458 /* video_category_comment@2x.png in Resources */,
 				406364321BD5E1C400202C16 /* tabbar_shadow@2x.png in Resources */,
+				4005A5A31C35132C005DA585 /* share_platform_sina@2x.png in Resources */,
 				40FBAB181C27E9B10090716B /* user_weiboimage_sina@2x.png in Resources */,
 				40097AFB1C2A842600D87458 /* night_video_list_cell_mask@2x.png in Resources */,
 				40FBAAD81C27E9B10090716B /* user_achieve_arrow@2x.png in Resources */,
@@ -2762,6 +2780,7 @@
 				4012B7D71BE1B6D40057C8A2 /* pluginboard_icon_message@2x.png in Resources */,
 				40FBAB2F1C27E9B10090716B /* usercenter_hd_mycomments@2x.png in Resources */,
 				400086281BDDC7530030BE78 /* HotBigCell.xib in Resources */,
+				4005A5A51C351338005DA585 /* share_platform_qqfriends@2x.png in Resources */,
 				406364741BD6201500202C16 /* night_top_navigation_locationicon@2x.png in Resources */,
 				4012B7B91BE1B5860057C8A2 /* weather_location_highlighted@2x.png in Resources */,
 				40097BCF1C2AA8FE00D87458 /* night_audio_button_bg@2x.png in Resources */,
@@ -2836,6 +2855,7 @@
 				40FBAAFB1C27E9B10090716B /* user_mission_label_bg@2x.png in Resources */,
 				40FBAABE1C27E9B10090716B /* night_user_mission_explain_3_1@2x.png in Resources */,
 				40FBAB301C27E9B10090716B /* usercenter_hd_myfavorites.png in Resources */,
+				4005A59E1C3509CA005DA585 /* headex_button_highlighted@2x.png in Resources */,
 				40E8184E1C336FC2003077FD /* reader_search_bar.png in Resources */,
 				40E818471C336FC2003077FD /* night_top_navigation_searchbutton_highlighted@2x.png in Resources */,
 				4063642B1BD5E1C400202C16 /* tabbar_icon_me_normal@2x.png in Resources */,
