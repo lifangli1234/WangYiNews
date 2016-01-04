@@ -17,7 +17,6 @@
 
 @implementation DiscoveryViewController
 {
-    UITableView *_listTableView;
     NSMutableArray *_topicArr;
     NSInteger count;
     CGFloat height;
@@ -29,9 +28,9 @@
     
     _topicArr = [[NSMutableArray alloc] init];
     count = 1;
-    [self createNavigationBar];
-    [self createTableView];
-    [_listTableView headerBeginRefreshing];
+    [self.tableView1 addHeaderWithTarget:self action:@selector(loadData)];
+    [self.tableView1 addFooterWithTarget:self action:@selector(loadMoreData)];
+    [self.tableView1 headerBeginRefreshing];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -57,70 +56,39 @@
         if (type == 1) {
             [_topicArr removeAllObjects];
             [_topicArr addObjectsFromArray:[topicModel.data objectForKey:@"expertList"]];
-            [_listTableView headerEndRefreshing];
+            [self.tableView1 headerEndRefreshing];
         }else if(type == 2){
             [_topicArr addObjectsFromArray:[topicModel.data objectForKey:@"expertList"]];
-            [_listTableView footerEndRefreshing];
+            [self.tableView1 footerEndRefreshing];
         }
-        [_listTableView reloadData];
+        [self.tableView1 reloadData];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"%@",error);
-        [_listTableView headerEndRefreshing];
+        [self.tableView1 headerEndRefreshing];
     }] resume];
 }
 
--(void)createNavigationBar
+-(void)initData
 {
-    self.view.dk_backgroundColorPicker = DKColorWithColors([UIColor whiteColor], NIGHTBACKGROUNDCOLOR);
-    
-    UIView *IV = [Helper view:BASERED nightColor:BASERED_NIGHT];
-    [self.view addSubview:IV];
-    [IV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view);
-        make.left.right.equalTo(self.view);
-        make.height.offset(64);
-    }];
-    
-    UIButton *searchBtn = [Helper button:@"search_icon@2x" target:self action:@selector(searchBtn) tag:0];
-    searchBtn.contentEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
-    [IV addSubview:searchBtn];
-    [searchBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(IV).offset(20);
-        make.left.equalTo(IV);
-        make.size.sizeOffset(CGSizeMake(44, 44));
-    }];
-    
-    UILabel *titleLab = [Helper label:@"问吧" font:TITLEFONT textColor:[UIColor whiteColor] nightTextColor:[UIColor whiteColor] textAligment:NSTextAlignmentCenter];
-    [IV addSubview:titleLab];
-    [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(IV).offset(20);
-        make.centerX.equalTo(IV);
-        make.height.offset(44);
-    }];
-    
-    UIButton *loginBtn = [Helper button:@"qa_login_normal@2x" target:self action:@selector(loginBtn) tag:0];
-    loginBtn.contentEdgeInsets = UIEdgeInsetsMake(12.5, 12.5, 12.5, 12.5);
-    [IV addSubview:loginBtn];
-    [loginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(IV).offset(20);
-        make.right.equalTo(IV);
-        make.size.sizeOffset(CGSizeMake(44, 44));
-    }];
+    [self setIsNormal:YES];
+    [self setTitleStr:@"问吧"];
 }
 
--(void)createTableView
+-(void)loadNavigationBar
 {
-    _listTableView = [[UITableView alloc] init];
-    _listTableView.delegate = self;
-    _listTableView.dataSource = self;
-    _listTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [_listTableView addHeaderWithTarget:self action:@selector(loadData)];
-    [_listTableView addFooterWithTarget:self action:@selector(loadMoreData)];
-    [self.view addSubview:_listTableView];
-    [_listTableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).offset(64);
-        make.left.right.equalTo(self.view);
-        make.bottom.equalTo(self.view).offset(-49);
+    SetButtonImage(self.naviLeftBtn, @"search_icon@2x");
+    SetButtonImage(self.naviRightBtn, @"qa_login_normal@2x");
+    self.naviLeftBtn.contentEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
+    self.naviRightBtn.contentEdgeInsets = UIEdgeInsetsMake(12.5, 12.5, 12.5, 12.5);
+    [self.naviLeftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view);
+        make.top.equalTo(self.view).offset(20);
+        make.size.sizeOffset(CGSizeMake(44, 44));
+    }];
+    [self.naviRightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view).offset(20);
+        make.right.equalTo(self.view);
+        make.size.sizeOffset(CGSizeMake(44, 44));
     }];
 }
 
@@ -158,17 +126,17 @@
     return height;
 }
 
--(void)searchBtn
+-(void)navigationLeftBtnClick
 {}
 
--(void)loginBtn
+-(void)navigationRightBtnClick
 {
     [self.navigationController pushViewController:[[LoginViewController alloc] init] animated:YES];
 }
 
 -(void)topicCellAddOrRemoveToAttention:(TopicCell *)topicCell
 {
-    [self loginBtn];
+    [self navigationRightBtnClick];
 }
 
 @end

@@ -24,7 +24,6 @@
     // Do any additional setup after loading the view.
     
     self.tabBar.hidden = YES;
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     [self createTabBar];
 }
 

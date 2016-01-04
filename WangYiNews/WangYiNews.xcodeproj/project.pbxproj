@@ -11,6 +11,8 @@
 		400086261BDDB2EA0030BE78 /* cola_bubble_red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 400086241BDDB2EA0030BE78 /* cola_bubble_red@2x.png */; };
 		400086281BDDC7530030BE78 /* HotBigCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 400086271BDDC7530030BE78 /* HotBigCell.xib */; };
 		400086541BDE00510030BE78 /* 223.png in Resources */ = {isa = PBXBuildFile; fileRef = 400086531BDE00510030BE78 /* 223.png */; };
+		40010A4C1C3A33AF0003B571 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40010A4B1C3A33AF0003B571 /* BaseViewController.m */; };
+		40010A4F1C3A47AA0003B571 /* SegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 40010A4E1C3A47AA0003B571 /* SegmentView.m */; };
 		400378FC1C3288DA004F8274 /* night_tabbar_icon_bar_highlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 400378F81C3288DA004F8274 /* night_tabbar_icon_bar_highlight@2x.png */; };
 		400378FD1C3288DA004F8274 /* night_tabbar_icon_bar_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 400378F91C3288DA004F8274 /* night_tabbar_icon_bar_normal@2x.png */; };
 		400378FE1C3288DA004F8274 /* tabbar_icon_bar_highlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 400378FA1C3288DA004F8274 /* tabbar_icon_bar_highlight@2x.png */; };
@@ -635,6 +637,10 @@
 		400086241BDDB2EA0030BE78 /* cola_bubble_red@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cola_bubble_red@2x.png"; sourceTree = "<group>"; };
 		400086271BDDC7530030BE78 /* HotBigCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HotBigCell.xib; sourceTree = "<group>"; };
 		400086531BDE00510030BE78 /* 223.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 223.png; sourceTree = "<group>"; };
+		40010A4A1C3A33AF0003B571 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		40010A4B1C3A33AF0003B571 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		40010A4D1C3A47AA0003B571 /* SegmentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentView.h; sourceTree = "<group>"; };
+		40010A4E1C3A47AA0003B571 /* SegmentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentView.m; sourceTree = "<group>"; };
 		400378F81C3288DA004F8274 /* night_tabbar_icon_bar_highlight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "night_tabbar_icon_bar_highlight@2x.png"; sourceTree = "<group>"; };
 		400378F91C3288DA004F8274 /* night_tabbar_icon_bar_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "night_tabbar_icon_bar_normal@2x.png"; sourceTree = "<group>"; };
 		400378FA1C3288DA004F8274 /* tabbar_icon_bar_highlight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_icon_bar_highlight@2x.png"; sourceTree = "<group>"; };
@@ -1744,6 +1750,8 @@
 			children = (
 				404FA8AB1BD4B98000FCEC69 /* TabBarViewController.h */,
 				404FA8AC1BD4B98000FCEC69 /* TabBarViewController.m */,
+				40010A4A1C3A33AF0003B571 /* BaseViewController.h */,
+				40010A4B1C3A33AF0003B571 /* BaseViewController.m */,
 			);
 			path = Basic;
 			sourceTree = "<group>";
@@ -1830,6 +1838,8 @@
 			children = (
 				407FAE2D1BDF48FF004DA6F1 /* CategoryTitle */,
 				404FA8B31BD4BB3C00FCEC69 /* CustomButton */,
+				40010A4D1C3A47AA0003B571 /* SegmentView.h */,
+				40010A4E1C3A47AA0003B571 /* SegmentView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -3049,6 +3059,7 @@
 				401CCA721C2945EF0023B8A4 /* VideoModel.m in Sources */,
 				40A81D641BDB79EB008A315E /* MJRefreshConst.m in Sources */,
 				4012B86D1BE4A0BC0057C8A2 /* MGTemplateEngine.m in Sources */,
+				40010A4F1C3A47AA0003B571 /* SegmentView.m in Sources */,
 				4012B7241BE1AE200057C8A2 /* WeatherModel.m in Sources */,
 				4012B8C71BE6F2C80057C8A2 /* NormalImageModel.m in Sources */,
 				40097ABD1C2A3ADA00D87458 /* VideoTitleModel.m in Sources */,
@@ -3058,6 +3069,7 @@
 				406363FA1BD5CB6500202C16 /* ReadingViewController.m in Sources */,
 				4012B8701BE4A0BC0057C8A2 /* NSArray_DeepMutableCopy.m in Sources */,
 				4012B8C81BE6F2C80057C8A2 /* NormalVideoModel.m in Sources */,
+				40010A4C1C3A33AF0003B571 /* BaseViewController.m in Sources */,
 				40E1B12D1C2B8F06006C2D2D /* RadioModel.m in Sources */,
 				4004AFB91C23FBC200EF3954 /* PhotoSetScrollView.m in Sources */,
 				4012B81B1BE330930057C8A2 /* SepecialContentModel.m in Sources */,

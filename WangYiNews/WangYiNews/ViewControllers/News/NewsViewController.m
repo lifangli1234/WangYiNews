@@ -49,8 +49,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.view.dk_backgroundColorPicker = DKColorWithColors([UIColor whiteColor], NIGHTBACKGROUNDCOLOR);
-    
     [self createNavigation];
     [self createScrollView];
     [self sendWeatherRequest];

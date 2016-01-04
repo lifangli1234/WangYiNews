@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "TopicCell.h"
+#import "BaseViewController.h"
 
-@interface DiscoveryViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,TopicCellDelegate>
+@interface DiscoveryViewController : BaseViewController<TopicCellDelegate>
 
 @end
