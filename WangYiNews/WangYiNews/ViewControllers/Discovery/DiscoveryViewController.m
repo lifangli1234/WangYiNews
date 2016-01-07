@@ -9,6 +9,7 @@
 #import "DiscoveryViewController.h"
 #import "TopicModel.h"
 #import "ExpertModel.h"
+#import "ExpertViewController.h"
 #import "LoginViewController.h"
 
 @interface DiscoveryViewController ()
@@ -113,6 +114,15 @@
     height = cell.cellHeight;
     
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ExpertViewController *exp = [[ExpertViewController alloc] init];
+    NSDictionary *dic = [_topicArr objectAtIndex:indexPath.row];
+    ExpertModel *em = [ExpertModel objectWithKeyValues:dic];
+    exp.expertId = em.expertId;
+    [self.navigationController pushViewController:exp animated:YES];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

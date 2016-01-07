@@ -21,6 +21,8 @@
 @property (nonatomic, strong) NSString *picurl;
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSNumber *state;
+@property (nonatomic, strong) NSNumber *questionCount;
+@property (nonatomic, strong) NSNumber *answerCount;
 
 + (instancetype)expertModelWithDict:(NSDictionary *)dict;
 

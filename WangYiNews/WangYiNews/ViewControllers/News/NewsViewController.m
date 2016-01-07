@@ -50,8 +50,8 @@
     // Do any additional setup after loading the view.
     
     [self createNavigation];
-    [self createScrollView];
-    [self sendWeatherRequest];
+    //[self createScrollView];
+    //[self sendWeatherRequest];
 }
 
 #pragma mark -----------------navigation---------------
