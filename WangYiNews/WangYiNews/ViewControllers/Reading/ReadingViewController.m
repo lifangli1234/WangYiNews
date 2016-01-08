@@ -20,6 +20,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    [self.tableView1 addHeaderWithTarget:self action:@selector(loadData)];
+    [self.tableView1 headerBeginRefreshing];
 }
 
 -(void)initData
@@ -37,6 +39,27 @@
         make.size.sizeOffset(CGSizeMake(30, 30));
         make.right.equalTo(self.view).offset(-14);
     }];
+}
+
+-(void)loadData
+{
+    
+}
+
+-(void)loadDataWithType:(NSInteger)type url:(NSString *)url tableView:(UITableView *)tableView
+{
+    [[[NetworkTools sharedNetworkTools] GET:url parameters:nil success:^(NSURLSessionDataTask *task, NSDictionary* responseObject) {
+        if (tableView == self.tableView1) {
+            
+        }
+        else{
+            
+        }
+        [tableView reloadData];
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"%@",error);
+        [tableView headerEndRefreshing];
+    }] resume];
 }
 
 - (void)didReceiveMemoryWarning {

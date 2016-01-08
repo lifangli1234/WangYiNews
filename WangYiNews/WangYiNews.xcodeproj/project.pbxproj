@@ -387,6 +387,8 @@
 		4063649B1BD6201500202C16 /* topicheader_coverdefault@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 406364671BD6201500202C16 /* topicheader_coverdefault@2x.png */; };
 		4063649C1BD6201500202C16 /* topicheader_iconboard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 406364681BD6201500202C16 /* topicheader_iconboard@2x.png */; };
 		4063649F1BD625E300202C16 /* NewsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4063649E1BD625E300202C16 /* NewsTableViewController.m */; };
+		406924FE1C3F580E0003FAD2 /* detail_expand_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 406924FC1C3F580E0003FAD2 /* detail_expand_arrow@2x.png */; };
+		406924FF1C3F580E0003FAD2 /* night_detail_expand_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 406924FD1C3F580E0003FAD2 /* night_detail_expand_arrow@2x.png */; };
 		407FAE301BDF490A004DA6F1 /* NewsCategoryTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 407FAE2F1BDF490A004DA6F1 /* NewsCategoryTitle.m */; };
 		407FAE331BDF5250004DA6F1 /* ChannelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 407FAE321BDF5250004DA6F1 /* ChannelModel.m */; };
 		40A81D351BDB5DB1008A315E /* NewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A81D341BDB5DB1008A315E /* NewsCell.m */; };
@@ -1092,6 +1094,8 @@
 		406364681BD6201500202C16 /* topicheader_iconboard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "topicheader_iconboard@2x.png"; sourceTree = "<group>"; };
 		4063649D1BD625E300202C16 /* NewsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsTableViewController.h; sourceTree = "<group>"; };
 		4063649E1BD625E300202C16 /* NewsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsTableViewController.m; sourceTree = "<group>"; };
+		406924FC1C3F580E0003FAD2 /* detail_expand_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "detail_expand_arrow@2x.png"; sourceTree = "<group>"; };
+		406924FD1C3F580E0003FAD2 /* night_detail_expand_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "night_detail_expand_arrow@2x.png"; sourceTree = "<group>"; };
 		407FAE2E1BDF490A004DA6F1 /* NewsCategoryTitle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsCategoryTitle.h; sourceTree = "<group>"; };
 		407FAE2F1BDF490A004DA6F1 /* NewsCategoryTitle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsCategoryTitle.m; sourceTree = "<group>"; };
 		407FAE311BDF5250004DA6F1 /* ChannelModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelModel.h; sourceTree = "<group>"; };
@@ -2112,6 +2116,8 @@
 		40E817EA1C336DF2003077FD /* qa */ = {
 			isa = PBXGroup;
 			children = (
+				406924FC1C3F580E0003FAD2 /* detail_expand_arrow@2x.png */,
+				406924FD1C3F580E0003FAD2 /* night_detail_expand_arrow@2x.png */,
 				404468541C3E7D6F00EAC4F0 /* night_covernewscell_editor_default@2x.png */,
 				404468521C3E7D5100EAC4F0 /* covernewscell_editor_default@2x.png */,
 				4044684E1C3E75D900EAC4F0 /* icon_share@2x.png */,
@@ -2633,6 +2639,7 @@
 				40FBAB211C27E9B10090716B /* usercenter_hd_cover_0@2x.png in Resources */,
 				40E818411C336FC2003077FD /* night_pluginmanager_icon_search@2x.png in Resources */,
 				4012B7C31BE1B5FD0057C8A2 /* fog@2x.png in Resources */,
+				406924FE1C3F580E0003FAD2 /* detail_expand_arrow@2x.png in Resources */,
 				40FBAAB81C27E9B10090716B /* night_user_header_defaultbg@2x.jpg in Resources */,
 				406364971BD6201500202C16 /* top_navigation_shareicon@2x.png in Resources */,
 				406364821BD6201500202C16 /* night_top_navigation_square@2x.png in Resources */,
@@ -2975,6 +2982,7 @@
 				400086251BDDB2EA0030BE78 /* cola_bubble_gray@2x.png in Resources */,
 				4012B78A1BE1B5860057C8A2 /* rain_heavyx@2x.png in Resources */,
 				40097BCB1C2AA8FE00D87458 /* audionews_share_button@2x.png in Resources */,
+				406924FF1C3F580E0003FAD2 /* night_detail_expand_arrow@2x.png in Resources */,
 				406364801BD6201500202C16 /* night_top_navigation_shareicon@2x.png in Resources */,
 				406364951BD6201500202C16 /* top_navigation_searchbutton@2x.png in Resources */,
 				40FBAAC71C27E9B10090716B /* night_user_mission_progress_bg_3@2x.png in Resources */,

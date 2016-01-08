@@ -50,7 +50,7 @@
     // Do any additional setup after loading the view.
     
     [self createNavigation];
-    //[self createScrollView];
+    [self createScrollView];
     //[self sendWeatherRequest];
 }
 

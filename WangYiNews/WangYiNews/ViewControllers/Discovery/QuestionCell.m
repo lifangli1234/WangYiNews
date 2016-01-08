@@ -112,8 +112,6 @@
     self.replyBtn.layer.cornerRadius = 15;
     self.supportBtn.layer.cornerRadius = 15;
     self.supportBtn.layer.borderWidth = 0.5;
-    self.supportBtn.contentEdgeInsets = UIEdgeInsetsMake(7, 30, 7, 12);
-    self.replyBtn.contentEdgeInsets = UIEdgeInsetsMake(9, 30, 9, 12);
 }
 
 -(void)layoutSubviews

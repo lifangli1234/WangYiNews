@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WangYiNews/ViewControllers/Discovery/QuestionCell.m"
-            timestampString = "473859898.329026"
+            timestampString = "473930202.458257"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "137"
-            endingLineNumber = "137"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
             landmarkName = "-layoutSubviews"
             landmarkType = "5">
          </BreakpointContent>
