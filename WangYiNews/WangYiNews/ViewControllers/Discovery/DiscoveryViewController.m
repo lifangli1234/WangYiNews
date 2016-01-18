@@ -28,7 +28,7 @@
     // Do any additional setup after loading the view.
     
     _topicArr = [[NSMutableArray alloc] init];
-    count = 1;
+    count = 10;
     [self.tableView1 addHeaderWithTarget:self action:@selector(loadData)];
     [self.tableView1 addFooterWithTarget:self action:@selector(loadMoreData)];
     [self.tableView1 headerBeginRefreshing];
@@ -47,7 +47,7 @@
 -(void)loadMoreData
 {
     [self loadDataWithType:2 url:[NSString stringWithFormat:@"/newstopic/list/expert/%ld-10.html",count]];
-    count++;
+    count+=10;
 }
 
 -(void)loadDataWithType:(NSInteger)type url:(NSString *)url

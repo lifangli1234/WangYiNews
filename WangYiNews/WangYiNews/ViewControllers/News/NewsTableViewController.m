@@ -22,10 +22,16 @@
 @end
 
 @implementation NewsTableViewController
+{
+    UILabel *nameLabel;
+    UIPageControl *pageControl;
+    UIView *lebelView;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.arrayList = [[NSMutableArray alloc] init];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView addHeaderWithTarget:self action:@selector(loadData)];
     [self.tableView addFooterWithTarget:self action:@selector(loadMoreData)];
@@ -68,28 +74,138 @@
         
         NSArray *temArray = responseObject[key];
         
-        NSMutableArray *arrayM = [NewsModel objectArrayWithKeyValuesArray:temArray];
-    
         if (type == 1) {
-            self.arrayList = arrayM;
+            [self.arrayList removeAllObjects];
+            [self.arrayList addObjectsFromArray:temArray];
+            [self createHeaderView:_arrayList];
+            NSString *prompt = [[_arrayList objectAtIndex:0] objectForKey:@"prompt"];
+            if (prompt != nil && ![prompt isEqualToString:@""]) {
+                [self addLabel:prompt];
+                [self performSelector:@selector(showLableView) withObject:nil afterDelay:0.8];
+            }
             [self.tableView headerEndRefreshing];
             [self.tableView reloadData];
         }else if(type == 2){
-            [self.arrayList addObjectsFromArray:arrayM];
+            [self.arrayList addObjectsFromArray:temArray];
             
             [self.tableView footerEndRefreshing];
             [self.tableView reloadData];
         }
-        
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"%@",error);
         [self.tableView headerEndRefreshing];
     }] resume];
 }
 
+-(void)showLableView
+{
+    [UIView animateWithDuration:0.8 animations:^{
+        lebelView.hidden = NO;
+    } completion:^(BOOL finished) {
+        [self performSelector:@selector(hideLableView) withObject:nil afterDelay:1];
+    }];
+}
+
+-(void)hideLableView
+{
+    [UIView animateWithDuration:0.8 animations:^{
+        lebelView.hidden = YES;
+    } completion:^(BOOL finished) {
+        nil;
+    }];
+}
+
+-(void)addLabel:(NSString *)str
+{
+    lebelView = nil;
+    lebelView = [Helper view:[UIColor colorWithWhite:1 alpha:0.8] nightColor:[UIColor colorWithWhite:1 alpha:0.8]];
+    [self.view addSubview:lebelView];
+    lebelView.hidden = YES;
+    lebelView.frame = CGRectMake(0, 0, [Helper screenWidth], 30);
+    
+    UILabel *label = [Helper label:str font:[UIFont systemFontOfSize:14] textColor:[UIColor colorWithRed:0.0 green:105.0/255.0 blue:210.0/255.0 alpha:1.0] nightTextColor:[UIColor colorWithRed:0.0 green:195.0/255.0 blue:255.0/255.0 alpha:1.0] textAligment:NSTextAlignmentCenter];
+    [lebelView addSubview:label];
+    label.frame = CGRectMake(10, 0, [Helper screenWidth]-20, 30);
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)createHeaderView:(NSMutableArray *)arr
+{
+    UIView *headerView = [Helper view:[UIColor clearColor] nightColor:[UIColor clearColor]];
+    headerView.frame = CGRectMake(0, 0, [Helper screenWidth], 200);
+    NSMutableArray *tempArr = [[NSMutableArray alloc] init];
+    NSDictionary *dic;
+    if ([[_arrayList objectAtIndex:0] objectForKey:@"ads"]!=nil) {
+        NSDictionary *tempDic = [_arrayList objectAtIndex:0];
+        [tempArr addObjectsFromArray:[tempDic objectForKey:@"ads"]];
+        dic = tempArr[0];
+        UIScrollView *imgScr = [[UIScrollView alloc] init];
+        imgScr.frame = headerView.bounds;
+        imgScr.contentSize = CGSizeMake([Helper screenWidth]*tempArr.count, 200);
+        imgScr.pagingEnabled = YES;
+        imgScr.delegate = self;
+        imgScr.showsHorizontalScrollIndicator = NO;
+        imgScr.bounces = NO;
+        [headerView addSubview:imgScr];
+        
+        for (int i=0; i<tempArr.count; i++) {
+            NSDictionary *dic = tempArr[i];
+            UIImageView *img = [[UIImageView alloc] init];
+            img.frame = CGRectMake([Helper screenWidth]*i, 0, [Helper screenWidth], 200);
+            [img sd_setImageWithURL:[NSURL URLWithString:[dic objectForKey:@"imgsrc"]] placeholderImage:nil];
+            [imgScr addSubview:img];
+        }
+        
+        pageControl = [[UIPageControl alloc] init];
+        pageControl.numberOfPages = tempArr.count;
+        pageControl.currentPageIndicatorTintColor = BASERED;
+        pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
+        [headerView addSubview:pageControl];
+        [pageControl mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(headerView).offset(-30);
+            make.centerX.equalTo(headerView);
+            make.size.sizeOffset(CGSizeMake(100, 30));
+        }];
+    }
+    else{
+        dic = [_arrayList objectAtIndex:0];
+        UIImageView *img = [[UIImageView alloc] init];
+        img.frame = CGRectMake(0, 0, [Helper screenWidth], 200);
+        [img sd_setImageWithURL:[NSURL URLWithString:[dic objectForKey:@"imgsrc"]] placeholderImage:nil];
+        [headerView addSubview:img];
+    }
+    
+    UIView *titleView = [Helper view:[UIColor blackColor] nightColor:[UIColor blackColor]];
+    titleView.alpha = 0.1;
+    [headerView addSubview:titleView];
+    [titleView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.equalTo(headerView);
+        make.height.offset(30);
+    }];
+    
+    UIImageView *tagImg = [Helper imageView:@"night_photoset_list_cell_icon@2x"];
+    [headerView addSubview:tagImg];
+    [tagImg mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(headerView).offset(10);
+        make.bottom.equalTo(headerView).offset(-7);
+        make.size.sizeOffset(CGSizeMake(16, 16));
+    }];
+    
+    nameLabel = [Helper label:[dic objectForKey:@"title"] font:[UIFont systemFontOfSize:15] textColor:[UIColor whiteColor] nightTextColor:[UIColor whiteColor] textAligment:NSTextAlignmentLeft];
+    [headerView addSubview:nameLabel];
+    [nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(tagImg.mas_right).offset(5);
+        make.centerY.equalTo(tagImg);
+        make.height.offset(30);
+        make.right.equalTo(headerView).offset(-10);
+    }];
+    
+    self.tableView.tableHeaderView = nil;
+    self.tableView.tableHeaderView = headerView;
 }
 
 #pragma mark - Table view data source
@@ -99,29 +215,26 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.arrayList.count;
+    return self.arrayList.count-1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NewsModel *newsModel = self.arrayList[indexPath.row];
+    NSDictionary *dic = self.arrayList[indexPath.row+1];
+    NewsModel *newsModel = [NewsModel objectWithKeyValues:dic];
     
-    NSString *ID = [NewsCell idForRow:newsModel];
+    static NSString *cellName = @"cell";
     
-    if ((indexPath.row%20 == 0)&&(indexPath.row != 0)) {
-        ID = @"BasicCell";
-    }
-    
-    NewsCell * cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    NewsCell * cell = [tableView dequeueReusableCellWithIdentifier:cellName];
     NSArray *nib;
-    if ([ID isEqualToString:@"BasicCell"]) {
-        nib = [[NSBundle mainBundle]loadNibNamed:@"BasicCell" owner:self options:nil];
+    if ([newsModel.imgType integerValue]==1) {
+        nib = [[NSBundle mainBundle]loadNibNamed:@"BigPhotoCell" owner:self options:nil];
     }
-    else if ([ID isEqualToString:@"ImagesCell"]){
+    else if (newsModel.imgextra){
         nib = [[NSBundle mainBundle]loadNibNamed:@"ImagesCell" owner:self options:nil];
     }
     else{
-        nib = [[NSBundle mainBundle]loadNibNamed:@"BigPhotoCell" owner:self options:nil];
+        nib = [[NSBundle mainBundle]loadNibNamed:@"BasicCell" owner:self options:nil];
     }
     for(id oneObject in nib){
         if([oneObject isKindOfClass:[NewsCell class]]){
@@ -136,17 +249,17 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NewsModel *newsModel = self.arrayList[indexPath.row];
+    NSDictionary *dic = self.arrayList[indexPath.row];
+    NewsModel *newsModel = [NewsModel objectWithKeyValues:dic];
     
-    NSString *ID = [NewsCell idForRow:newsModel];
-    if ([ID isEqualToString:@"BasicCell"]) {
-        return 90;
+    if ([newsModel.imgType integerValue]==1) {
+        return 200;
     }
-    else if ([ID isEqualToString:@"ImagesCell"]){
+    else if (newsModel.imgextra){
         return 121;
     }
     else{
-        return 200;
+        return 90;
     }
     
 }
@@ -182,6 +295,14 @@
         ndvc.newsModel = newsModel;
         [self.navigationController pushViewController:ndvc animated:YES];
     }
+}
+
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    NSDictionary *dic = [_arrayList objectAtIndex:0];
+    int offset = scrollView.contentOffset.x/[Helper screenWidth];
+    nameLabel.text = [[[dic objectForKey:@"ads"] objectAtIndex:offset] objectForKey:@"title"];
+    pageControl.currentPage = offset;
 }
 
 @end

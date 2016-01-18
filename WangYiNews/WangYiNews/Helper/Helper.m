@@ -10,14 +10,13 @@
 #import "ChannelModel.h"
 
 #define SUBURL @"/nc/article/list/"
-#define HEADLINE @"/nc/article/headline/"
-#define HOTPOINE @"/recommend/getSubDocPic?passport=&devId=C69552E9-7170-416D-ACC0-4432339E77AE&size=20&version=5.3.4&spever=false&net=wifi&lat=40.044000&lon=116.299841"
+#define HOTPOINE @"/recommend/getSubDocPic?passport=&devId=4R70nVFo7N%2FjOGAl7Dql%2BgnhtyYRtyVIqBeGB12xtfEEIz0ZpgPoDMhS%2FpBn8zvR&size=20&version=5.5.0&spever=false&net=wifi&lat=&lon=&ts=1452488786&sign=pd7N48tHRS5TvRJR7dDDPjxWzIoCXNneU3inmhjcVHh48ErR02zJ6%2FKXOnxX046I&encryption=1&canal=appstore"
 #define LOCAL @"/nc/article/local/5YyX5Lqs/0-20.html"
 #define PHOTO @"/photo/api/list/0096/4GJ60096.json"
 #define COMMENT @"/nc/article/comment/list/"
 #define LIVE @"/nc/live/livelist.html"
 #define CAR @"/nc/auto/list/5YyX5Lqs/0-20.html "
-#define DUANZI @"/recommend/getChanRecomNews?channel=duanzi&passport=&devId=A88BD8D8-79E1-4EA6-9DC8-43A816FD0D77&size=20"
+#define DUANZI @"/recommend/getChanRecomNews?channel=duanzi&passport=&devId=4R70nVFo7N%2FjOGAl7Dql%2BgnhtyYRtyVIqBeGB12xtfEEIz0ZpgPoDMhS%2FpBn8zvR&size=20&version=5.5.0&spever=false&net=wifi&lat=uJQXXHviitk5NqEmCMPrww%3D%3D&lon=rhp4fqzFw1y0FLn%2F%2FF8NHg%3D%3D&ts=1452489280&sign=vHSGETotqW9kk2zp4mWON%2FA%2BSd4UIrxm0alvsTfNiEZ48ErR02zJ6%2FKXOnxX046I&encryption=1&canal=appstore"
 #define HOUSE @"/nc/article/house/5YyX5Lqs/0-20.html"
 
 @implementation Helper
@@ -123,7 +122,7 @@
     for (ChannelModel *ttm in arr) {
         NSString *urlStr = [[NSString alloc] init];
         if ([ttm.tname isEqualToString:@"头条"]) {
-            urlStr = [NSString stringWithFormat:@"%@%@/0-140.html",HEADLINE,ttm.tid];
+            urlStr = [NSString stringWithFormat:@"/nc/article/headline/%@/%d-20.html?from=toutiao&passport=&devId=4R70nVFo7N%2FjOGAl7Dql%2BgnhtyYRtyVIqBeGB12xtfEEIz0ZpgPoDMhS%2FpBn8zvR&size=20&version=5.5.0&spever=false&net=wifi&lat=&lon=&ts=1452523392&sign=x95ySVU9uSqwqFbt1Ubd3YUtCuLswI8YQmBBOEJwu2B48ErR02zJ6%2FKXOnxX046I&encryption=1&canal=appstore",ttm.tid,0];
         }
         else if ([ttm.tname isEqualToString:@"热点"]){
             urlStr = [NSString stringWithFormat:@"%@",HOTPOINE];

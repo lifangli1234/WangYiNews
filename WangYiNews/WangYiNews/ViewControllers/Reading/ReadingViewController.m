@@ -21,7 +21,7 @@
     // Do any additional setup after loading the view.
     
     [self.tableView1 addHeaderWithTarget:self action:@selector(loadData)];
-    [self.tableView1 headerBeginRefreshing];
+    //[self.tableView1 headerBeginRefreshing];
 }
 
 -(void)initData
@@ -84,10 +84,10 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView == self.tableView1) {
-        return 318;
+        return 10;
     }
     else{
-        return 133 + ([Helper screenWidth]-50)/3;
+        return 10;
     }
 }
 

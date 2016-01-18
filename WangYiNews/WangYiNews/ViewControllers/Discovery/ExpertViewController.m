@@ -22,7 +22,6 @@
 
 @implementation ExpertViewController
 {
-    UIView *_headView;
     UITableView *_questionAndAnswerTableView;
     ExpertModel *_expertModel;
     UIButton *hotBtn;
@@ -31,6 +30,11 @@
     UIView *_tableHeaderView;
     UILabel *_alias;
     CGSize aliasSize;
+    UIActivityIndicatorView *testActivityIndicator;
+    UIActivityIndicatorView *activityIndicator;
+    NSInteger count;
+    UILabel *_loadingLabel;
+    BOOL isHot;
 }
 
 - (void)viewDidLoad {
@@ -40,6 +44,9 @@
     _hotList = [[NSMutableArray alloc] init];
     _latestList = [[NSMutableArray alloc] init];
     height = 0;
+    count = 0;
+    isHot = YES;
+    [self createNaviButton];
     [self loadData];
 }
 
@@ -52,6 +59,7 @@
 {
     NSString *url = [NSString stringWithFormat:@"/newstopic/qa/%@.html",self.expertId];
     [[[NetworkTools sharedNetworkTools] GET:url parameters:nil success:^(NSURLSessionDataTask *task, NSDictionary* responseObject) {
+        [testActivityIndicator stopAnimating];
         NSDictionary *tempDic = [responseObject objectForKey:@"data"];
         _expertModel = [ExpertModel objectWithKeyValues:[tempDic objectForKey:@"expert"]];
         _expertModel.desc = [[tempDic objectForKey:@"expert"] objectForKey:@"description"];
@@ -61,13 +69,41 @@
         [_latestList addObjectsFromArray:[tempDic objectForKey:@"latestLiat"]];
         [self createTableView];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        [testActivityIndicator stopAnimating];
         NSLog(@"%@",error);
     }] resume];
 }
 
+-(void)refreshData
+{
+    NSString *url = isHot?[NSString stringWithFormat:@"/newstopic/list/hotqa/%@/0-10.html",self.expertId]:[NSString stringWithFormat:@"/newstopic/list/latestqa/%@/0-10.html",self.expertId];
+    [self loadDataWithType:1 url:url];
+}
+
 -(void)loadMoreQuestion
 {
-    
+    count+=10;
+    NSString *url = isHot?[NSString stringWithFormat:@"/newstopic/list/hotqa/%@/%ld-10.html",self.expertId,count]:[NSString stringWithFormat:@"/newstopic/list/latestqa/%@/%ld-10.html",self.expertId,count];
+    [self loadDataWithType:2 url:url];
+}
+
+-(void)loadDataWithType:(NSInteger)type url:(NSString *)url
+{
+    [[[NetworkTools sharedNetworkTools] GET:url parameters:nil success:^(NSURLSessionDataTask *task, NSDictionary* responseObject) {
+        if (type == 1) {
+            [activityIndicator stopAnimating];
+            [_hotList removeAllObjects];
+            [_hotList addObjectsFromArray:[responseObject objectForKey:@"data"]];
+        }
+        else{
+            [_hotList addObjectsFromArray:[responseObject objectForKey:@"data"]];
+            [_questionAndAnswerTableView footerEndRefreshing];
+        }
+        [_questionAndAnswerTableView reloadData];
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"%@",error);
+        [_questionAndAnswerTableView footerEndRefreshing];
+    }] resume];
 }
 
 -(void)createTableView
@@ -82,14 +118,22 @@
     _questionAndAnswerTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_questionAndAnswerTableView];
     [_questionAndAnswerTableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_headView.mas_bottom);
+        make.top.equalTo(self.view).offset(200);
         make.left.right.equalTo(self.view);
         make.bottom.equalTo(self.view).offset(-49);
     }];
-    [self addQuestionView];
+    activityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    activityIndicator.hidden = YES;
+    [activityIndicator setHidesWhenStopped:YES];
+    [self.view addSubview:activityIndicator];
+    [activityIndicator mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view).offset(20);
+        make.top.equalTo(self.view).offset(240+_tableHeaderView.frame.size.height);
+    }];
+    [self addBootomView];
 }
 
--(void)addQuestionView
+-(void)addBootomView
 {
     UIView *bootomView = [Helper view:[UIColor colorWithWhite:0.95 alpha:1.0] nightColor:[UIColor colorWithWhite:0.1 alpha:1.0]];
     [self.view addSubview:bootomView];
@@ -135,6 +179,11 @@
     [btn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(bootomView);
     }];
+}
+
+-(void)addQuestionView
+{
+    
 }
 
 -(void)tableHeaderView
@@ -207,81 +256,112 @@
             make.centerX.equalTo(_tableHeaderView);
             make.size.sizeOffset(CGSizeMake(40, 38));
         }];
-        _tableHeaderView.frame = CGRectMake(0, 0, [Helper screenWidth], 116);
+        _tableHeaderView.frame = CGRectMake(0, 0, [Helper screenWidth], 115);
     }
     else{
         _tableHeaderView.frame = CGRectMake(0, 0, [Helper screenWidth], 60+aliasSize.height);
     }
 }
 
--(void)createHeaderView
+-(void)createNaviButton
 {
-    _headView = [Helper view:[UIColor clearColor] nightColor:[UIColor clearColor]];
-    [self.view addSubview:_headView];
-    [_headView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.equalTo(self.view);
-        make.height.equalTo(@200);
-    }];
-    [self addCotentForHeaderView];
-}
-
--(void)addCotentForHeaderView
-{
-    UIImageView *img = [[UIImageView alloc] init];
-    [img sd_setImageWithURL:[NSURL URLWithString:_expertModel.picurl] placeholderImage:nil];
-    [_headView addSubview:img];
-    [img mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(_headView);
+    UIView *back = [Helper view:[UIColor colorWithWhite:0.9 alpha:1] nightColor:[UIColor colorWithWhite:0.02 alpha:1]];
+    [self.view addSubview:back];
+    [back mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
     }];
     
-    UIButton *backBtn = [Helper button:@"weather_back@2x" target:self action:@selector(backBtn) tag:0];
-    [_headView addSubview:backBtn];
+    UIImageView *img = [Helper imageView:@"photoview_image_default_white@2x"];
+    [back addSubview:img];
+    [img mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self.view);
+        make.size.sizeOffset(CGSizeMake(320, 70));
+    }];
+    
+    UIButton *backBtn = [Helper button:@"weather_back_highlight@2x" target:self action:@selector(backBtn) tag:0];
+    [self.view addSubview:backBtn];
     [backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(_headView);
-        make.top.equalTo(_headView).offset(20);
+        make.left.equalTo(self.view);
+        make.top.equalTo(self.view).offset(20);
         make.size.sizeOffset(CGSizeMake(45, 44));
     }];
     
-    UIButton *shareBtn = [Helper button:@"qa_share_normal@2x" target:self action:@selector(shareBtn) tag:0];
-    [_headView addSubview:shareBtn];
+    UIButton *shareBtn = [Helper button:@"weather_share_highlight@2x" target:self action:@selector(shareBtn) tag:0];
+    [self.view addSubview:shareBtn];
     [shareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(_headView);
-        make.top.equalTo(_headView).offset(20);
+        make.right.equalTo(self.view);
+        make.top.equalTo(self.view).offset(20);
+        make.size.sizeOffset(CGSizeMake(45, 44));
+    }];
+    
+    testActivityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [testActivityIndicator startAnimating];
+    [testActivityIndicator setHidesWhenStopped:YES];
+    [self.view addSubview:testActivityIndicator];
+    [testActivityIndicator mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(img).offset(-70);
+        make.centerY.equalTo(img).offset(-11);
+    }];
+}
+
+-(void)createHeaderView
+{
+    UIImageView *img = [[UIImageView alloc] init];
+    [img sd_setImageWithURL:[NSURL URLWithString:_expertModel.picurl] placeholderImage:nil];
+    [self.view addSubview:img];
+    [img mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.equalTo(self.view);
+        make.height.offset(200);
+    }];
+    
+    UIButton *backBtn = [Helper button:@"weather_back_highlight@2x" target:self action:@selector(backBtn) tag:0];
+    [self.view addSubview:backBtn];
+    [backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view);
+        make.top.equalTo(self.view).offset(20);
+        make.size.sizeOffset(CGSizeMake(45, 44));
+    }];
+    
+    UIButton *shareBtn = [Helper button:@"weather_share_highlight@2x" target:self action:@selector(shareBtn) tag:0];
+    [self.view addSubview:shareBtn];
+    [shareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.view);
+        make.top.equalTo(self.view).offset(20);
         make.size.sizeOffset(CGSizeMake(45, 44));
     }];
     
     UILabel *title1 = [Helper label:_expertModel.alias font:[UIFont systemFontOfSize:15] textColor:[UIColor colorWithWhite:1 alpha:0] nightTextColor:[UIColor colorWithWhite:1 alpha:0] textAligment:NSTextAlignmentCenter];
-    [_headView addSubview:title1];
+    [self.view addSubview:title1];
     [title1 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_headView).offset(20);
-        make.left.equalTo(backBtn.mas_right);
-        make.right.equalTo(shareBtn.mas_left);
+        make.top.equalTo(self.view).offset(20);
+        make.left.equalTo(self.view).offset(45);
+        make.right.equalTo(self.view).offset(-45);
         make.height.offset(44);
     }];
     
     UILabel *title2 = [Helper label:_expertModel.alias font:[UIFont boldSystemFontOfSize:16] textColor:[UIColor colorWithWhite:1 alpha:1] nightTextColor:[UIColor colorWithWhite:1 alpha:1] textAligment:NSTextAlignmentCenter];
     title2.lineBreakMode = NSLineBreakByWordWrapping;
     title2.numberOfLines = 2;
-    [_headView addSubview:title2];
+    [self.view addSubview:title2];
     [title2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(title1.mas_bottom);
-        make.left.equalTo(backBtn.mas_right);
-        make.right.equalTo(shareBtn.mas_left);
-        make.centerX.equalTo(_headView);
+        make.left.equalTo(title1);
+        make.right.equalTo(title1);
+        make.centerX.equalTo(self.view);
     }];
     
     UILabel *concernCountLab = [Helper label:[NSString stringWithFormat:@"--- %@关注 ---",_expertModel.concernCount] font:[UIFont systemFontOfSize:16] textColor:[UIColor colorWithWhite:1 alpha:1] nightTextColor:[UIColor colorWithWhite:1 alpha:1] textAligment:NSTextAlignmentCenter];
-    [_headView addSubview:concernCountLab];
+    [self.view addSubview:concernCountLab];
     [concernCountLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(title2.mas_bottom).offset(10);
-        make.centerX.equalTo(_headView);
+        make.centerX.equalTo(self.view);
     }];
     
     UIButton *addConcernBtn = [Helper button:@"qa_concern@2x" target:self action:@selector(addConcernBtn) tag:0];
-    [_headView addSubview:addConcernBtn];
+    [self.view addSubview:addConcernBtn];
     [addConcernBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(concernCountLab.mas_bottom).offset(10);
-        make.centerX.equalTo(_headView);
+        make.centerX.equalTo(self.view);
         make.size.sizeOffset(CGSizeMake(95, 30));
     }];
 }
@@ -324,60 +404,68 @@
     }
 }
 
+-(UIView *)sectionHeaderView
+{
+    UIView *view;
+    if (view == nil) {
+        view = [Helper view:LINECOLOR nightColor:NIGHTLINECOLOR];
+        view.frame = CGRectMake(0, 0, [Helper screenWidth], 30);
+        
+        UILabel *countLab = [Helper label:[NSString stringWithFormat:@"%@提问 . %@回复",_expertModel.questionCount,_expertModel.answerCount] font:[UIFont systemFontOfSize:13] textColor:[UIColor grayColor] nightTextColor:[UIColor lightGrayColor] textAligment:NSTextAlignmentLeft];
+        [view addSubview:countLab];
+        [countLab mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(view).offset(10);
+            make.top.bottom.equalTo(view);
+        }];
+        
+        UIView *segView = [Helper view:[UIColor clearColor] nightColor:[UIColor clearColor]];
+        segView.layer.cornerRadius = 4;
+        segView.layer.borderWidth = 0.8;
+        segView.layer.borderColor = [Helper isNightMode]?BASERED_NIGHT.CGColor:BASERED.CGColor;
+        [view addSubview:segView];
+        [segView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(view).offset(-10);
+            make.top.equalTo(view).offset(4);
+            make.bottom.equalTo(view).offset(-4);
+            make.width.offset(80);
+        }];
+        
+        hotBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        hotBtn.dk_backgroundColorPicker = isHot?DKColorWithColors(BASERED, BASERED_NIGHT):DKColorWithColors([UIColor whiteColor], [UIColor whiteColor]);
+        hotBtn.layer.cornerRadius = 3;
+        [hotBtn setTitle:@"最热" forState:UIControlStateNormal];
+        hotBtn.titleLabel.font = [UIFont systemFontOfSize:13];
+        [hotBtn dk_setTitleColorPicker:DKColorWithColors([UIColor whiteColor], [UIColor whiteColor]) forState:UIControlStateSelected];
+        [hotBtn dk_setTitleColorPicker:DKColorWithColors(BASERED, BASERED_NIGHT) forState:UIControlStateNormal];
+        hotBtn.selected = isHot;
+        [hotBtn addTarget:self action:@selector(hotBtn) forControlEvents:UIControlEventTouchUpInside];
+        [segView addSubview:hotBtn];
+        [hotBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.top.bottom.equalTo(segView);
+            make.width.offset(40);
+        }];
+        
+        latestBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        latestBtn.dk_backgroundColorPicker = isHot?DKColorWithColors([UIColor whiteColor], [UIColor whiteColor]):DKColorWithColors(BASERED, BASERED_NIGHT);
+        latestBtn.layer.cornerRadius = 3;
+        latestBtn.selected = !isHot;
+        [latestBtn setTitle:@"最新" forState:UIControlStateNormal];
+        latestBtn.titleLabel.font = [UIFont systemFontOfSize:13];
+        [latestBtn dk_setTitleColorPicker:DKColorWithColors([UIColor whiteColor], [UIColor whiteColor]) forState:UIControlStateSelected];
+        [latestBtn dk_setTitleColorPicker:DKColorWithColors(BASERED, BASERED_NIGHT) forState:UIControlStateNormal];
+        [latestBtn addTarget:self action:@selector(latestBtn) forControlEvents:UIControlEventTouchUpInside];
+        [segView addSubview:latestBtn];
+        [latestBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.top.bottom.equalTo(segView);
+            make.width.offset(40);
+        }];
+    }
+    return view;
+}
+
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *view = [Helper view:LINECOLOR nightColor:NIGHTLINECOLOR];
-    view.frame = CGRectMake(0, 0, [Helper screenWidth], 30);
-    
-    UILabel *countLab = [Helper label:[NSString stringWithFormat:@"%@提问 . %@回复",_expertModel.questionCount,_expertModel.answerCount] font:[UIFont systemFontOfSize:13] textColor:[UIColor grayColor] nightTextColor:[UIColor lightGrayColor] textAligment:NSTextAlignmentLeft];
-    [view addSubview:countLab];
-    [countLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(view).offset(10);
-        make.top.bottom.equalTo(view);
-    }];
-    
-    UIView *segView = [Helper view:[UIColor clearColor] nightColor:[UIColor clearColor]];
-    segView.layer.cornerRadius = 4;
-    segView.layer.borderWidth = 0.8;
-    segView.layer.borderColor = [Helper isNightMode]?BASERED_NIGHT.CGColor:BASERED.CGColor;
-    [view addSubview:segView];
-    [segView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(view).offset(-10);
-        make.top.equalTo(view).offset(4);
-        make.bottom.equalTo(view).offset(-4);
-        make.width.offset(80);
-    }];
-    
-    hotBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    hotBtn.dk_backgroundColorPicker = DKColorWithColors(BASERED, BASERED_NIGHT);
-    hotBtn.layer.cornerRadius = 3;
-    [hotBtn setTitle:@"最热" forState:UIControlStateNormal];
-    hotBtn.titleLabel.font = [UIFont systemFontOfSize:13];
-    [hotBtn dk_setTitleColorPicker:DKColorWithColors([UIColor whiteColor], [UIColor whiteColor]) forState:UIControlStateSelected];
-    [hotBtn dk_setTitleColorPicker:DKColorWithColors(BASERED, BASERED_NIGHT) forState:UIControlStateNormal];
-    hotBtn.selected = YES;
-    [hotBtn addTarget:self action:@selector(hotBtn) forControlEvents:UIControlEventTouchUpInside];
-    [segView addSubview:hotBtn];
-    [hotBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.bottom.equalTo(segView);
-        make.width.offset(40);
-    }];
-    
-    latestBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    latestBtn.dk_backgroundColorPicker = DKColorWithColors([UIColor whiteColor], [UIColor whiteColor]);
-    latestBtn.layer.cornerRadius = 3;
-    [latestBtn setTitle:@"最新" forState:UIControlStateNormal];
-    latestBtn.titleLabel.font = [UIFont systemFontOfSize:13];
-    [latestBtn dk_setTitleColorPicker:DKColorWithColors([UIColor whiteColor], [UIColor whiteColor]) forState:UIControlStateSelected];
-    [latestBtn dk_setTitleColorPicker:DKColorWithColors(BASERED, BASERED_NIGHT) forState:UIControlStateNormal];
-    [latestBtn addTarget:self action:@selector(latestBtn) forControlEvents:UIControlEventTouchUpInside];
-    [segView addSubview:latestBtn];
-    [latestBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.top.bottom.equalTo(segView);
-        make.width.offset(40);
-    }];
-    
-    return view;
+    return [self sectionHeaderView];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -392,14 +480,14 @@
             make.height.offset(32);
         }];
         [_alias layoutIfNeeded];
-        _tableHeaderView.frame = CGRectMake(0, 0, [Helper screenWidth], 116);
+        _tableHeaderView.frame = CGRectMake(0, 0, [Helper screenWidth], 115);
     }
     else{
         [_alias mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.offset(aliasSize.height);
+            make.height.offset(aliasSize.height+2);
         }];
         [_alias layoutIfNeeded];
-        _tableHeaderView.frame = CGRectMake(0, 0, [Helper screenWidth], 84+aliasSize.height);
+        _tableHeaderView.frame = CGRectMake(0, 0, [Helper screenWidth], 83+aliasSize.height);
     }
     _questionAndAnswerTableView.tableHeaderView = nil;
     _questionAndAnswerTableView.tableHeaderView = _tableHeaderView;
@@ -422,18 +510,18 @@
 
 -(void)hotBtn
 {
-    hotBtn.selected = YES;
-    latestBtn.selected = NO;
-    hotBtn.dk_backgroundColorPicker = DKColorWithColors(BASERED, BASERED_NIGHT);
-    latestBtn.dk_backgroundColorPicker = DKColorWithColors([UIColor whiteColor], [UIColor whiteColor]);
+    isHot = YES;
+    activityIndicator.hidden = NO;
+    [activityIndicator startAnimating];
+    [self refreshData];
 }
 
 -(void)latestBtn
 {
-    hotBtn.selected = NO;
-    latestBtn.selected = YES;
-    latestBtn.dk_backgroundColorPicker = DKColorWithColors(BASERED, BASERED_NIGHT);
-    hotBtn.dk_backgroundColorPicker = DKColorWithColors([UIColor whiteColor], [UIColor whiteColor]);
+    isHot = NO;
+    activityIndicator.hidden = NO;
+    [activityIndicator startAnimating];
+    [self refreshData];
 }
 
 -(void)addQuestion

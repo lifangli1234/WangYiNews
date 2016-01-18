@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NewsTableViewController : UITableViewController<UITableViewDataSource,UITableViewDelegate>
+@interface NewsTableViewController : UITableViewController<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 
 @property (nonatomic, strong) NSString *newsUrl;
 @property (nonatomic, assign) NSInteger index;

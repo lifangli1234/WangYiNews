@@ -60,15 +60,16 @@
     }
 }
 
-+ (NSString *)idForRow:(NewsModel *)newsModel
-{
-    if (newsModel.imgType){
-        return @"BigPhotoCell";
-    }else if (newsModel.imgextra){
-        return @"ImagesCell";
-    }else{
-        return @"BasicCell";
-    }
-}
+//+ (NSString *)idForRow:(NewsModel *)newsModel
+//{
+//    if (newsModel.imgType){
+//        return @"BigPhotoCell";
+//    }else
+//    if (newsModel.imgextra){
+//        return @"ImagesCell";
+//    }else{
+//        return @"BasicCell";
+//    }
+//}
 
 @end

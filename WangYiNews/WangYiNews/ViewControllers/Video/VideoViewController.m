@@ -66,7 +66,7 @@
     [self.tableView2 addHeaderWithTarget:self action:@selector(loadAudioData)];
     self.tableView2.tableHeaderView = [self createAudioTableViewHeaderView];
     self.update = YES;
-    count = 1;
+    count = 10;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -91,7 +91,7 @@
 -(void)loadMoreVideoData
 {
     [self loadDataWithType:2 url:[NSString stringWithFormat:@"%@%ld-10.html",VIDEOSUBURL,count] tableView:self.tableView1];
-    count++;
+    count+=10;
 }
 
 -(void)loadAudioData

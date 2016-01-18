@@ -23,8 +23,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imgsrc2;
 @property (weak, nonatomic) IBOutlet UILabel *replyLabel;
 
-+ (NSString *)idForRow:(NewsModel *)newsModel;
-
-+ (CGFloat)heightForRow:(NewsModel *)newsModel;
+//+ (NSString *)idForRow:(NewsModel *)newsModel;
+//
+//+ (CGFloat)heightForRow:(NewsModel *)newsModel;
 
 @end

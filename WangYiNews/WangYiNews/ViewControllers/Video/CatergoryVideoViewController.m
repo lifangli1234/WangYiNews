@@ -40,7 +40,7 @@
     [self createNavigationView];
     [self createRadioTableView];
     [_radioListTableView headerBeginRefreshing];
-    count = 1;
+    count = 10;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -59,7 +59,7 @@
 {
     NSString *url = [self.type isEqualToString:@"radio"]?[NSString stringWithFormat:@"/nc/topicset/ios/radio/%@/%d-20.html",self.cid,count]:[NSString stringWithFormat:@"/nc/video/list/%@/y/%d-10.html",self.cid,count];
     [self loadDataWithType:2 url:url];
-    count++;
+    count+=10;
 }
 
 -(void)loadDataWithType:(NSInteger)type url:(NSString *)url
