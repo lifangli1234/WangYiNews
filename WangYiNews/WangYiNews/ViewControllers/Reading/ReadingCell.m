@@ -102,7 +102,7 @@
             [self.recReasonLabel mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(self).offset(28);
                 make.top.equalTo(self).offset(8);
-                make.top.equalTo(@20);
+                make.height.equalTo(@20);
             }];
             [self.recReasonImg mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.size.sizeOffset(CGSizeMake(10, 12));
@@ -114,7 +114,7 @@
             [self.recReasonLabel mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(self).offset(28);
                 make.top.equalTo(self).offset(8);
-                make.top.equalTo(@20);
+                make.height.equalTo(@20);
             }];
             [self.recReasonImg mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.size.sizeOffset(CGSizeMake(10, 10));
@@ -126,7 +126,7 @@
             [self.recReasonLabel mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(self).offset(27.5);
                 make.top.equalTo(self).offset(8);
-                make.top.equalTo(@20);
+                make.height.equalTo(@20);
             }];
             [self.recReasonImg mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.size.sizeOffset(CGSizeMake(9.5, 12.5));
@@ -138,7 +138,7 @@
             [self.recReasonLabel mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(self).offset(25);
                 make.top.equalTo(self).offset(8);
-                make.top.equalTo(@20);
+                make.height.equalTo(@20);
             }];
             [self.recReasonImg mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.size.sizeOffset(CGSizeMake(7, 10));

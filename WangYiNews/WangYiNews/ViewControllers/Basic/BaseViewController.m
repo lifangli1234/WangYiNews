@@ -41,8 +41,8 @@
     self.view.dk_backgroundColorPicker = DKColorWithColors([UIColor whiteColor], NIGHTBACKGROUNDCOLOR);
     [self initData];
     [self createNavigationBar];
-    [self loadNavigationBar];
     [self addContentScrllView];
+    [self loadNavigationBar];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -117,6 +117,7 @@
 -(void)addContentScrllView
 {
     self.contentScr= [[UIScrollView alloc] init];
+    self.contentScr.frame = CGRectMake(0, 64, [Helper screenWidth], [Helper screenHeight]-64-49);
     self.contentScr.dk_backgroundColorPicker = DKColorWithColors([UIColor whiteColor], NIGHTBACKGROUNDCOLOR);
     self.contentScr.contentSize = CGSizeMake([Helper screenWidth]*(self.isNormal?1:2), [Helper screenHeight]-64-49);
     self.contentScr.pagingEnabled = YES;
@@ -125,11 +126,6 @@
     self.contentScr.showsVerticalScrollIndicator = NO;
     self.contentScr.bounces = NO;
     [self.view addSubview:_contentScr];
-    [self.contentScr mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).offset(64);
-        make.left.right.equalTo(self.view);
-        make.bottom.equalTo(self.view).offset(-49);
-    }];
     [self createTableView1];
     if (!self.isNormal) {
         [self createTableView2];
@@ -138,7 +134,7 @@
 
 -(void)createTableView1
 {
-    self.tableView1 = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, [Helper screenWidth], [Helper screenHeight]-64-49)];
+    self.tableView1 = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, [Helper screenWidth], _contentScr.frame.size.height)];
     self.tableView1.delegate = self;
     self.tableView1.dataSource = self;
     self.tableView1.dk_backgroundColorPicker = DKColorWithColors([UIColor whiteColor], NIGHTBACKGROUNDCOLOR);
@@ -148,7 +144,7 @@
 
 -(void)createTableView2
 {
-    self.tableView2 = [[UITableView alloc] initWithFrame:CGRectMake([Helper screenWidth], 0, [Helper screenWidth], [Helper screenHeight]-64-49)];
+    self.tableView2 = [[UITableView alloc] initWithFrame:CGRectMake([Helper screenWidth], 0, [Helper screenWidth], _contentScr.frame.size.height)];
     self.tableView2.delegate = self;
     self.tableView2.dataSource = self;
     self.tableView2.dk_backgroundColorPicker = DKColorWithColors([UIColor whiteColor], NIGHTBACKGROUNDCOLOR);

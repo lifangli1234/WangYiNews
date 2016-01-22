@@ -10,6 +10,7 @@
 #import "ReadingCell.h"
 #import "ReadingModel.h"
 #import "LoginViewController.h"
+#import "RecommendSubscribeViewController.h"
 
 @interface ReadingViewController ()
 
@@ -29,8 +30,9 @@
     isTableView1 = YES;
     [self.tableView1 addHeaderWithTarget:self action:@selector(loadData)];
     [self.tableView1 headerBeginRefreshing];
-    self.tableView1.tableHeaderView = [self tableViewHeaderView];
-    self.tableView2.tableHeaderView = [self tableViewHeaderView];
+    self.tableView1.tableHeaderView = [self tableViewHeaderViewWithStr:@"获取更合口味的推荐"];
+    self.tableView2.tableHeaderView = [self tableViewHeaderViewWithStr:@"同步多平台订阅内容"];
+    self.tableView2.tableFooterView = [self tableViewFooterView];
 }
 
 -(void)initData
@@ -59,6 +61,7 @@
 {
     [[[NetworkTools sharedNetworkTools] GET:url parameters:nil success:^(NSURLSessionDataTask *task, NSDictionary* responseObject) {
         [self.tableView1 headerEndRefreshing];
+        [_listArr removeAllObjects];
         [_listArr addObjectsFromArray:[responseObject objectForKey:@"推荐"]];
         [tableView reloadData];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
@@ -72,7 +75,7 @@
     // Dispose of any resources that can be recreated.
 }
 
--(UIView *)tableViewHeaderView
+-(UIView *)tableViewHeaderViewWithStr:(NSString *)str
 {
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [Helper screenWidth], 105)];
     
@@ -88,7 +91,7 @@
         make.height.offset(40);
     }];
     
-    UILabel *label = [Helper label:isTableView1?@"获取更合口味的推荐":@"同步多平台订阅内容" font:[UIFont systemFontOfSize:14] textColor:[UIColor lightGrayColor] nightTextColor:[UIColor lightGrayColor] textAligment:NSTextAlignmentCenter];
+    UILabel *label = [Helper label:str font:[UIFont systemFontOfSize:14] textColor:[UIColor lightGrayColor] nightTextColor:[UIColor lightGrayColor] textAligment:NSTextAlignmentCenter];
     [headerView addSubview:label];
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(login.mas_bottom).offset(8);
@@ -113,17 +116,29 @@
     UIImageView *img = [Helper imageView:@"reader_myreader_blank@2x"];
     [footerView addSubview:img];
     [img mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(footerView).offset(8);
+        make.top.equalTo(footerView).offset(5);
         make.centerX.equalTo(footerView);
         make.size.sizeOffset(CGSizeMake(225, 195));
     }];
     
-    UILabel *label = [Helper label:isTableView1?@"获取更合口味的推荐":@"同步多平台订阅内容" font:[UIFont systemFontOfSize:14] textColor:[UIColor lightGrayColor] nightTextColor:[UIColor lightGrayColor] textAligment:NSTextAlignmentCenter];
+    UILabel *label = [Helper label:@"" font:[UIFont systemFontOfSize:14] textColor:[UIColor blackColor] nightTextColor:[UIColor whiteColor] textAligment:NSTextAlignmentCenter];
+    NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:@"寻找我感兴趣的订阅栏目"];
+    NSString *attrStr = @"订阅栏目";
+    [str addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:0.0 green:105.0/255.0 blue:210.0/255.0 alpha:1.0]} range:NSMakeRange(str.length-attrStr.length, attrStr.length)];
+    label.attributedText = str;
     [footerView addSubview:label];
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(img.mas_bottom).offset(8);
-        make.centerX.equalTo(footerView);
+        make.top.equalTo(img.mas_bottom);
+        make.centerX.equalTo(footerView).offset(-15.5/2);
         make.height.offset(25);
+    }];
+    
+    UIImageView *enterImg = [Helper imageView:@"lm_cell_detail_indicator@2x"];
+    [footerView addSubview:enterImg];
+    [enterImg mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(label);
+        make.left.equalTo(label.mas_right).offset(8);
+        make.size.sizeOffset(CGSizeMake(7.5, 14));
     }];
     
     return  footerView;
@@ -171,8 +186,16 @@
         [cell addSubview:lab];
         [lab mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(img.mas_right).offset(8);
-            make.centerY.equalTo(cell);
+            make.centerY.equalTo(cell).offset(-5);
             make.height.offset(70);
+        }];
+        
+        UIImageView *enterImg = [Helper imageView:@"lm_cell_detail_indicator@2x"];
+        [cell addSubview:enterImg];
+        [enterImg mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(cell).offset(-5);
+            make.right.equalTo(cell).offset(-17.5);
+            make.size.sizeOffset(CGSizeMake(7.5, 14));
         }];
         
         UIView *line = [Helper view:LINECOLOR nightColor:NIGHTLINECOLOR];
@@ -183,6 +206,13 @@
         }];
         
         return cell;
+    }
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (tableView == self.tableView2) {
+        [self.navigationController pushViewController:[[RecommendSubscribeViewController alloc] init] animated:YES];
     }
 }
 

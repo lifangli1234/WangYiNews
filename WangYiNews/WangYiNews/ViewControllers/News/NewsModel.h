@@ -79,7 +79,6 @@
 @property (nonatomic,copy)NSNumber *imgType;
 @property (nonatomic,strong)NSArray *specialextra;
 
-
 @property (nonatomic,copy) NSString *boardid;
 @property (nonatomic,copy) NSString *commentid;
 @property (nonatomic,copy)NSNumber *speciallogo;

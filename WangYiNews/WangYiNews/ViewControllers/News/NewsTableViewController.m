@@ -249,17 +249,33 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *dic = self.arrayList[indexPath.row];
+    NSDictionary *dic = self.arrayList[indexPath.row+1];
     NewsModel *newsModel = [NewsModel objectWithKeyValues:dic];
-    
+    CGSize titleSize = [newsModel.title boundingRectWithSize:CGSizeMake([Helper screenWidth]-20, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17]} context:nil].size;
+    CGSize descSize = [newsModel.digest boundingRectWithSize:CGSizeMake([Helper screenWidth]-20, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size;
     if ([newsModel.imgType integerValue]==1) {
-        return 200;
+        if (newsModel.editor != nil && newsModel.editor.count>0){
+            if ([newsModel.replyCount intValue]>0) {
+                return 228.5+titleSize.height;
+            }
+            else{
+                return 198.5+descSize.height+titleSize.height;
+            }
+        }
+        else{
+            if ([newsModel.replyCount intValue]>0) {
+                return 216.5+titleSize.height;
+            }
+            else{
+                return 186.5+descSize.height+titleSize.height;
+            }
+        }
     }
     else if (newsModel.imgextra){
-        return 121;
+        return 128.5+titleSize.height;
     }
     else{
-        return 90;
+        return 95.5;
     }
     
 }
@@ -270,7 +286,8 @@
     UIViewController *vc = [[UIViewController alloc]init];
     vc.view.backgroundColor = [UIColor yellowColor];
     
-    NewsModel *newsModel = self.arrayList[indexPath.row];
+    NSDictionary *dic = self.arrayList[indexPath.row+1];
+    NewsModel *newsModel = [NewsModel objectWithKeyValues:dic];
     if (newsModel.skipType) {
         if ([newsModel.skipType isEqualToString:@"photoset"]) {
             PhotosetViewController *pvc = [[PhotosetViewController alloc] init];
