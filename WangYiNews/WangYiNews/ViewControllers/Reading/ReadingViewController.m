@@ -11,6 +11,7 @@
 #import "ReadingModel.h"
 #import "LoginViewController.h"
 #import "RecommendSubscribeViewController.h"
+#import "AddSubscribeViewController.h"
 
 @interface ReadingViewController ()
 
@@ -37,14 +38,14 @@
 
 -(void)initData
 {
-    self.naviLeftBtn.hidden = YES;
-    SetButtonImage(self.naviRightBtn, @"top_navigation_readerplus@2x");
     [self setSegLStr:@"推荐阅读"];
     [self setSegRStr:@"我的订阅"];
 }
 
 -(void)loadNavigationBar
 {
+    self.naviLeftBtn.hidden = YES;
+    SetButtonImage(self.naviRightBtn, @"top_navigation_readerplus@2x");
     [self.naviRightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view).offset(27);
         make.size.sizeOffset(CGSizeMake(30, 30));
@@ -225,7 +226,7 @@
         if (rm.recReason) {
             if ([rm.template isEqualToString:@"normal"]) {
                 if (rm.imgsrc == nil || [rm.imgsrc isEqualToString:@""]) {
-                    return 64+titleSize.height;
+                    return 74+titleSize.height;
                 }
                 else
                     return 154;
@@ -240,7 +241,7 @@
         else {
             if ([rm.template isEqualToString:@"normal"]) {
                 if (rm.imgsrc == nil || [rm.imgsrc isEqualToString:@""]) {
-                    return 40+titleSize.height;
+                    return 50+titleSize.height;
                 }
                 else
                     return 130;
@@ -289,7 +290,9 @@
 
 #pragma mark----------------btnAction------------
 -(void)navigationRightBtnClick
-{}
+{
+    [self.navigationController pushViewController:[[AddSubscribeViewController alloc] init] animated:YES];
+}
 
 -(void)login
 {

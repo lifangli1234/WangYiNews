@@ -68,9 +68,9 @@
         make.left.and.right.and.top.mas_equalTo(self.view);
         make.height.offset(64);
     }];
+    [self addLeftButton];
+    [self addRightButton];
     if (self.isNormal) {
-        [self addLeftButton];
-        [self addRightButton];
         [self addTitleLabel];
     }
     else{

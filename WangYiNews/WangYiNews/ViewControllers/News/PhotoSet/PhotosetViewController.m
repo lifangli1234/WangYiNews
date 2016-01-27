@@ -17,10 +17,7 @@
 {
     UIButton *_backBtn;
     UIButton *_replyCountBtn;
-    UIView *_line;
-    UIButton *_downLoadBtn;
-    UIButton *_shareBtn;
-    UIButton *_favouriteBtn;
+    UIView *_bottomView;
     PhotoSetScrollView *_photoSetView;
     PhotoSetModel *_photoSetModel;
 }
@@ -37,19 +34,37 @@
 
 -(void)createImageSroll
 {
+//    UIImageView *img = [Helper imageView:@"night_contentview_image_default@2x"];
+//    [self.view addSubview:img];
+//    [img mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.center.equalTo(self.view);
+//        make.size.sizeOffset(CGSizeMake(100, 100));
+//    }];
+    _photoSetView = [[PhotoSetScrollView alloc] init];
+    _photoSetView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:_photoSetView];
+    [_photoSetView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view).offset(0);
+        make.right.left.bottom.equalTo(self.view);
+    }];
+    
+    UIActivityIndicatorView *testActivityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [testActivityIndicator startAnimating];
+    [self.view addSubview:testActivityIndicator];
+    [testActivityIndicator mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self.view);
+    }];
+    
     NSArray *idArr = [self.newsModel.skipID componentsSeparatedByString:@"|"];
-    NSString *url = [NSString stringWithFormat:@"/photo/api/set/0096/%@.json",idArr[1]];
+    NSMutableString *mStr = [[NSMutableString alloc] initWithString:idArr[0]];
+    NSString *str = [mStr substringWithRange:NSMakeRange(mStr.length-4, 4)];
+    NSString *url = [NSString stringWithFormat:@"/photo/api/set/%@/%@.json",str,idArr[1]];
     [[NetworkTools sharedNetworkTools] GET:url parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        [testActivityIndicator stopAnimating];
         _photoSetModel = [PhotoSetModel objectWithKeyValues:responseObject];
-        _photoSetView = [[PhotoSetScrollView alloc] init];
         [_photoSetView setPhotoSetModel:_photoSetModel];
-        _photoSetView.backgroundColor = [UIColor clearColor];
-        [self.view addSubview:_photoSetView];
-        [_photoSetView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.view).offset(20);
-            make.right.left.bottom.equalTo(self.view);
-        }];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        [testActivityIndicator stopAnimating];
         NSLog(@"%@",error);
     }];
 }
@@ -65,10 +80,10 @@
     }];
     
     _replyCountBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    CGSize size = [[NSString stringWithFormat:@"%@",_newsModel.replyCount] sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]}];
+    CGSize size = [[NSString stringWithFormat:@"%@跟帖",_newsModel.replyCount] sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]}];
     _replyCountBtn.frame = CGRectMake([Helper screenWidth]-size.width-28, 20, size.width + 20, 40);
     _replyCountBtn.titleLabel.font = [UIFont systemFontOfSize:13];
-    [_replyCountBtn setTitle:[NSString stringWithFormat:@"%@",_newsModel.replyCount] forState:UIControlStateNormal];
+    [_replyCountBtn setTitle:[NSString stringWithFormat:@"%@跟帖",_newsModel.replyCount] forState:UIControlStateNormal];
     [_replyCountBtn needsUpdateConstraints];
     UIImage *normalImg = [UIImage imageNamed:@"contentview_commentbacky"];
     UIImage *highlightedImg = [UIImage imageNamed:@"contentview_commentbacky_selected"];
@@ -86,34 +101,42 @@
 
 -(void)createFooterButton
 {
-    _line = [Helper view:[UIColor grayColor] nightColor:[UIColor grayColor]];
-    [self.view addSubview:_line];
-    [_line mas_makeConstraints:^(MASConstraintMaker *make) {
+    _bottomView = [Helper view:[UIColor colorWithWhite:0 alpha:0.6] nightColor:[UIColor colorWithWhite:0 alpha:0.6]];
+    [self.view addSubview:_bottomView];
+    [_bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.view);
+        make.left.right.equalTo(self.view);
+        make.height.offset(44);
+    }];
+    
+    UIView *line = [Helper view:[UIColor grayColor] nightColor:[UIColor grayColor]];
+    [_bottomView addSubview:line];
+    [line mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.view).offset(-43.5);
         make.left.right.equalTo(self.view);
         make.height.offset(0.3);
     }];
     
-    _favouriteBtn = [Helper button:@"night_icon_star@2x" target:self action:@selector(addToFavotrite) tag:0];
-    [self.view addSubview:_favouriteBtn];
-    [_favouriteBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.right.equalTo(self.view);
+    UIButton *favouriteBtn = [Helper button:@"night_icon_star@2x" target:self action:@selector(addToFavotrite) tag:0];
+    [_bottomView addSubview:favouriteBtn];
+    [favouriteBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.right.equalTo(_bottomView);
         make.size.sizeOffset(CGSizeMake(45, 44));
     }];
     
-    _shareBtn = [Helper button:@"weather_share@2x" target:self action:@selector(share) tag:0];
-    [self.view addSubview:_shareBtn];
-    [_shareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.view);
-        make.right.equalTo(_favouriteBtn.mas_left).offset(-8);
+    UIButton *shareBtn = [Helper button:@"weather_share@2x" target:self action:@selector(share) tag:0];
+    [_bottomView addSubview:shareBtn];
+    [shareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(_bottomView);
+        make.right.equalTo(favouriteBtn.mas_left).offset(-8);
         make.size.sizeOffset(CGSizeMake(45, 44));
     }];
     
-    _downLoadBtn = [Helper button:@"" target:self action:@selector(downLoadImage) tag:0];
-    [self.view addSubview:_downLoadBtn];
-    [_downLoadBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.view);
-        make.right.equalTo(_shareBtn.mas_left).offset(-8);
+    UIButton *downLoadBtn = [Helper button:@"" target:self action:@selector(downLoadImage) tag:0];
+    [_bottomView addSubview:downLoadBtn];
+    [downLoadBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(_bottomView);
+        make.right.equalTo(shareBtn.mas_left).offset(-8);
         make.size.sizeOffset(CGSizeMake(45, 44));
     }];
 }

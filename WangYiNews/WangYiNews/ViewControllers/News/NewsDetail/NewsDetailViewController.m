@@ -84,12 +84,11 @@
 }
 
 - (NSString *)loadHTMLByMGTempEngine:(NormalDetailModel *)data {
-    NSString *tempPath = [[NSBundle mainBundle] pathForResource:@"content" ofType:@"html"];
+    NSString *tempPath = [[NSBundle mainBundle] pathForResource:@"content_template" ofType:@"html"];
     MGTemplateEngine *engine = [MGTemplateEngine templateEngine];
     [engine setMatcher:[ICUTemplateMatcher matcherWithTemplateEngine:engine]];
     if (data.ptime) {
-        NSString *newptime = [data.ptime substringWithRange:NSMakeRange(6, 10)];
-        [engine setObject:newptime forKey:@"ptime"];
+        [engine setObject:data.ptime forKey:@"ptime"];
     }
     if (data.body) {
         NSString *newbody = [self setupBody:data.body];

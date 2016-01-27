@@ -29,6 +29,8 @@
     self.replyLabel.textColor = [UIColor grayColor];
     self.titleLabel.text = self.newsModel.title;
     self.descLabel.text = self.newsModel.digest;
+    self.tagLabel.layer.cornerRadius = 2;
+    self.tagLabel.layer.borderWidth = 0.5;
     
     [self.imgsrc sd_setImageWithURL:[NSURL URLWithString:self.newsModel.imgsrc] placeholderImage:[UIImage imageNamed:@""]];
     if (self.newsModel.imgextra.count == 2) {
@@ -65,6 +67,9 @@
         self.headImg.hidden = YES;
         self.nickName.hidden = YES;
     }
+    
+    [self setTagImgView:self.tagImg];
+    
     if ([newsModel.imgType integerValue]==1) {
         [self layoutBigImageSubviews];
     }
@@ -92,9 +97,31 @@
         make.left.equalTo(self.imgsrc.mas_right).offset(8);
         make.right.equalTo(self).offset(-10);
     }];
-    [self.replyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.tagImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.imgsrc).offset(-5);
-        make.right.equalTo(self).offset(-15);
+        make.right.equalTo(self).offset(-10);
+        make.size.sizeOffset(CGSizeMake(13, 13));
+    }];
+    [self.tagLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        CGSize tagLeblSize = [self.tagLabel.text boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:11]} context:nil].size;
+        make.size.sizeOffset(CGSizeMake(tagLeblSize.width+3, tagLeblSize.height+2));
+        make.bottom.equalTo(self.imgsrc).offset(-5);
+        make.right.equalTo(self).offset(-10);
+    }];
+    [self.replyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        if ([self.newsModel.skipType isEqualToString:@"photoset"] || [self.newsModel.TAG isEqualToString:@"视频"] || [self.newsModel.TAG isEqualToString:@"语音"]) {
+            make.right.equalTo(self.tagImg.mas_left).offset(-8);
+            make.centerY.equalTo(self.tagImg);
+        }
+        else if ([self.newsModel.TAG isEqualToString:@"正在直播"] || [self.newsModel.TAG isEqualToString:@"独家"] || [self.newsModel.skipType isEqualToString:@"special"]) {
+            make.right.equalTo(self.tagLabel.mas_left).offset(-8);
+            make.centerY.equalTo(self.tagLabel);
+        }
+        else {
+            make.bottom.equalTo(self.imgsrc).offset(-5);
+            make.right.equalTo(self).offset(-15);
+        }
     }];
     [self.replyImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.top.equalTo(self.replyLabel);
@@ -136,9 +163,30 @@
             make.top.equalTo(self.imgsrc.mas_bottom).offset(8);
         make.left.right.equalTo(self.imgsrc);
     }];
-    [self.replyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.tagImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.descLabel).offset(17);
-        make.right.equalTo(self).offset(-15);
+        make.right.equalTo(self).offset(-10);
+        make.size.sizeOffset(CGSizeMake(13, 13));
+    }];
+    [self.tagLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        CGSize tagLeblSize = [self.tagLabel.text boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:11]} context:nil].size;
+        make.size.sizeOffset(CGSizeMake(tagLeblSize.width+3, tagLeblSize.height+2));
+        make.top.equalTo(self.descLabel).offset(17);
+        make.right.equalTo(self).offset(-10);
+    }];
+    [self.replyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        if ([self.newsModel.skipType isEqualToString:@"photoset"] || [self.newsModel.TAG isEqualToString:@"视频"] || [self.newsModel.TAG isEqualToString:@"语音"]) {
+            make.right.equalTo(self.tagImg.mas_left).offset(-8);
+            make.centerY.equalTo(self.tagImg);
+        }
+        else if ([self.newsModel.TAG isEqualToString:@"正在直播"] || [self.newsModel.TAG isEqualToString:@"独家"] || [self.newsModel.skipType isEqualToString:@"special"]) {
+            make.right.equalTo(self.tagLabel.mas_left).offset(-8);
+            make.centerY.equalTo(self.tagLabel);
+        }
+        else{
+            make.top.equalTo(self.descLabel).offset(17);
+            make.right.equalTo(self).offset(-15);
+        }
     }];
     [self.replyImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.top.equalTo(self.replyLabel);
@@ -149,8 +197,17 @@
         if ([self.newsModel.replyCount intValue]>0) {
             make.top.equalTo(self.replyImg.mas_bottom).offset(5);
         }
-        else
-            make.top.equalTo(self.descLabel.mas_bottom).offset(10);
+        else {
+            if ([self.newsModel.skipType isEqualToString:@"photoset"] || [self.newsModel.TAG isEqualToString:@"视频"] || [self.newsModel.TAG isEqualToString:@"语音"]) {
+                make.top.equalTo(self.tagImg.mas_bottom).offset(5);
+            }
+            else if ([self.newsModel.TAG isEqualToString:@"正在直播"] || [self.newsModel.TAG isEqualToString:@"独家"] || [self.newsModel.skipType isEqualToString:@"special"]) {
+                make.top.equalTo(self.tagLabel.mas_bottom).offset(5);
+            }
+            else{
+                make.top.equalTo(self.descLabel.mas_bottom).offset(10);
+            }
+        }
         make.right.left.equalTo(self);
         make.height.offset(0.5);
     }];
@@ -189,6 +246,46 @@
         make.right.left.equalTo(self);
         make.height.offset(0.5);
     }];
+}
+
+-(void)setTagImgView:(UIImageView *)img
+{
+    if ([self.newsModel.skipType isEqualToString:@"photoset"] || [self.newsModel.TAG isEqualToString:@"视频"] || [self.newsModel.TAG isEqualToString:@"语音"]) {
+        self.tagLabel.hidden = YES;
+        self.tagImg.hidden = NO;
+        if ([self.newsModel.skipType isEqualToString:@"photoset"]) {
+            SetImageViewImage(self.tagImg, @"cell_tag_photo@2x");
+        }
+        else if ([self.newsModel.TAG isEqualToString:@"语音"]) {
+            SetImageViewImage(self.tagImg, @"cell_tag_audio@2x");
+        }
+        else{
+            SetImageViewImage(self.tagImg, @"cell_tag_video@2x");
+        }
+    }
+    else if ([self.newsModel.TAG isEqualToString:@"正在直播"] || [self.newsModel.TAG isEqualToString:@"独家"] || [self.newsModel.skipType isEqualToString:@"sepcial"]) {
+        self.tagLabel.hidden = NO;
+        self.tagImg.hidden = YES;
+        if ([self.newsModel.TAG isEqualToString:@"正在直播"]) {
+            self.tagLabel.text = @"正在直播";
+            self.tagLabel.textColor = [UIColor blueColor];
+            self.tagLabel.layer.borderColor = [UIColor blueColor].CGColor;
+        }
+        else if ([self.newsModel.TAG isEqualToString:@"独家"]){
+            self.tagLabel.text = @"独家";
+            self.tagLabel.textColor = [UIColor blueColor];
+            self.tagLabel.layer.borderColor = [UIColor blueColor].CGColor;
+        }
+        else{
+            self.tagLabel.text = @"专题";
+            self.tagLabel.textColor = BASERED;
+            self.tagLabel.layer.borderColor = BASERED.CGColor;
+        }
+    }
+    else{
+        self.tagLabel.hidden = YES;
+        self.tagImg.hidden = YES;
+    }
 }
 
 @end

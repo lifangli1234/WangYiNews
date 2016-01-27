@@ -1,5 +1,5 @@
 <html><head>
-<meta name="viewport" content="target-densitydpi=device-dpi,user-scalable=no"/>
+<meta name="viewport" content="target-densitydpi=device-dpi,width=410,user-scalable=no"/>
 <link href='content.css' rel='stylesheet'/>
 <script src="content.js"></script>
 {% if _hasYouku %}<script src="http://player.youku.com/jsapi"></script>{% /if %}
@@ -30,19 +30,16 @@ body #title, .H1, .H2, b, strong, .bold_font{font-weight:bold;}
 {{body}}
 {% if ec %}<p align="right">（责任编辑：{{ec}}）</p>{% /if %}
 {% if source_url %}<p align="center"><a href="source:///{{source_url}}" class="border_link">查看原文<span></span></a></p>{% /if %}
+</div>
 {% if _up_down %}{{_up_down}}{% /if %}
 {% if _share %}{{_share}}{% /if %}
-</div>
+{% if _auto %}{{_auto}}{% /if %}
 {% if _lottery_1 %}{{_lottery_1}}{% /if %}
 {% if _rel_1 %}{{_rel_1}}{% /if %}
 {% if _comments %}{{_comments}}{% /if %}
 {% if _rel_2 %}{{_rel_2}}{% /if %}
+{% if _qa %}{{_qa}}{% /if %}
 {% if _topics %}{{_topics}}{% /if %}
 {% if _lottery_2 %}{{_lottery_2}}{% /if %}
-{% if _lm_recommends %}
-<div class='section' aria-hidden='true'><div class='section_header'>相关推荐</div>
-    <div class='recommend_section section_body'>{{_lm_recommends}}</div>
-    <div class='section_footer'></div></div>
-{% /if %}
-{% if _ad %}{{_ad}}{% /if %}
+{% if _lm_recommends %}{{_lm_recommends}}{% /if %}
 </body></html>

@@ -27,7 +27,7 @@
     _scale = scale;
     self.textColor = [UIColor colorWithRed:scale green:0.0 blue:0.0 alpha:1.0];
     
-    CGFloat minScale = 0.7;
+    CGFloat minScale = 0.8;
     CGFloat curScale = minScale + (1-minScale)*scale;
     self.transform = CGAffineTransformMakeScale(curScale, curScale);
 }

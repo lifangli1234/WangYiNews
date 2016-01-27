@@ -63,6 +63,13 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pJo-Gw-cVt">
+                        <rect key="frame" x="270" y="171" width="42" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
             </tableViewCellContentView>
             <connections>
@@ -73,6 +80,8 @@
                 <outlet property="nickName" destination="KmG-jK-c1c" id="6MD-vo-EBp"/>
                 <outlet property="replyImg" destination="Pyu-xS-ROh" id="WnL-q7-5po"/>
                 <outlet property="replyLabel" destination="f3r-Y3-wCX" id="nuC-IK-A4e"/>
+                <outlet property="tagImg" destination="D3x-iE-GZd" id="UwM-z4-BPj"/>
+                <outlet property="tagLabel" destination="pJo-Gw-cVt" id="W1f-D6-WB5"/>
                 <outlet property="titleLabel" destination="nx2-QE-Gh5" id="lJr-hq-CBJ"/>
             </connections>
             <point key="canvasLocation" x="426" y="316"/>

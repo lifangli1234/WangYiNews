@@ -49,6 +49,72 @@ function getLinkRect()
     return jsonString;
 }
 
+function removeElementById(elementID){
+    element = document.getElementById(elementID);
+    if(element){
+        element.parentNode.removeChild(element);
+    }
+}
+
+function getMultilineRectsById(elementID){
+    var element = document.getElementById(elementID);
+    if(element){
+        rects = element.getClientRects();
+        var results = new Array();
+        for (var i = 0; i != rects.length; i++)
+        {
+            var rect = rects[i];
+            var theRect = new Object();
+            theRect.bottom = rect.bottom;
+            theRect.height = rect.height;
+            theRect.left = rect.left;
+            theRect.right = rect.right;
+            theRect.top = rect.top;
+            theRect.width = rect.width;
+            results[i] = theRect;
+        }
+        var jsonString = JSON.stringify(results);
+        return jsonString;
+    }
+    else
+        return null;
+}
+
+function getActualWidthById(elementID){
+    var element = document.getElementById(elementID);
+    if(element){
+        var rect = element.getBoundingClientRect();
+        var width = rect.width - element.style.paddingLeft - element.style.paddingRight;
+        
+        var widthString = JSON.stringify(width);
+        return widthString;
+    }
+    else{
+        return null;
+    }
+}
+
+function getImageRectById(imageID)
+{
+    var image = document.getElementById(imageID);
+    if(image)
+    {
+        var rect = image.getBoundingClientRect();
+        var theRect = new Object();
+        theRect.bottom = rect.bottom;
+        theRect.height = rect.height;
+        theRect.left = rect.left;
+        theRect.right = rect.right;
+        theRect.top = rect.top + window.pageYOffset;
+        theRect.width = rect.width;
+
+        var rectString = JSON.stringify(theRect);
+        return rectString;
+    }
+    else
+        return null
+}
+
 function getImageRect()
 {
     var results = new Array();
@@ -56,17 +122,10 @@ function getImageRect()
     {
         var imageID = "image_" + i;
         var image = document.getElementById(imageID);
-        if(image)
+        var rect = getImageRectById(imageID);
+        if(rect != null)
         {
-            var rect = image.getBoundingClientRect(); 
-            var theRect = new Object();
-            theRect.bottom = rect.bottom;
-            theRect.height = rect.height;
-            theRect.left = rect.left;
-            theRect.right = rect.right;
-            theRect.top = rect.top + window.pageYOffset;
-            theRect.width = rect.width;
-            results[i] = theRect;
+            results[i] = JSON.parse(rect);
 
         } else {
             break;
@@ -79,17 +138,17 @@ function getImageRect()
 function download_image(element){
     element.onclick = function() { return false; };
     element.innerHTML="<span> 下载中...</span>";
-    location.href="downimage://" + element.parentElement.getAttribute("id").split('_')[1];
+    location.href="downimage://" + element.parentElement.getAttribute("id");
 }
 
 function image_loaded(element){
     element.className = 'loaded';
 }
 
-function play_video(url,boardcast,topicid,commentid,commentboardid,element){
+function play_video(url,boardcast,topicid,commentid,commentboardid,sourceName,element){
     
     var rect = element.getBoundingClientRect();   
-    location.href="video:///"+boardcast+"///" + url + "///" + topicid + "///" + commentid + "///"+ commentboardid + "///" + rect.left+ "///" + rect.top + "///" + rect.width+ "///" + rect.height;
+    location.href="video:///"+boardcast+"///" + url + "///" + topicid + "///" + commentid + "///"+ commentboardid + "///" + encodeURI(sourceName) + "///" + rect.left+ "///" + rect.top + "///" + rect.width+ "///" + rect.height;
 }
 
 function play_audio(url){
@@ -124,6 +183,18 @@ function simpleTouchStart(){
 
 function simpleTouchEnd(){
     this.id = "";
+}
+
+function insertAfter(newEl, targetEl)
+{
+    var parentEl = targetEl.parentNode;
+    if(parentEl.lastChild == targetEl)
+    {
+        parentEl.appendChild(newEl);
+    }else
+    {
+        parentEl.insertBefore(newEl,targetEl.nextSibling);
+    } 
 }
 
 function contentADEvent(){
@@ -163,10 +234,43 @@ function contentADEvent(){
                                           location.href = "plugin:///" + this.getAttribute("url");
                                           cancelSuperTouch();
                                           }, false);
-            
         }
     }
+    
+    //视频部分
+    var imgs = document.getElementsByClassName('ad_img');
+    if(imgs && imgs.length){
+        for(var i = 0; i < imgs.length; i++){
+            var subType = imgs[i].getAttribute('subType');
+            if(subType != 'video') continue;
+            
+            imgs[i].addEventListener('touchstart', function(event){
+                                          cancelSuperTouch();
+                                          }, false);
+            imgs[i].addEventListener('touchend', function(){
+                                          cancelSuperTouch();
+                                          }, false);
+            imgs[i].addEventListener('click', function(event){
+                                          location.href = "plugin:///" + this.getAttribute("url");
+                                          cancelSuperTouch();
+                                          }, false);
+        }
+    }
+}
 
+function relativeADEvent(){
+    var machine_ad = document.getElementById('machine_ad');
+    if(machine_ad){
+        machine_ad.addEventListener('touchstart', function(event){
+                                    this.id = "hover";
+                                    }, false);
+        machine_ad.addEventListener('touchend', function(){
+                                    this.id = ""
+                                    }, false);
+        machine_ad.addEventListener('click', function(event){
+                                    location.href = "plugin:///" + this.getAttribute("url")
+                                    }, false);
+    }
 }
 
 function onLoad(){
@@ -174,16 +278,11 @@ function onLoad(){
    	document.removeEventListener( "DOMContentLoaded", onLoad, false );
     window.removeEventListener( "load", onLoad, false );
     
-    //相关新闻
+    //编辑精选
     var relative_section = document.getElementById('relative_section');
     if(relative_section){
         var myLinks = relative_section.getElementsByTagName('li');
-        for(var i = 0; i < myLinks.length; i++){
-            //屏蔽关键词模块
-            if (myLinks[i].className == 'keywords_wrapper'){
-                continue;
-            }
-            
+        for(var i = 0; i < myLinks.length; i++){            
             myLinks[i].addEventListener('touchstart', function(event){
                                         this.id = "hover";
                                         }, false);
@@ -196,6 +295,50 @@ function onLoad(){
                                         }, false);
         }
     }
+    
+    //相关新闻
+    var machine_section = document.getElementById('machine_section');
+    if(machine_section){
+        var cells = machine_section.getElementsByTagName('li');
+        for(var i = 0; i < cells.length; i++){
+            //屏蔽关键词模块
+            if (cells[i].className == 'keywords_wrapper'){
+                continue;
+            }
+            
+            cells[i].addEventListener('touchstart', function(event){
+                                        this.id = "hover";
+                                        }, false);
+            cells[i].addEventListener('touchend', function(){
+                                        for(var j = 0; j < cells.length; j++){
+                                        cells[j].id = ""
+                                        }}, false);
+            cells[i].addEventListener('click', function(event){
+                                        var boxes = this.firstChild.getElementsByClassName('title_box');
+                                        boxes[0].id = 'read';
+                                        location.href = "doc:///" + this.firstChild.getAttribute("docid") + "///1"
+                                        }, false);
+        }
+    }
+    
+    //问吧
+    var qa_section = document.getElementById('qa_section');
+    if(qa_section){
+        var cells = qa_section.getElementsByTagName('li');
+        for(var i = 0; i < cells.length; i++){
+            cells[i].addEventListener('touchstart', function(event){
+                                      this.id = "hover";
+                                      }, false);
+            cells[i].addEventListener('touchend', function(){
+                                      for(var j = 0; j < cells.length; j++){
+                                      cells[j].id = ""
+                                      }}, false);
+            cells[i].addEventListener('click', function(event){
+                                      location.href = "qa://" + this.firstChild.getAttribute("expertid");
+                                      }, false);
+        }
+    }
+    
     //处理新的推荐栏目
     var relative_topics = document.getElementsByClassName('relative_recommend');
     if(relative_topics && relative_topics.length){
@@ -206,23 +349,48 @@ function onLoad(){
         }
     }
     
+    //热车推荐
+    var autos = document.getElementsByClassName('auto_unit');
+    if(autos && autos.length){
+        for(var i = 0; i < autos.length; i++){
+            autos[i].addEventListener('touchstart', function(event){
+                                      this.id = "hover";
+                                      }, false);
+            autos[i].addEventListener('touchend', function(){
+                                      for(var j = 0; j < autos.length; j++){
+                                      autos[j].id = ""
+                                      }}, false);
+            autos[i].addEventListener('click', function(event){
+                                          location.href = this.getAttribute("url");
+                                          }, false);
+        }
+    }
+    
     //内嵌插件
     var plugins = document.getElementsByClassName('plugin');
     if(plugins && plugins.length){
         for(var i = 0; i < plugins.length; i++){
-            if (plugins[i].getAttribute('subs')){
-                //推荐栏目的订阅按钮
-                addEventListenerToSubButton(plugins[i]);
-            }else{
-                plugins[i].addEventListener('touchstart', function(event){
-                                                this.id = "hover";
-                                            }, false);
-                plugins[i].addEventListener('touchend', function(){
-                                                this.id = "";
-                                            }, false);
-                plugins[i].addEventListener('click', function(event){
-                                                location.href = "plugin:///" + this.getAttribute("url");
-                                                }, false);
+            plugins[i].addEventListener('touchstart', function(event){
+                                        this.id = "hover";
+                                        }, false);
+            plugins[i].addEventListener('touchend', function(){
+                                        this.id = "";
+                                        }, false);
+            plugins[i].addEventListener('click', function(event){
+                                        location.href = "plugin:///" + this.getAttribute("url");
+                                        }, false);
+            
+        }
+    }
+    
+    //订阅按钮
+    var subs = document.getElementsByClassName('subs');
+    if(subs && subs.length){
+        for(var i = 0; i < subs.length; i++){
+            var subscribed = subs[i].getAttribute('subscribed')
+            if(subscribed == 'false'){
+                var name = subs[i].id;
+                addEventListenerToSubButton(name,subs[i]);
             }
         }
     }
@@ -243,27 +411,24 @@ function onLoad(){
     }
     
     //分享按钮
-    var wrappers = document.getElementsByClassName('share_wrapper');
-    if(wrappers && wrappers.length){
-        for(var i = 0; i < wrappers.length; i++){
-            var wrapper = wrappers[i];
-            var buttons = wrapper.getElementsByClassName('share_button');
-            if (buttons && buttons.length) {
-                for (var j = 0; j < buttons.length; j++) {
-                    if (buttons[j].getAttribute('enable') == "no") {
-                        buttons[j].style.opacity = 0.3;
-                        continue;
-                    }
-                    buttons[j].addEventListener('click', function(event){
-                                                shareButtonDidClick(this);
-                                                }, false);
-                    buttons[j].addEventListener('touchstart', function(event){
-                                                this.id = "hover";
-                                                }, false);
-                    buttons[j].addEventListener('touchend', function(){
-                                                this.id = "";
-                                                }, false);
+    var wrapper = document.getElementById('share_wrapper');
+    if(wrapper){
+        var buttons = wrapper.getElementsByClassName('share_button');
+        if (buttons && buttons.length) {
+            for (var j = 0; j < buttons.length; j++) {
+                if (buttons[j].getAttribute('enable') == "no") {
+                    buttons[j].style.opacity = 0.3;
+                    continue;
                 }
+                buttons[j].addEventListener('click', function(event){
+                                            shareButtonDidClick(this);
+                                            }, false);
+                buttons[j].addEventListener('touchstart', function(event){
+                                            this.id = "hover";
+                                            }, false);
+                buttons[j].addEventListener('touchend', function(){
+                                            this.id = "";
+                                            }, false);
             }
         }
     }
@@ -318,6 +483,17 @@ function onLoad(){
             }, false);
         };
     }
+    
+    //汽车插件<a>冒泡屏蔽
+    var auto_buttons = document.getElementsByClassName('auto_button');
+    if(auto_buttons && auto_buttons.length){
+        for(var i = 0; i < auto_buttons.length; i++){
+            auto_buttons[i].addEventListener('touchstart', function(event){
+                                          cancelSuperTouch();
+                                          }, false);
+        }
+    }
+    
     setTimeout(function(){location.href = "show://" + document.body.scrollHeight;},100);
 }
 
@@ -357,59 +533,45 @@ document.addEventListener( "DOMContentLoaded", onLoad, false );
 //window.addEventListener('load', onLoad, false);
 
 /*
- 栏目推荐相关
+ 订阅源推荐相关
  */
 
-function removeSubsButton(pluginbox){
-    var plugin = pluginbox.firstChild;
-    var subbutton = plugin.nextSibling;
-    //去掉订阅按钮
-    pluginbox.removeChild(subbutton);
-    //添加箭头
-    plugin.removeAttribute('short');
-    var arrows = plugin.getElementsByClassName("arrow");
-    if (!arrows || arrows.length==0){
-        var arrow = document.createElement('div');
-        arrow.className = 'arrow';
-        plugin.appendChild(arrow);
+function changeSubsButtonState(name,isSub){
+    var newButton = replaceElementById(name+'_button')
+    if(newButton){
+        if(isSub == true){
+            newButton.innerHTML = '立即查看';
+        }
+        else{
+            newButton.innerHTML = '+订阅';
+            addEventListenerToSubButton(name+'_button',newButton)
+        }
     }
 }
 
-function addSubsButtonWithEname(ename,text){
-    var pluginbox = document.getElementById(ename);
-    //去掉箭头
-    var plugin = pluginbox.firstChild;
-    plugin.setAttribute("short","true");
-    var arrows = plugin.getElementsByClassName("arrow");
-    if (arrows && arrows.length) {plugin.removeChild(arrows[0])};
+function replaceElementById(elementID){
+    var element = document.getElementById(elementID)
+    if(element){
+        elementClone = element.cloneNode(true);
+        element.parentNode.replaceChild(elementClone, element);
+    }
     
-    //添加订阅按钮
-    subbutton = document.createElement('div');
-    subbutton.className = "plugin no_tc";
-    subbutton.id = "subbutton";
-    subbutton.setAttribute("subs","true");
-    subbutton.setAttribute("url","topic///sub///"+ename);
-    subbutton.innerText = "＋" + text;
-    pluginbox.appendChild(subbutton);
-    addEventListenerToSubButton(subbutton);
+    return elementClone
 }
 
-function removeSubsButtonWithEname(ename){
-    var pluginbox = document.getElementById(ename);
-    removeSubsButton(pluginbox);
-}
-
-function addEventListenerToSubButton(subbutton){
+function addEventListenerToSubButton(name,subbutton){
     subbutton.addEventListener('touchstart', function(event){
-                                    this.id = "hover";
-                                }, false);
+                               this.id = "hover";
+                               cancelSuperTouch();
+                               }, false);
     subbutton.addEventListener('touchend', function(){
-                                    this.id = "";
-                                }, false);
+                               this.id = name;
+                               cancelSuperTouch();
+                               }, false);
     subbutton.addEventListener('click', function(event){
-                                    location.href = "plugin:///" + this.getAttribute("url");
-//                                    removeSubsButton(this.parentElement);
-                                }, false);
+                               location.href = "plugin:///" + this.getAttribute("url");
+                               cancelSuperTouch();
+                               }, false);
 }
 
 /*
@@ -446,7 +608,7 @@ function buildSingleFloor(usericon,mars,username,subname,vote,body,bigv,first,vi
 {
     var floor = document.createElement('li');
     if (first == true) {
-        floor.className = 'first';
+        floor.className = '';//跟贴第一个现在无特殊样式
     };
 
     //头像、用户名、顶数
@@ -491,6 +653,16 @@ function buildSingleFloor(usericon,mars,username,subname,vote,body,bigv,first,vi
     floor.appendChild(bodyDiv);
     var list = document.getElementById('comment_list');
     list.appendChild(floor);
+    
+    /* 不要这个高亮效果了
+    //点击高亮
+    floor.addEventListener('touchstart', function(event){
+                               this.lastChild.id = "hover";
+                               }, false);
+    floor.addEventListener('touchend', function(){
+                               this.lastChild.id = "";
+                               }, false);
+     */
 }
 
 function clearImage(element)

@@ -35,7 +35,7 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Qaz-w6-fCz">
                         <rect key="frame" x="275" y="59" width="37" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -63,6 +63,13 @@
                         <rect key="frame" x="294" y="16" width="22" height="27"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2W2-xn-izg">
+                        <rect key="frame" x="275" y="16" width="42" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
             </tableViewCellContentView>
             <connections>
@@ -74,6 +81,7 @@
                 <outlet property="sortImg" destination="XUq-cR-mES" id="TMp-DF-YW7"/>
                 <outlet property="sortLab" destination="oMg-md-NvP" id="wfq-wG-7AF"/>
                 <outlet property="tagImg" destination="Sj0-cR-OHj" id="d0N-80-43W"/>
+                <outlet property="tagLabel" destination="2W2-xn-izg" id="Ed9-jM-q4Z"/>
                 <outlet property="titleLabel" destination="mXD-vh-WCT" id="RhQ-k8-huD"/>
             </connections>
             <point key="canvasLocation" x="329" y="356"/>

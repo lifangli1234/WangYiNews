@@ -170,12 +170,15 @@
 
 -(void)crateTableView
 {
-    _myInfoListTableView = [[UITableView alloc] initWithFrame:self.view.bounds];
+    _myInfoListTableView = [[UITableView alloc] init];
     _myInfoListTableView.dataSource = self;
     _myInfoListTableView.delegate = self;
     _myInfoListTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _myInfoListTableView.tableHeaderView = [self createHeaderView];
     [self.view addSubview:_myInfoListTableView];
+    [_myInfoListTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
 }
 
 #pragma mark ----------------TableViewDelegate------------

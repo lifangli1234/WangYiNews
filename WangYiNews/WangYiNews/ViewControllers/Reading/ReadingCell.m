@@ -35,7 +35,7 @@
         self.recReasonImg.hidden = NO;
         self.recReasonLabel.hidden = NO;
         self.recReasonLabel.text = self.rm.recReason;
-        [self setRecReasonImg:self.recReasonImg];
+        [self setImg:self.recReasonImg];
     }
     else{
         self.recReasonImg.hidden = YES;
@@ -94,7 +94,7 @@
     }];
 }
 
--(void)setRecReasonImg:(UIImageView *)recReasonImg
+-(void)setImg:(UIImageView *)recReasonImg
 {
     if (self.rm.recReason) {
         if ([self.rm.recReason isEqualToString:@"北京本地"]) {
@@ -104,9 +104,10 @@
                 make.top.equalTo(self).offset(8);
                 make.height.equalTo(@20);
             }];
-            [self.recReasonImg mas_makeConstraints:^(MASConstraintMaker *make) {
+            [recReasonImg mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.size.sizeOffset(CGSizeMake(10, 12));
                 make.centerY.equalTo(self.recReasonLabel);
+                make.right.equalTo(self.recReasonLabel.mas_left).offset(-5);
             }];
         }
         else if ([self.rm.recReason isEqualToString:@"猜你喜欢"]) {
@@ -116,9 +117,10 @@
                 make.top.equalTo(self).offset(8);
                 make.height.equalTo(@20);
             }];
-            [self.recReasonImg mas_makeConstraints:^(MASConstraintMaker *make) {
+            [recReasonImg mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.size.sizeOffset(CGSizeMake(10, 10));
                 make.centerY.equalTo(self.recReasonLabel);
+                make.right.equalTo(self.recReasonLabel.mas_left).offset(-5);
             }];
         }
         else if ([self.rm.recReason isEqualToString:@"网友热议"] || [self.rm.recReason isEqualToString:@"大家都在看"]) {
@@ -128,9 +130,10 @@
                 make.top.equalTo(self).offset(8);
                 make.height.equalTo(@20);
             }];
-            [self.recReasonImg mas_makeConstraints:^(MASConstraintMaker *make) {
+            [recReasonImg mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.size.sizeOffset(CGSizeMake(9.5, 12.5));
                 make.centerY.equalTo(self.recReasonLabel);
+                make.right.equalTo(self.recReasonLabel.mas_left).offset(-5);
             }];
         }
         else {
@@ -140,9 +143,10 @@
                 make.top.equalTo(self).offset(8);
                 make.height.equalTo(@20);
             }];
-            [self.recReasonImg mas_makeConstraints:^(MASConstraintMaker *make) {
+            [recReasonImg mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.size.sizeOffset(CGSizeMake(7, 10));
                 make.centerY.equalTo(self.recReasonLabel);
+                make.right.equalTo(self.recReasonLabel.mas_left).offset(-5);
             }];
         }
     }

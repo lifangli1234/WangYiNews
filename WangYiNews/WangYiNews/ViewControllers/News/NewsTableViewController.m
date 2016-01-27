@@ -259,6 +259,9 @@
                 return 228.5+titleSize.height;
             }
             else{
+                if (newsModel.TAG || [newsModel.skipType isEqualToString:@"photoset"] || [newsModel.skipType isEqualToString:@"special"]) {
+                    return 216.5+descSize.height+titleSize.height;
+                }
                 return 198.5+descSize.height+titleSize.height;
             }
         }
@@ -267,6 +270,9 @@
                 return 216.5+titleSize.height;
             }
             else{
+                if (newsModel.TAG || [newsModel.skipType isEqualToString:@"photoset"] || [newsModel.skipType isEqualToString:@"special"]) {
+                    return 204.5+descSize.height+titleSize.height;
+                }
                 return 186.5+descSize.height+titleSize.height;
             }
         }
