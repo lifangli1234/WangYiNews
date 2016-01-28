@@ -116,13 +116,13 @@
     return IV;
 }
 
-+(NSMutableArray *)addUrlsWithArr:(NSMutableArray *)arr
++(NSMutableArray *)addUrlsWithArr:(NSMutableArray *)arr count:(NSInteger)count
 {
     NSMutableArray *urlArr = [[NSMutableArray alloc] init];
     for (ChannelModel *ttm in arr) {
         NSString *urlStr = [[NSString alloc] init];
         if ([ttm.tname isEqualToString:@"头条"]) {
-            urlStr = [NSString stringWithFormat:@"/nc/article/headline/%@/%d-20.html?from=toutiao&passport=&devId=4R70nVFo7N%2FjOGAl7Dql%2BgnhtyYRtyVIqBeGB12xtfEEIz0ZpgPoDMhS%2FpBn8zvR&size=20&version=5.5.0&spever=false&net=wifi&lat=&lon=&ts=1452523392&sign=x95ySVU9uSqwqFbt1Ubd3YUtCuLswI8YQmBBOEJwu2B48ErR02zJ6%2FKXOnxX046I&encryption=1&canal=appstore",ttm.tid,0];
+            urlStr = [NSString stringWithFormat:@"/nc/article/headline/%@/%d-20.html?from=toutiao&passport=&devId=4R70nVFo7N%2FjOGAl7Dql%2BgnhtyYRtyVIqBeGB12xtfEEIz0ZpgPoDMhS%2FpBn8zvR&size=20&version=5.5.0&spever=false&net=wifi&lat=&lon=&ts=1452523392&sign=x95ySVU9uSqwqFbt1Ubd3YUtCuLswI8YQmBBOEJwu2B48ErR02zJ6%2FKXOnxX046I&encryption=1&canal=appstore",ttm.tid,count];
         }
         else if ([ttm.tname isEqualToString:@"热点"]){
             urlStr = [NSString stringWithFormat:@"%@",HOTPOINE];

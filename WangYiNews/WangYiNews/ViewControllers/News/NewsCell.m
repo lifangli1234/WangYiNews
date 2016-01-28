@@ -263,7 +263,7 @@
             SetImageViewImage(self.tagImg, @"cell_tag_video@2x");
         }
     }
-    else if ([self.newsModel.TAG isEqualToString:@"正在直播"] || [self.newsModel.TAG isEqualToString:@"独家"] || [self.newsModel.skipType isEqualToString:@"sepcial"]) {
+    else if ([self.newsModel.TAG isEqualToString:@"正在直播"] || [self.newsModel.TAG isEqualToString:@"独家"] || [self.newsModel.skipType isEqualToString:@"special"]) {
         self.tagLabel.hidden = NO;
         self.tagImg.hidden = YES;
         if ([self.newsModel.TAG isEqualToString:@"正在直播"]) {

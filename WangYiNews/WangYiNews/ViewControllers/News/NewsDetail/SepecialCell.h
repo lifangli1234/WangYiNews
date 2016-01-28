@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imgplay2;
 @property (weak, nonatomic) IBOutlet UILabel *digst1;
 @property (weak, nonatomic) IBOutlet UILabel *digst2;
+@property (weak, nonatomic) IBOutlet UIView *bootomLine1;
 
 @property (weak, nonatomic) IBOutlet UIImageView *replyImg;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
@@ -30,5 +31,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imgsrc3;
 @property (weak, nonatomic) IBOutlet UIImageView *imgsrc4;
 @property (weak, nonatomic) IBOutlet UILabel *replyLabel;
+@property (unsafe_unretained, nonatomic) IBOutlet UIImageView *tagImg;
+@property (unsafe_unretained, nonatomic) IBOutlet UILabel *tagLabel;
+@property (unsafe_unretained, nonatomic) IBOutlet UIView *bootomLine;
 
 @end

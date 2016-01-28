@@ -176,14 +176,7 @@
         }
         else if ([newsModel.skipType isEqualToString:@"special"]) {
             SepecialViewController *svc = [[SepecialViewController alloc] init];
-            NSString *url = [NSString stringWithFormat:@"/nc/special/%@.html",newsModel.skipID];
-            [[NetworkTools sharedNetworkTools] GET:url parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-                NSDictionary *dic = [responseObject objectForKey:newsModel.skipID];
-                SepecialModel *model = [SepecialModel objectWithKeyValues:dic];
-                [svc setSepecialModel:model];
-            } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                NSLog(@"%@",error);
-            }];
+            svc.newsModel = newsModel;
             [self.navigationController pushViewController:svc animated:YES];
         }
     }

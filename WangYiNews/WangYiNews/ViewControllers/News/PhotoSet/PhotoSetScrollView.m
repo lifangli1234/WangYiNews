@@ -63,7 +63,7 @@
     [view mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self).offset(-44);
         make.left.right.equalTo(self);
-        make.height.offset(100);
+        make.height.offset(160);
     }];
     
     UILabel *title = [Helper label:model.setname font:[UIFont boldSystemFontOfSize:17] textColor:[UIColor whiteColor] nightTextColor:[UIColor whiteColor] textAligment:NSTextAlignmentLeft];
@@ -90,7 +90,7 @@
     }];
     
     contentScr = [[UIScrollView alloc] init];
-    contentScr.frame = CGRectMake(10, 30, [Helper screenWidth]-20, 70);
+    contentScr.frame = CGRectMake(10, 30, [Helper screenWidth]-20, 130);
     contentScr.backgroundColor = [UIColor clearColor];
     contentScr.bounces = NO;
     contentScr.showsVerticalScrollIndicator = NO;

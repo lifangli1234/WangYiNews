@@ -11,10 +11,12 @@
 @interface SepecialContentModel : NSObject
 
 //news  imgnews
+@property (nonatomic, strong) NSString *boardid;
 @property (nonatomic, strong) NSString *digest;
 @property (nonatomic, strong) NSString *imgsrc;
 @property (nonatomic, strong) NSString *lmodify;
-@property (nonatomic, strong) NSString *replyCount;
+@property (nonatomic, strong) NSNumber *replyCount;
+@property (nonatomic, strong) NSNumber *votecount;
 @property (nonatomic, strong) NSString *ptime;
 @property (nonatomic, strong) NSString *docid;
 @property (nonatomic, strong) NSString *url;
@@ -26,7 +28,7 @@
 @property (nonatomic,copy) NSString *skipID;
 @property (nonatomic,copy) NSString *photosetID;
 @property (nonatomic,copy) NSString *skipType;
-@property (nonatomic,copy) NSString *priority;
+@property (nonatomic,copy) NSNumber *priority;
 @property (nonatomic,copy)NSNumber *imgType;
 @property (nonatomic,strong)NSArray *specialextra;
 @property (nonatomic,strong)NSArray *live_info;

@@ -59,12 +59,13 @@
 }
 
 // ------上拉加载
-//- (void)loadMoreData
-//{
-    //NSString *allUrlstring = [NSString stringWithFormat:@"/nc/article/%@/%ld-20.html",self.urlString,(self.arrayList.count - self.arrayList.count%10)];
-    //    NSString *allUrlstring = [NSString stringWithFormat:@"/nc/article/%@/%ld-20.html",self.urlString,self.arrayList.count];
-    //[self loadDataForType:2 withURL:allUrlstring];
-//}
+- (void)loadMoreData
+{
+//    self.count = self.count + 10;
+//    NSMutableArray *arr = 
+//    [Helper addUrlsWithArr:<#(NSMutableArray *)#> count:<#(NSInteger)#>]
+//    [self loadDataForType:2 withURL:allUrlstring];
+}
 
 - (void)loadDataForType:(int)type withURL:(NSString *)allUrlstring
 {
@@ -302,14 +303,7 @@
         }
         else if ([newsModel.skipType isEqualToString:@"special"]) {
             SepecialViewController *svc = [[SepecialViewController alloc] init];
-            NSString *url = [NSString stringWithFormat:@"/nc/special/%@.html",newsModel.skipID];
-            [[NetworkTools sharedNetworkTools] GET:url parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-                NSDictionary *dic = [responseObject objectForKey:newsModel.skipID];
-                SepecialModel *model = [SepecialModel objectWithKeyValues:dic];
-                [svc setSepecialModel:model];
-            } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                NSLog(@"%@",error);
-            }];
+            svc.newsModel = newsModel;
             [self.navigationController pushViewController:svc animated:YES];
         }
     }
