@@ -67,15 +67,20 @@
                         <rect key="frame" x="275" y="16" width="42" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="wXj-8Z-XSl">
+                        <rect key="frame" x="258" y="59" width="35" height="22"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
                 </subviews>
             </tableViewCellContentView>
             <connections>
                 <outlet property="bottomLine" destination="Klb-pa-MqN" id="GP2-zV-9xN"/>
                 <outlet property="descLabel" destination="X96-2j-Uoh" id="fIU-CM-Q4y"/>
                 <outlet property="imgsrc" destination="uk4-bZ-N2H" id="0mp-9c-pDb"/>
+                <outlet property="localImg" destination="wXj-8Z-XSl" id="FsA-Lg-ITB"/>
                 <outlet property="replyImg" destination="R8k-Y9-He7" id="n9g-sN-l29"/>
                 <outlet property="replyLabel" destination="Qaz-w6-fCz" id="VDZ-PM-kwF"/>
                 <outlet property="sortImg" destination="XUq-cR-mES" id="TMp-DF-YW7"/>

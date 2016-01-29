@@ -25,7 +25,11 @@
     _contentModel = contentModel;
     
     self.replyLabel.textColor = [UIColor grayColor];
-    [self.replyImg setImage:[UIImage imageNamed:@"cola_bubble_gray@2x.png"]];
+    UIImage *normalImg = [UIImage imageNamed:@"cola_bubble_gray@2x"];
+    CGFloat normalW = normalImg.size.width;
+    CGFloat normalH = normalImg.size.height;
+    normalImg = [normalImg resizableImageWithCapInsets:UIEdgeInsetsMake(normalH * 0.5, normalW * 0.5, normalH * 0.5, normalW * 0.5)];
+    [self.replyImg setImage:normalImg];
     self.titleLabel.text = self.contentModel.title;
     self.descLabel.text = self.contentModel.digest;
     
@@ -58,6 +62,7 @@
     self.view2.layer.borderWidth = 0.5;
     
     [self layoutVideoSubviews];
+    
     if ([contentModel.imgType integerValue]==1) {
         [self layoutBigImageSubviews];
     }
@@ -158,10 +163,11 @@
             make.right.equalTo(self).offset(-15);
 //        }
     }];
+    CGSize replyLeblSize = [self.replyLabel.text boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil].size;
     [self.replyImg mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.top.equalTo(self.replyLabel);
-        make.right.equalTo(self.replyLabel).offset(5);
-        make.left.equalTo(self.replyLabel).offset(-5);
+        make.center.equalTo(self.replyLabel);
+        make.width.offset(replyLeblSize.width+12);
+        make.height.offset(replyLeblSize.height);
     }];
     [self.bootomLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.imgsrc.mas_bottom).offset(10);
@@ -223,10 +229,11 @@
             make.right.equalTo(self).offset(-15);
 //        }
     }];
+    CGSize replyLeblSize = [self.replyLabel.text boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil].size;
     [self.replyImg mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.top.equalTo(self.replyLabel);
-        make.right.equalTo(self.replyLabel).offset(5);
-        make.left.equalTo(self.replyLabel).offset(-5);
+        make.center.equalTo(self.replyLabel);
+        make.width.offset(replyLeblSize.width+12);
+        make.height.offset(replyLeblSize.height);
     }];
     [self.bootomLine mas_makeConstraints:^(MASConstraintMaker *make) {
         if ([self.contentModel.replyCount intValue]>0) {
@@ -271,10 +278,11 @@
         make.centerY.equalTo(self.titleLabel);
         make.right.equalTo(self).offset(-15);
     }];
+    CGSize replyLeblSize = [self.replyLabel.text boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil].size;
     [self.replyImg mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.top.equalTo(self.replyLabel);
-        make.right.equalTo(self.replyLabel).offset(5);
-        make.left.equalTo(self.replyLabel).offset(-5);
+        make.center.equalTo(self.replyLabel);
+        make.width.offset(replyLeblSize.width+12);
+        make.height.offset(replyLeblSize.height);
     }];
     [self.bootomLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.imgsrc.mas_bottom).offset(10);

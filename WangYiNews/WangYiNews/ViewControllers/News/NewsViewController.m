@@ -184,9 +184,8 @@
 -(void)addViewControllers
 {
     for (int i=0; i<_titleArray.count; i++) {
-        NSMutableArray *urlArr = [Helper addUrlsWithArr:_titleArray count:0];
+        NSMutableArray *urlArr = [Helper addUrlsWithArr:_titleArray];
         NewsTableViewController *newsTab = [[NewsTableViewController alloc] init];
-        newsTab.count = 0;
         newsTab.newsUrl = urlArr[i];
         [self addChildViewController:newsTab];
     }
@@ -273,7 +272,6 @@
     [_titleScr setContentOffset:CGPointMake(offsetX, _titleScr.contentOffset.y) animated:YES];
     
     NewsTableViewController *currVc = [self.childViewControllers objectAtIndex:index];
-    currVc.count = 0;
     [_titleScr.subviews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         if (idx != index) {
             NewsCategoryTitle *label =(NewsCategoryTitle *) _titleScr.subviews[idx];

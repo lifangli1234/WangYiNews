@@ -128,12 +128,7 @@
     for (SepecialSortModel *sm in _contentArr){
         if ([sm.type isEqualToString:@"photoset"] || [sm.type isEqualToString:@"video"]) {
             NSInteger count = 0;
-            if (sm.docs.count%2 == 0) {
-                count = sm.docs.count/2;
-            }
-            else{
-                count = sm.docs.count/2 + 1;
-            }
+            count = sm.docs.count/2 + sm.docs.count%2;
             for (int i=0; i<count; i++) {
                 NSMutableArray *arr = [[NSMutableArray alloc] init];
                 int x = 0;
@@ -163,6 +158,8 @@
 #pragma mark-------------------TableView-------------
 -(void)tableViewHeaderView
 {
+    headerViewHeight = 0.0;
+    
     headerView = [[UIView alloc] init];
     if (_sepcialModel.banner!=nil && ![_sepcialModel.banner isEqualToString:@""]) {
         UIImageView *banner = [[UIImageView alloc] init];
@@ -371,6 +368,10 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    SepecialSortModel *sortModel = [_contentArr objectAtIndex:section];
+    if ([sortModel.type isEqualToString:@"video"] || [sortModel.type isEqualToString:@"photoset"]) {
+        return _videoArr.count;
+    }
     return ((SepecialSortModel *)[_contentArr objectAtIndex:section]).docs.count;
 }
 
@@ -398,6 +399,16 @@
     }
     else if ([sortModel.type isEqualToString:@"video"] || [sortModel.type isEqualToString:@"photoset"]) {
         nib = [[NSBundle mainBundle]loadNibNamed:@"SepecialVideo" owner:self options:nil];
+    }
+    else if ([sortModel.type isEqualToString:@"timeline"]) {
+        
+    }
+    for(id oneObject in nib){
+        if([oneObject isKindOfClass:[SepecialCell class]]){
+            cell = (SepecialCell *)oneObject;
+        }
+    }
+    if ([sortModel.type isEqualToString:@"video"] || [sortModel.type isEqualToString:@"photoset"]) {
         NSMutableArray *arr = [_videoArr objectAtIndex:indexPath.row];
         if ([sortModel.type isEqualToString:@"video"]) {
             cell.imgplay1.hidden = NO;
@@ -411,14 +422,6 @@
         cell.digst2.text = ((SepecialContentModel *) [arr objectAtIndex:1]).title;
         [cell.imgsrc1 sd_setImageWithURL:[NSURL URLWithString:((SepecialContentModel *) [arr objectAtIndex:0]).cover]];
         [cell.imgsrc2 sd_setImageWithURL:[NSURL URLWithString:((SepecialContentModel *) [arr objectAtIndex:1]).cover]];
-    }
-    else if ([sortModel.type isEqualToString:@"timeline"]) {
-        
-    }
-    for(id oneObject in nib){
-        if([oneObject isKindOfClass:[SepecialCell class]]){
-            cell = (SepecialCell *)oneObject;
-        }
     }
     cell.contentModel = contentModel;
     

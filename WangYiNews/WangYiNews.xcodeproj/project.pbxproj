@@ -508,6 +508,8 @@
 		40EDBDDC1C40C6D800AEE50D /* photoview_image_default_white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 40EDBDDB1C40C6D800AEE50D /* photoview_image_default_white@2x.png */; };
 		40EDBDE01C40D57500AEE50D /* ReadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 40EDBDDE1C40D57500AEE50D /* ReadingCell.m */; };
 		40EDBDE11C40D57500AEE50D /* ReadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 40EDBDDF1C40D57500AEE50D /* ReadingCell.xib */; };
+		40EE944C1C5B232900A567D0 /* local_tag_circle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 40EE944B1C5B232900A567D0 /* local_tag_circle@2x.png */; };
+		40EE944F1C5B554500A567D0 /* WebViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40EE944E1C5B554500A567D0 /* WebViewViewController.m */; };
 		40F0B95B1C59DAFA002D8D86 /* SepecialImages.xib in Resources */ = {isa = PBXBuildFile; fileRef = 40250C0E1BE89CDD00CFB7F9 /* SepecialImages.xib */; };
 		40F0B96A1C59EF14002D8D86 /* SepecialBasic.xib in Resources */ = {isa = PBXBuildFile; fileRef = 40250C0C1BE89CAB00CFB7F9 /* SepecialBasic.xib */; };
 		40F800071C50A7E500852DA8 /* night_reader_add_red_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 40F8FFEB1C50A7E500852DA8 /* night_reader_add_red_button@2x.png */; };
@@ -1384,6 +1386,9 @@
 		40EDBDDD1C40D57500AEE50D /* ReadingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadingCell.h; sourceTree = "<group>"; };
 		40EDBDDE1C40D57500AEE50D /* ReadingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadingCell.m; sourceTree = "<group>"; };
 		40EDBDDF1C40D57500AEE50D /* ReadingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReadingCell.xib; sourceTree = "<group>"; };
+		40EE944B1C5B232900A567D0 /* local_tag_circle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "local_tag_circle@2x.png"; path = "../../../../../../../../Desktop/WangYiImages/local_tag_circle@2x.png"; sourceTree = "<group>"; };
+		40EE944D1C5B554500A567D0 /* WebViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewViewController.h; sourceTree = "<group>"; };
+		40EE944E1C5B554500A567D0 /* WebViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewViewController.m; sourceTree = "<group>"; };
 		40F800001C50A7E500852DA8 /* night_recommend_refreshtip_close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "night_recommend_refreshtip_close@2x.png"; sourceTree = "<group>"; };
 		40F800011C50A7E500852DA8 /* night_recommendlist_cell_action@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "night_recommendlist_cell_action@2x.png"; sourceTree = "<group>"; };
 		40F800021C50A7E500852DA8 /* night_recommendlist_cell_close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "night_recommendlist_cell_close@2x.png"; sourceTree = "<group>"; };
@@ -1959,6 +1964,8 @@
 				40250C0E1BE89CDD00CFB7F9 /* SepecialImages.xib */,
 				40250C101BE89CEF00CFB7F9 /* SepecialVideo.xib */,
 				40250C141BE8A7DC00CFB7F9 /* SepecialBigPhoto.xib */,
+				40EE944D1C5B554500A567D0 /* WebViewViewController.h */,
+				40EE944E1C5B554500A567D0 /* WebViewViewController.m */,
 			);
 			path = NewsDetail;
 			sourceTree = "<group>";
@@ -2545,6 +2552,7 @@
 		40F8FFEA1C50A73B00852DA8 /* Read */ = {
 			isa = PBXGroup;
 			children = (
+				40EE944B1C5B232900A567D0 /* local_tag_circle@2x.png */,
 				402142281C51C9B40003BDD3 /* night_subs_add_circle@2x.png */,
 				402142291C51C9B40003BDD3 /* night_subs_add_nocircle@2x.png */,
 				4021422A1C51C9B40003BDD3 /* night_subs_add@2x.png */,
@@ -3110,6 +3118,7 @@
 				40FBAB061C27E9B10090716B /* user_prize_icon@2x.png in Resources */,
 				4012B7D51BE1B6D40057C8A2 /* pluginboard_icon_invite@2x.png in Resources */,
 				40097BA71C2AA8FE00D87458 /* audio_comment_delete_finished@2x.png in Resources */,
+				40EE944C1C5B232900A567D0 /* local_tag_circle@2x.png in Resources */,
 				40097BC11C2AA8FE00D87458 /* audionews_pause_button@2x.png in Resources */,
 				40097B021C2A842600D87458 /* video_category_separator@2x.png in Resources */,
 				406364761BD6201500202C16 /* night_top_navigation_menuicon_highlighted@2x.png in Resources */,
@@ -3741,6 +3750,7 @@
 				40A81D681BDB79EB008A315E /* UIScrollView+MJRefresh.m in Sources */,
 				4063649F1BD625E300202C16 /* NewsTableViewController.m in Sources */,
 				4012B8CF1BE6F7BF0057C8A2 /* NSObject+Extension.m in Sources */,
+				40EE944F1C5B554500A567D0 /* WebViewViewController.m in Sources */,
 				40ED62331BF2FF6800D2504C /* PhotosetViewController.m in Sources */,
 				4021421F1C51C27E0003BDD3 /* AddSubscribeViewController.m in Sources */,
 				4012B86C1BE4A0BC0057C8A2 /* ICUTemplateMatcher.m in Sources */,

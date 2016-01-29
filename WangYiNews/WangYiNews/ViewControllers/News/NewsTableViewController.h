@@ -12,6 +12,5 @@
 
 @property (nonatomic, strong) NSString *newsUrl;
 @property (nonatomic, assign) NSInteger index;
-@property (nonatomic, assign) NSInteger count;
 
 @end

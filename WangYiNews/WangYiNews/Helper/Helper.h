@@ -22,7 +22,7 @@
 +(UIButton *)button:(NSString *)image target:(id)target action:(SEL)sel tag:(NSInteger)tag;
 +(UIButton *)button:(NSString *)title textColor:(UIColor *)color nightTextColor:(UIColor *)nightColor textFont:(UIFont *)font tag:(NSInteger)tag target:(id)target action:(SEL)sel;
 
-+(NSMutableArray *)addUrlsWithArr:(NSMutableArray *)arr count:(NSInteger)count;
++(NSMutableArray *)addUrlsWithArr:(NSMutableArray *)arr;
 
 +(UIView *)createNavigationBarWithTitle:(NSString *)title andTarget:(id)target andSel:(SEL)sel;
 

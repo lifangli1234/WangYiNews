@@ -60,16 +60,20 @@
                         <rect key="frame" x="53" y="144" width="42" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pJo-Gw-cVt">
                         <rect key="frame" x="270" y="171" width="42" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Pj5-AI-tfs">
+                        <rect key="frame" x="234" y="170" width="35" height="23"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
                 </subviews>
             </tableViewCellContentView>
             <connections>
@@ -77,6 +81,7 @@
                 <outlet property="descLabel" destination="g1k-tC-Ez6" id="FHf-Tt-pzD"/>
                 <outlet property="headImg" destination="7Zy-90-jTl" id="Jlf-88-ubt"/>
                 <outlet property="imgsrc" destination="Zj6-ey-CLe" id="BFd-K1-YAc"/>
+                <outlet property="localImg" destination="Pj5-AI-tfs" id="xcf-j4-WcH"/>
                 <outlet property="nickName" destination="KmG-jK-c1c" id="6MD-vo-EBp"/>
                 <outlet property="replyImg" destination="Pyu-xS-ROh" id="WnL-q7-5po"/>
                 <outlet property="replyLabel" destination="f3r-Y3-wCX" id="nuC-IK-A4e"/>

@@ -9,6 +9,10 @@
 #import "NewsCell.h"
 
 @implementation NewsCell
+{
+    BOOL isImage;
+    BOOL isLabel;
+}
 
 - (void)awakeFromNib {
     // Initialization code
@@ -23,9 +27,26 @@
 -(void)setNewsModel:(NewsModel *)newsModel
 {
     _newsModel = newsModel;
-    UIImage *image = [UIImage imageNamed:@"cola_bubble_gray@2x"];
-    //[image stretchableImageWithLeftCapWidth:20 topCapHeight:8];
-    [self.replyImg setImage:[UIImage imageNamed:@"cola_bubble_gray@2x"]];
+    
+    if ([_newsModel.skipType isEqualToString:@"photoset"] || [self.newsModel.TAG isEqualToString:@"视频"] || [self.newsModel.TAG isEqualToString:@"语音"]) {
+        isImage = YES;
+        isLabel = NO;
+    }
+    else if ([self.newsModel.TAG isEqualToString:@"正在直播"] || [self.newsModel.TAG isEqualToString:@"独家"] || [self.newsModel.TAG isEqualToString:@"link"] || [self.newsModel.TAG isEqualToString:@"本地:北京"] || [self.newsModel.skipType isEqualToString:@"special"]) {
+        isLabel = YES;
+        isImage = NO;
+    }
+    else{
+        isLabel = NO;
+        isImage = NO;
+    }
+    
+    UIImage *normalImg = [UIImage imageNamed:@"cola_bubble_gray@2x"];
+    CGFloat normalW = normalImg.size.width;
+    CGFloat normalH = normalImg.size.height;
+    normalImg = [normalImg resizableImageWithCapInsets:UIEdgeInsetsMake(normalH * 0.5, normalW * 0.5, normalH * 0.5, normalW * 0.5)];
+    [self.replyImg setImage:normalImg];
+    [self.localImg setImage:[UIImage imageNamed:@"local_tag_circle@2x"]];
     self.replyLabel.textColor = [UIColor grayColor];
     self.titleLabel.text = self.newsModel.title;
     self.descLabel.text = self.newsModel.digest;
@@ -108,13 +129,17 @@
         make.bottom.equalTo(self.imgsrc).offset(-5);
         make.right.equalTo(self).offset(-10);
     }];
+    [self.localImg mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.tagLabel);
+        make.left.equalTo(self.tagLabel).offset(-2);
+        make.size.sizeOffset(CGSizeMake(19, 19));
+    }];
     [self.replyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        if ([self.newsModel.skipType isEqualToString:@"photoset"] || [self.newsModel.TAG isEqualToString:@"视频"] || [self.newsModel.TAG isEqualToString:@"语音"]) {
+        if (isImage) {
             make.right.equalTo(self.tagImg.mas_left).offset(-8);
             make.centerY.equalTo(self.tagImg);
         }
-        else if ([self.newsModel.TAG isEqualToString:@"正在直播"] || [self.newsModel.TAG isEqualToString:@"独家"] || [self.newsModel.skipType isEqualToString:@"special"]) {
+        else if (isLabel) {
             make.right.equalTo(self.tagLabel.mas_left).offset(-8);
             make.centerY.equalTo(self.tagLabel);
         }
@@ -123,10 +148,11 @@
             make.right.equalTo(self).offset(-15);
         }
     }];
+    CGSize replyLeblSize = [self.replyLabel.text boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil].size;
     [self.replyImg mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.top.equalTo(self.replyLabel);
-        make.right.equalTo(self.replyLabel).offset(5);
-        make.left.equalTo(self.replyLabel).offset(-5);
+        make.center.equalTo(self.replyLabel);
+        make.width.offset(replyLeblSize.width+12);
+        make.height.offset(replyLeblSize.height);
     }];
     [self.bottomLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.imgsrc.mas_bottom).offset(10);
@@ -174,12 +200,17 @@
         make.top.equalTo(self.descLabel).offset(17);
         make.right.equalTo(self).offset(-10);
     }];
+    [self.localImg mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.tagLabel);
+        make.left.equalTo(self.tagLabel).offset(-2);
+        make.size.sizeOffset(CGSizeMake(19, 19));
+    }];
     [self.replyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        if ([self.newsModel.skipType isEqualToString:@"photoset"] || [self.newsModel.TAG isEqualToString:@"视频"] || [self.newsModel.TAG isEqualToString:@"语音"]) {
+        if (isImage) {
             make.right.equalTo(self.tagImg.mas_left).offset(-8);
             make.centerY.equalTo(self.tagImg);
         }
-        else if ([self.newsModel.TAG isEqualToString:@"正在直播"] || [self.newsModel.TAG isEqualToString:@"独家"] || [self.newsModel.skipType isEqualToString:@"special"]) {
+        else if (isLabel) {
             make.right.equalTo(self.tagLabel.mas_left).offset(-8);
             make.centerY.equalTo(self.tagLabel);
         }
@@ -188,20 +219,21 @@
             make.right.equalTo(self).offset(-15);
         }
     }];
+    CGSize replyLeblSize = [self.replyLabel.text boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil].size;
     [self.replyImg mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.top.equalTo(self.replyLabel);
-        make.right.equalTo(self.replyLabel).offset(5);
-        make.left.equalTo(self.replyLabel).offset(-5);
+        make.center.equalTo(self.replyLabel);
+        make.width.offset(replyLeblSize.width+12);
+        make.height.offset(replyLeblSize.height);
     }];
     [self.bottomLine mas_makeConstraints:^(MASConstraintMaker *make) {
         if ([self.newsModel.replyCount intValue]>0) {
             make.top.equalTo(self.replyImg.mas_bottom).offset(5);
         }
         else {
-            if ([self.newsModel.skipType isEqualToString:@"photoset"] || [self.newsModel.TAG isEqualToString:@"视频"] || [self.newsModel.TAG isEqualToString:@"语音"]) {
+            if (isImage) {
                 make.top.equalTo(self.tagImg.mas_bottom).offset(5);
             }
-            else if ([self.newsModel.TAG isEqualToString:@"正在直播"] || [self.newsModel.TAG isEqualToString:@"独家"] || [self.newsModel.skipType isEqualToString:@"special"]) {
+            else if (isLabel) {
                 make.top.equalTo(self.tagLabel.mas_bottom).offset(5);
             }
             else{
@@ -236,10 +268,11 @@
         make.centerY.equalTo(self.titleLabel);
         make.right.equalTo(self).offset(-15);
     }];
+    CGSize replyLeblSize = [self.replyLabel.text boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil].size;
     [self.replyImg mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.top.equalTo(self.replyLabel);
-        make.right.equalTo(self.replyLabel).offset(5);
-        make.left.equalTo(self.replyLabel).offset(-5);
+        make.center.equalTo(self.replyLabel);
+        make.width.offset(replyLeblSize.width+12);
+        make.height.offset(replyLeblSize.height);
     }];
     [self.bottomLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.imgsrc.mas_bottom).offset(10);
@@ -250,7 +283,7 @@
 
 -(void)setTagImgView:(UIImageView *)img
 {
-    if ([self.newsModel.skipType isEqualToString:@"photoset"] || [self.newsModel.TAG isEqualToString:@"视频"] || [self.newsModel.TAG isEqualToString:@"语音"]) {
+    if (isImage) {
         self.tagLabel.hidden = YES;
         self.tagImg.hidden = NO;
         if ([self.newsModel.skipType isEqualToString:@"photoset"]) {
@@ -263,7 +296,7 @@
             SetImageViewImage(self.tagImg, @"cell_tag_video@2x");
         }
     }
-    else if ([self.newsModel.TAG isEqualToString:@"正在直播"] || [self.newsModel.TAG isEqualToString:@"独家"] || [self.newsModel.skipType isEqualToString:@"special"]) {
+    else if (isLabel) {
         self.tagLabel.hidden = NO;
         self.tagImg.hidden = YES;
         if ([self.newsModel.TAG isEqualToString:@"正在直播"]) {
@@ -276,10 +309,21 @@
             self.tagLabel.textColor = [UIColor blueColor];
             self.tagLabel.layer.borderColor = [UIColor blueColor].CGColor;
         }
-        else{
+        else if ([self.newsModel.skipType isEqualToString:@"special"]){
             self.tagLabel.text = @"专题";
             self.tagLabel.textColor = BASERED;
             self.tagLabel.layer.borderColor = BASERED.CGColor;
+        }
+        else if ([self.newsModel.TAG isEqualToString:@"link"]){
+            self.tagLabel.text = @"推广";
+            self.tagLabel.textColor = [UIColor blackColor];
+            self.tagLabel.layer.borderColor = [UIColor blackColor].CGColor;
+        }
+        else {
+            self.localImg.hidden = NO;
+            self.tagLabel.text = @"北京";
+            self.tagLabel.textColor = BASERED;
+            self.tagLabel.layer.borderColor = [UIColor clearColor].CGColor;
         }
     }
     else{

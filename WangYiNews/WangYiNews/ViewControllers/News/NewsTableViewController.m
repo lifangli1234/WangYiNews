@@ -13,6 +13,7 @@
 #import "SepecialModel.h"
 #import "SepecialViewController.h"
 #import "PhotoSetModel.h"
+#import "WebViewViewController.h"
 
 @interface NewsTableViewController ()
 
@@ -26,6 +27,7 @@
     UILabel *nameLabel;
     UIPageControl *pageControl;
     UIView *lebelView;
+    NSInteger count;
 }
 
 - (void)viewDidLoad {
@@ -36,6 +38,7 @@
     [self.tableView addHeaderWithTarget:self action:@selector(loadData)];
     [self.tableView addFooterWithTarget:self action:@selector(loadMoreData)];
     self.update = YES;
+    count = 0;
 }
 
 - (void)setNewsUrl:(NSString *)newsUrl
@@ -61,10 +64,18 @@
 // ------上拉加载
 - (void)loadMoreData
 {
-//    self.count = self.count + 10;
-//    NSMutableArray *arr = 
-//    [Helper addUrlsWithArr:<#(NSMutableArray *)#> count:<#(NSInteger)#>]
-//    [self loadDataForType:2 withURL:allUrlstring];
+    NSString *oldUrl = [NSString stringWithFormat:@"/nc/article/headline/T1348647853363/0-20.html?from=toutiao&passport=&devId=4R70nVFo7N%2FjOGAl7Dql%2BgnhtyYRtyVIqBeGB12xtfEEIz0ZpgPoDMhS%2FpBn8zvR&size=20&version=5.5.0&spever=false&net=wifi&lat=&lon=&ts=1452523392&sign=x95ySVU9uSqwqFbt1Ubd3YUtCuLswI8YQmBBOEJwu2B48ErR02zJ6%2FKXOnxX046I&encryption=1&canal=appstore"];
+    NSMutableString *newUrl = [[NSMutableString alloc] init];
+    if ([self.newsUrl isEqualToString:oldUrl]) {
+        count = count + 10;
+    }
+    else
+        count = count + 20;
+    NSArray *arr = [self.newsUrl componentsSeparatedByString:@"0-20.html"];
+    [newUrl appendString:arr[0]];
+    [newUrl appendString:[NSString stringWithFormat:@"%ld-20.html",count]];
+    [newUrl appendString:arr[1]];
+    [self loadDataForType:2 withURL:newUrl];
 }
 
 - (void)loadDataForType:(int)type withURL:(NSString *)allUrlstring
@@ -94,6 +105,7 @@
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"%@",error);
+        [self.tableView footerEndRefreshing];
         [self.tableView headerEndRefreshing];
     }] resume];
 }
@@ -306,6 +318,11 @@
             svc.newsModel = newsModel;
             [self.navigationController pushViewController:svc animated:YES];
         }
+    }
+    else if (newsModel.TAG && [newsModel.TAG isEqualToString:@"独家"]){
+        WebViewViewController *wvc = [[WebViewViewController alloc] init];
+        wvc.newsModel = newsModel;
+        [self.navigationController pushViewController:wvc animated:YES];
     }
     else {
         NewsDetailViewController *ndvc = [[NewsDetailViewController alloc] init];
