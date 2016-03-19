@@ -396,12 +396,8 @@
     AnswerModel *am = [AnswerModel objectWithKeyValues:[dic objectForKey:@"answer"]];
     CGSize questSize = [qm.content boundingRectWithSize:CGSizeMake([Helper screenWidth]-58, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size;
     CGSize answerSize = [am.content boundingRectWithSize:CGSizeMake([Helper screenWidth]-58, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size;
-    if (answerSize.height > 51) {
-        return 155.5+questSize.height+51;
-    }
-    else{
-        return 155.5+questSize.height+answerSize.height;
-    }
+    
+    return 155.5+questSize.height+answerSize.height;
 }
 
 -(UIView *)sectionHeaderView

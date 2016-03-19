@@ -399,16 +399,6 @@
     }
     else if ([sortModel.type isEqualToString:@"video"] || [sortModel.type isEqualToString:@"photoset"]) {
         nib = [[NSBundle mainBundle]loadNibNamed:@"SepecialVideo" owner:self options:nil];
-    }
-    else if ([sortModel.type isEqualToString:@"timeline"]) {
-        
-    }
-    for(id oneObject in nib){
-        if([oneObject isKindOfClass:[SepecialCell class]]){
-            cell = (SepecialCell *)oneObject;
-        }
-    }
-    if ([sortModel.type isEqualToString:@"video"] || [sortModel.type isEqualToString:@"photoset"]) {
         NSMutableArray *arr = [_videoArr objectAtIndex:indexPath.row];
         if ([sortModel.type isEqualToString:@"video"]) {
             cell.imgplay1.hidden = NO;
@@ -423,6 +413,29 @@
         [cell.imgsrc1 sd_setImageWithURL:[NSURL URLWithString:((SepecialContentModel *) [arr objectAtIndex:0]).cover]];
         [cell.imgsrc2 sd_setImageWithURL:[NSURL URLWithString:((SepecialContentModel *) [arr objectAtIndex:1]).cover]];
     }
+    else if ([sortModel.type isEqualToString:@"timeline"]) {
+        
+    }
+    for(id oneObject in nib){
+        if([oneObject isKindOfClass:[SepecialCell class]]){
+            cell = (SepecialCell *)oneObject;
+        }
+    }
+//    if ([sortModel.type isEqualToString:@"video"] || [sortModel.type isEqualToString:@"photoset"]) {
+//        NSMutableArray *arr = [_videoArr objectAtIndex:indexPath.row];
+//        if ([sortModel.type isEqualToString:@"video"]) {
+//            cell.imgplay1.hidden = NO;
+//            cell.imgplay2.hidden = NO;
+//        }
+//        else{
+//            cell.imgplay1.hidden = YES;
+//            cell.imgplay2.hidden = YES;
+//        }
+//        cell.digst1.text = ((SepecialContentModel *) [arr objectAtIndex:0]).title;
+//        cell.digst2.text = ((SepecialContentModel *) [arr objectAtIndex:1]).title;
+//        [cell.imgsrc1 sd_setImageWithURL:[NSURL URLWithString:((SepecialContentModel *) [arr objectAtIndex:0]).cover]];
+//        [cell.imgsrc2 sd_setImageWithURL:[NSURL URLWithString:((SepecialContentModel *) [arr objectAtIndex:1]).cover]];
+//    }
     cell.contentModel = contentModel;
     
     return cell;

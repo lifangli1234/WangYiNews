@@ -132,7 +132,6 @@
         make.centerY.equalTo(self.userHeadPic);
         make.height.offset(30);
     }];
-    CGSize questionSize = [self.question.text boundingRectWithSize:CGSizeMake([Helper screenWidth]-58, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:self.question.font} context:nil].size;
     [self.question mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.userName.mas_left);
         make.top.equalTo(self.userName.mas_bottom);
@@ -144,7 +143,6 @@
         make.right.equalTo(self).offset(-10);
         make.height.equalTo(@0.5);
     }];
-    self.cellHeight = self.cellHeight+30.5+questionSize.height;
     [self.specialistHeadPic mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.userHeadPic);
         make.top.equalTo(self.midLine.mas_bottom).offset(10);
@@ -159,14 +157,10 @@
         make.centerY.equalTo(self.specialistHeadPic);
         make.height.offset(30);
     }];
-    CGSize answerSize = [self.answer.text boundingRectWithSize:CGSizeMake([Helper screenWidth]-58, 51) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:self.answer.font} context:nil].size;
     [self.answer mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.specialistName.mas_left);
         make.top.equalTo(self.specialistName.mas_bottom);
         make.right.equalTo(self).offset(-10);
-        if (answerSize.height>51) {
-            make.height.offset(51);
-        }
     }];
     [self.shareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self).offset(-10);
@@ -225,7 +219,6 @@
         make.top.equalTo(self.replyBtn.mas_bottom).offset(10);
         make.height.offset(5);
     }];
-    self.cellHeight = self.cellHeight+105.5+questionSize.height+answerSize.height;
 }
 
 @end
