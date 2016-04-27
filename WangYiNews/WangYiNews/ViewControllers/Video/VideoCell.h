@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "VideoContentModel.h"
+#import "VideoModel.h"
 
 @interface VideoCell : UITableViewCell
 
-@property(nonatomic,strong)VideoContentModel *videoContentModel;
+@property (nonatomic, strong) VideoModel *model;
 
 @property (weak, nonatomic) IBOutlet UIButton *playBtn;
 @property (weak, nonatomic) IBOutlet UIView *line;

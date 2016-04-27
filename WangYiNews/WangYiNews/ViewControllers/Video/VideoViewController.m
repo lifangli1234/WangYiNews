@@ -7,74 +7,62 @@
 //
 
 #import "VideoViewController.h"
-#import "VideoModel.h"
-#import "AudioModel.h"
-#import "AudioSubModel.h"
-#import "VideoTitleModel.h"
-#import "VideoContentModel.h"
-#import "VideoCell.h"
-#import "AudioCell.h"
-#import "CatergoryVideoViewController.h"
+#import "NewsCategoryTitle.h"
+#import "VideoTableViewController.h"
 
 #define VIDEOSUBURL @"/nc/video/home/"
 #define AUDIOSUBURL @"/nc/topicset/ios/radio/index.html"
 
-@interface VideoViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,AudioCellDelegate>
+@interface VideoViewController ()
 
-@property(nonatomic,strong) NSMutableArray *contentListArr;
-@property(nonatomic,strong) NSMutableArray *titleListArr;
-@property(nonatomic,strong) NSMutableArray *radioListArr;
+@property(nonatomic,strong) NSMutableArray *titleArr;
 @property(nonatomic,assign)BOOL update;
+@property(nonatomic,strong) UIView *navigationView;
+@property (nonatomic, strong) NSMutableArray *urlsArr;
+@property (nonatomic, strong) NSMutableArray *idArr;
 
 @end
 
 @implementation VideoViewController
 {
-    NSInteger count;
+    UIScrollView *_titleScr;
+    UIScrollView *_contentScr;
 }
 
--(NSMutableArray *)titleListArr
+-(NSMutableArray *)titleArr
 {
-    if (_titleListArr == nil) {
-        _titleListArr = [[NSMutableArray alloc] init];
+    if (_titleArr == nil) {
+        _titleArr = [[NSMutableArray alloc] initWithObjects:@"推荐",@"搞笑",@"美女帅哥",@"新闻现场",@"宠物",@"八卦",@"猎奇",@"体育",@"黑科技",@"涨姿势",@"二次元",@"军武",@"全景", nil];
     }
-    return _titleListArr;
+    return _titleArr;
 }
 
--(NSMutableArray *)contentListArr
+-(NSMutableArray *)idArr
 {
-    if (_contentListArr == nil) {
-        _contentListArr = [[NSMutableArray alloc] init];
+    if (!_idArr) {
+        _idArr = [[NSMutableArray alloc] initWithObjects:@"T1457069041911",@"T1457069080899",@"T1457069205071",@"T1457069232830",@"T1457069261743",@"T1457069319264",@"T1457069346235",@"T1457069387259",@"T1457069475980",@"T1457069446903",@"T1457069421892",@"T1461563165622", nil];
     }
-    return _contentListArr;
+    return _idArr;
 }
 
--(NSMutableArray *)radioListArr
+-(NSMutableArray *)urlsArr
 {
-    if (_radioListArr == nil) {
-        _radioListArr = [[NSMutableArray alloc] init];
+    if (_urlsArr == nil) {
+        _urlsArr = [[NSMutableArray alloc] init];
+        NSString *recommend = @"recommend/getChanListNews?channel=T1457068979049&passport=&devId=4R70nVFo7N%2FjOGAl7Dql%2BgnhtyYRtyVIqBeGB12xtfEEIz0ZpgPoDMhS%2FpBn8zvR&size=10&version=7.0&spever=false&net=wifi&lat=BrzwoNWShMXZeVmIF6z1EA%3D%3D&lon=rxIMPDa8YnQi22T5RLClZg%3D%3D&ts=1461562001&sign=l6CyWZzQ2P%2Bfw9QE0no9TlVjWJt8hh3hnP%2FcA3VG7eh48ErR02zJ6%2FKXOnxX046I&encryption=1&canal=appstore";
+        [_urlsArr insertObject:recommend atIndex:0];
+        for(NSString *str in self.idArr){
+            [_urlsArr addObject:[NSString stringWithFormat:@"nc/video/Tlist/%@/0-10.html",str]];
+        }
     }
-    return _radioListArr;
+    return _urlsArr;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self.tableView1 addHeaderWithTarget:self action:@selector(loadVideoData)];
-    [self.tableView2 addFooterWithTarget:self action:@selector(loadMoreVideoData)];
-    [self.tableView2 addHeaderWithTarget:self action:@selector(loadAudioData)];
-    self.tableView2.tableHeaderView = [self createAudioTableViewHeaderView];
-    self.update = YES;
-    count = 10;
-}
-
--(void)viewWillAppear:(BOOL)animated
-{
-    if (self.update == YES) {
-        [self.tableView1 headerBeginRefreshing];
-        self.update = NO;
-    }
+    [self layoutSubviews];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -82,350 +70,157 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark----------------request------------
--(void)loadVideoData
-{
-    [self loadDataWithType:1 url:[NSString stringWithFormat:@"%@%d-10.html",VIDEOSUBURL,0] tableView:self.tableView1];
-}
-
--(void)loadMoreVideoData
-{
-    [self loadDataWithType:2 url:[NSString stringWithFormat:@"%@%ld-10.html",VIDEOSUBURL,count] tableView:self.tableView1];
-    count+=10;
-}
-
--(void)loadAudioData
-{
-    [self loadDataWithType:1 url:AUDIOSUBURL tableView:self.tableView2];
-}
-
--(void)loadDataWithType:(NSInteger)type url:(NSString *)url tableView:(UITableView *)tableView
-{
-    [[[NetworkTools sharedNetworkTools] GET:url parameters:nil success:^(NSURLSessionDataTask *task, NSDictionary* responseObject) {
-        if (tableView == self.tableView1) {
-            VideoModel *videoModel = [VideoModel objectWithKeyValues:responseObject];
-            [self.titleListArr removeAllObjects];
-            [self.titleListArr addObjectsFromArray:videoModel.videoSidList];
-            self.tableView1.tableHeaderView = nil;
-            self.tableView1.tableHeaderView = [self createVideoTableViewHeaderView];
-            if (type == 1) {
-                [self.contentListArr removeAllObjects];
-                [self.contentListArr addObjectsFromArray:videoModel.videoList];
-                [tableView headerEndRefreshing];
-            }else if(type == 2){
-                [self.contentListArr addObjectsFromArray:videoModel.videoList];
-                [tableView footerEndRefreshing];
-            }
-        }
-        else{
-            [self.radioListArr removeAllObjects];
-            NSArray *arr = [responseObject objectForKey:@"cList"];
-            [self.radioListArr addObjectsFromArray:arr];
-            [tableView headerEndRefreshing];
-        }
-        [tableView reloadData];
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        NSLog(@"%@",error);
-        [tableView headerEndRefreshing];
-    }] resume];
-}
-
 #pragma mark----------------UI------------
--(void)initData
+-(void)layoutSubviews
 {
-    self.naviLeftBtn.hidden = YES;
-    self.naviRightBtn.hidden = YES;
-    [self setSegLStr:@"视频"];
-    [self setSegRStr:@"电台"];
-}
-
--(UIView *)createVideoTableViewHeaderView
-{
-    UIView *headerView = [Helper view:DAYBACKGROUNDCOLOR nightColor:NIGHTBACKGROUNDCOLOR];
-    headerView.frame = CGRectMake(0, 0, [Helper screenWidth], 100);
-    
-    [self addContentForHeaderView:headerView index:0];
-    [self addContentForHeaderView:headerView index:1];
-    [self addContentForHeaderView:headerView index:2];
-    [self addContentForHeaderView:headerView index:3];
-    
-    UIView *line = [Helper view:LINECOLOR nightColor:NIGHTLINECOLOR];
-    line.layer.borderColor = [Helper isNightMode]?NIGHTGRAYCOLOR.CGColor:GRAYCOLOR.CGColor;
-    line.layer.borderWidth = 1;
-    [headerView addSubview:line];
-    [line mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.offset(5);
-        make.left.right.bottom.equalTo(headerView);
+    [self.view addSubview:self.navigationView];
+    [self.navigationView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.top.equalTo(self.view);
+        make.height.offset(64);
     }];
     
-    return headerView;
+    [self createScrollView];
 }
 
--(void)addContentForHeaderView:(UIView *)superView index:(NSInteger)index
+-(void)createScrollView
 {
-    CGFloat width = ([Helper screenWidth]-(_titleListArr.count-1))/_titleListArr.count;
+    UIView *titleView = [Helper view:DAYBACKGROUNDCOLOR nightColor:NIGHTBACKGROUNDCOLOR];
+    [self.view addSubview:titleView];
+    [titleView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.and.right.mas_equalTo(self.view);
+        make.top.mas_equalTo(self.view).offset(64);
+        make.height.offset(40);
+    }];
     
-    NSDictionary *dic = [_titleListArr objectAtIndex:index];
-    VideoTitleModel *vtm = [VideoTitleModel objectWithKeyValues:dic];
+    _titleScr = [[UIScrollView alloc] initWithFrame:CGRectMake(10, 0, [Helper screenWidth]-20, 40)];
+    _titleScr.showsHorizontalScrollIndicator = NO;
+    _titleScr.showsVerticalScrollIndicator = NO;
+    [self addTitleWithArr:self.titleArr];
+    NewsCategoryTitle *currTitle = _titleScr.subviews.firstObject;
+    currTitle.scale = 1.0;
+    [titleView addSubview:_titleScr];
     
-    UILabel *lab = [Helper label:vtm.title font:[UIFont systemFontOfSize:13] textColor:[UIColor darkGrayColor] nightTextColor:[UIColor lightGrayColor] textAligment:NSTextAlignmentCenter];
-    [superView addSubview:lab];
-    [lab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(superView).offset(-13);
-        make.height.offset(26);
-        make.width.offset(width);
-        make.left.equalTo(superView).offset((width+1)*index);
+    _contentScr = [[UIScrollView alloc] init];
+    _contentScr.frame = CGRectMake(0, 100, [Helper screenWidth], [Helper screenHeight]-149);
+    _contentScr.contentSize = CGSizeMake([Helper screenWidth]*self.titleArr.count, [Helper screenHeight]-149);
+    _contentScr.showsHorizontalScrollIndicator = NO;
+    _contentScr.delegate = self;
+    _contentScr.bounces = NO;
+    _contentScr.pagingEnabled = YES;
+    [self.view addSubview:_contentScr];
+    
+    [self addViewControllers];
+    UIViewController *currVc = self.childViewControllers.firstObject;
+    currVc.view.frame = _contentScr.bounds;
+    [_contentScr addSubview:currVc.view];
+}
+
+-(void)addViewControllers
+{
+    for (int i=0; i<self.titleArr.count; i++) {
+        VideoTableViewController *vvc = [[VideoTableViewController alloc] init];
+        vvc.urlStr = self.urlsArr[i];
+        [self addChildViewController:vvc];
+    }
+}
+
+-(void)addTitleWithArr:(NSMutableArray *)arr
+{
+    CGFloat X = 10;
+    for (int i=0; i<arr.count; i++) {
+        NewsCategoryTitle *categoryTitle = [[NewsCategoryTitle alloc] init];
+        categoryTitle.userInteractionEnabled = YES;
+        categoryTitle.text = arr[i];
+        CGSize titleSize = [categoryTitle.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:21]}];
+        CGFloat W = titleSize.width;
+        CGFloat H = 40;
+        CGFloat Y = 0;
+        categoryTitle.frame = CGRectMake(X, Y, W, H);
+        categoryTitle.font = [UIFont systemFontOfSize:21];
+        categoryTitle.tag = i;
+        [_titleScr addSubview:categoryTitle];
+        X = X + titleSize.width +10;
         
-    }];
-    
-    UIImageView *img = [[UIImageView alloc] init];
-    [img sd_setImageWithURL:[NSURL URLWithString:vtm.imgsrc] placeholderImage:nil];
-    [superView addSubview:img];
-    [img mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(superView).offset((width-40)/2+(width+1)*index);
-        make.top.equalTo(superView).offset(17);
-        make.size.sizeOffset(CGSizeMake(40, 40));
-    }];
-    
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.backgroundColor = [UIColor clearColor];
-    btn.tag = VIDEOTITLEVIEWBUTTON_TAG+index;
-    [btn addTarget:self action:@selector(videoCatergory:) forControlEvents:UIControlEventTouchUpInside];
-    [superView addSubview:btn];
-    [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(lab.mas_left);
-        make.top.equalTo(superView);
-        make.bottom.equalTo(superView).offset(-5);
-        make.width.equalTo(lab.mas_width);
-    }];
-    
-    UIView *line = [Helper view:GRAYCOLOR nightColor:NIGHTGRAYCOLOR];
-    [superView addSubview:line];
-    [line mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(lab.mas_right);
-        make.width.offset(1);
-        make.top.bottom.equalTo(superView);
-    }];
-}
-
--(UIView *)createAudioTableViewHeaderView
-{
-    UIView *headerView = [Helper view:DAYBACKGROUNDCOLOR nightColor:NIGHTBACKGROUNDCOLOR];
-    headerView.frame = CGRectMake(0, 0, [Helper screenWidth], 49);
-    
-    [self addContentForAudioHeaderView:headerView index:0 text:@"我的下载" image:@"audionews_indexheader_download@2x"];
-    [self addContentForAudioHeaderView:headerView index:1 text:@"最近播放" image:@"audionews_indexheader_recent@2x"];
-    
-    UIView *line = [Helper view:LINECOLOR nightColor:NIGHTLINECOLOR];
-    line.layer.borderColor = [Helper isNightMode]?NIGHTGRAYCOLOR.CGColor:GRAYCOLOR.CGColor;
-    line.layer.borderWidth = 1;
-    [headerView addSubview:line];
-    [line mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.offset(5);
-        make.left.right.bottom.equalTo(headerView);
-    }];
-    
-    return headerView;
-}
-
--(void)addContentForAudioHeaderView:(UIView *)superView index:(NSInteger)index text:(NSString *)text image:(NSString *)image
-{
-    CGFloat width = ([Helper screenWidth]-1)/2;
-    
-    UIView *backView = [Helper view:DAYBACKGROUNDCOLOR nightColor:NIGHTBACKGROUNDCOLOR];
-    [superView addSubview:backView];
-    [backView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(superView);
-        make.bottom.equalTo(superView).offset(-5);
-        make.left.equalTo(superView).offset((width+1)*index);
-        make.width.offset(width);
-    }];
-    
-    UILabel *lab = [Helper label:text font:[UIFont systemFontOfSize:13] textColor:[UIColor darkGrayColor] nightTextColor:[UIColor lightGrayColor] textAligment:NSTextAlignmentCenter];
-    [backView addSubview:lab];
-    [lab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.equalTo(backView);
-        make.centerX.equalTo(backView).offset(index==0?11:14);
-    }];
-    
-    UIImageView *img = [Helper imageView:image];
-    [backView addSubview:img];
-    [img mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(lab.mas_left).offset(-8);
-        make.centerY.equalTo(backView);
-        make.size.sizeOffset(index==0?CGSizeMake(14, 19):CGSizeMake(20, 20));
-    }];
-    
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.backgroundColor = [UIColor clearColor];
-    btn.tag = VIDEOTITLEVIEWBUTTON_TAG+index;
-    [btn addTarget:self action:@selector(videoCatergory:) forControlEvents:UIControlEventTouchUpInside];
-    [backView addSubview:btn];
-    [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(backView);
-    }];
-    
-    UIView *line = [Helper view:GRAYCOLOR nightColor:NIGHTGRAYCOLOR];
-    [superView addSubview:line];
-    [line mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(backView.mas_right);
-        make.width.offset(1);
-        make.top.bottom.equalTo(superView);
-    }];
-}
-
-#pragma mark----------------tableViewDelegate------------
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    if (tableView == self.tableView1) {
-        return _contentListArr.count;
+        [categoryTitle addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(titleLabelClick:)]];
     }
-    else
-        return _radioListArr.count;
-}
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *cellName = @"cell";
     
-    if (tableView == self.tableView1) {
-        VideoCell *cell = [tableView dequeueReusableCellWithIdentifier:cellName];
-        if (cell == nil) {
-            cell = [[[NSBundle mainBundle] loadNibNamed:@"VideoCell" owner:self options:nil] lastObject];
-        }
-        
-        NSDictionary *dic = [_contentListArr objectAtIndex:indexPath.row];
-        VideoContentModel *vcm = [VideoContentModel objectWithKeyValues:dic];
-        vcm.desc = [dic objectForKey:@"description"];
-        [cell setVideoContentModel:vcm];
-        
-        return cell;
-    }
-    else{
-        AudioCell *cell = [tableView dequeueReusableCellWithIdentifier:cellName];
-        if (cell == nil) {
-            cell = [[[NSBundle mainBundle] loadNibNamed:@"AudioCell" owner:self options:nil] lastObject];
-        }
-        
-        NSDictionary *dic = [_radioListArr objectAtIndex:indexPath.row];
-        AudioModel *acm = [AudioModel objectWithKeyValues:dic];
-        [cell setAudioModel:acm];
-        cell.delegate = self;
-        cell.catergortBtn.tag = indexPath.row;
-        cell.playBtn1.tag = indexPath.row;
-        cell.playBtn2.tag = indexPath.row;
-        cell.playBtn3.tag = indexPath.row;
-        return cell;
-    }
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (tableView == self.tableView1) {
-        return 318;
-    }
-    else{
-        return 133 + ([Helper screenWidth]-50)/3;
-    }
+    _titleScr.contentSize = CGSizeMake(X, 40);
 }
 
 #pragma mark----------------scrollViewDelegate------------
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    NSInteger index = scrollView.contentOffset.x/[Helper screenWidth];
-    switch (index) {
-        case 0:
-        {
-            self.segmentView.firstButton.selected = YES;
-            self.segmentView.secondButton.selected = NO;
-            [self.segmentView.btnBackView mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(self.segmentView).offset(0);
-            }];
-            [self.segmentView.btnBackView layoutIfNeeded];
-        }
-            break;
-        case 1:
-        {
-            self.segmentView.firstButton.selected = NO;
-            self.segmentView.secondButton.selected = YES;
-            [self.segmentView.btnBackView mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(self.segmentView).offset(120);
-            }];
-            [self.segmentView.btnBackView layoutIfNeeded];
-        }
-            break;
-        default:
-            break;
+    [self scrollViewDidEndScrollingAnimation:scrollView];
+}
+
+-(void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
+{
+    NSInteger index = scrollView.contentOffset.x/_contentScr.frame.size.width;
+    NewsCategoryTitle *currTitle = (NewsCategoryTitle *)[_titleScr.subviews objectAtIndex:index];
+    CGFloat offsetX = currTitle.center.x - _titleScr.frame.size.width*0.5;
+    CGFloat offsetMax = _titleScr.contentSize.width - _titleScr.frame.size.width;
+    if (offsetX<0) {
+        offsetX = 0;
     }
+    else if (offsetX > offsetMax){
+        offsetX = offsetMax;
+    }
+    [_titleScr setContentOffset:CGPointMake(offsetX, _titleScr.contentOffset.y) animated:YES];
+    
+    VideoTableViewController *currVc = [self.childViewControllers objectAtIndex:index];
+    [_titleScr.subviews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        if (idx != index) {
+            NewsCategoryTitle *label =(NewsCategoryTitle *) _titleScr.subviews[idx];
+            label.scale = 0.0;
+        }
+    }];
+    
+    if (currVc.view.superview) return;
+    
+    currVc.view.frame = _contentScr.bounds;
+    [_contentScr addSubview:currVc.view];
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-
+    CGFloat value = ABS(scrollView.contentOffset.x / scrollView.frame.size.width);
+    NSUInteger leftIndex = (int)value;
+    NSUInteger rightIndex = leftIndex + 1;
+    CGFloat scaleRight = value - leftIndex;
+    CGFloat scaleLeft = 1 - scaleRight;
+    NewsCategoryTitle *labelLeft = _titleScr.subviews[leftIndex];
+    labelLeft.scale = scaleLeft;
+    if (rightIndex < _titleScr.subviews.count) {
+        NewsCategoryTitle *labelRight = _titleScr.subviews[rightIndex];
+        labelRight.scale = scaleRight;
+    }
 }
 
 #pragma mark----------------btnAction------------
-//-(void)videoPageBtn:(UIButton *)btn
-//{
-//    if (btn.tag == VIDEO_TAG) {
-//        btn.selected = YES;
-//        _audioBtn.selected = NO;
-//        _contentScr.contentOffset = CGPointMake(0, 0);
-//        [_btnBackView mas_updateConstraints:^(MASConstraintMaker *make) {
-//            make.left.equalTo(segmentView);
-//        }];
-//        [_btnBackView layoutIfNeeded];
-//    }
-//    else if(btn.tag == RADIO_TAG){
-//        btn.selected = YES;
-//        _videoBtn.selected = NO;
-//        _contentScr.contentOffset = CGPointMake([Helper screenWidth], 0);
-//        [_btnBackView mas_updateConstraints:^(MASConstraintMaker *make) {
-//            make.left.equalTo(segmentView).offset(100);
-//        }];
-//        [_btnBackView layoutIfNeeded];
-//        if (self.update == YES) {
-//            [_videoTableView headerBeginRefreshing];
-//            self.update = NO;
-//        }
-//    }
-//    else{
-//        
-//    }
-//}
-
--(void)segmentViewFirstBtnClick:(SegmentView *)segmentView
+-(void)titleLabelClick:(UITapGestureRecognizer *)gesture
 {
-     self.contentScr.contentOffset = CGPointMake(0, 0);
+    NewsCategoryTitle *title = (NewsCategoryTitle *)gesture.view;
+    
+    CGFloat offsetX = title.tag * _contentScr.frame.size.width;
+    CGFloat offsetY = _contentScr.contentOffset.y;
+    
+    [_contentScr setContentOffset:CGPointMake(offsetX, offsetY) animated:YES];
 }
 
--(void)segmentViewSecondBtnClick:(SegmentView *)segmentView
+-(UIView *)navigationView
 {
-    self.contentScr.contentOffset = CGPointMake([Helper screenWidth], 0);
-    [self.tableView2 headerBeginRefreshing];
-}
-
--(void)videoCatergory:(UIButton *)btn
-{
-    NSDictionary *dic = [_titleListArr objectAtIndex:btn.tag-VIDEOTITLEVIEWBUTTON_TAG];
-    VideoTitleModel *vtm = [VideoTitleModel objectWithKeyValues:dic];
-    CatergoryVideoViewController *cvvc = [[CatergoryVideoViewController alloc] init];
-    cvvc.cid = vtm.sid;
-    cvvc.cname = vtm.title;
-    cvvc.type = @"video";
-    [self.navigationController pushViewController:cvvc animated:YES];
-}
-
-#pragma mark----------------audioCellDelegate------------
--(void)audioCellCatergoryBtnClick:(NSInteger)tag
-{
-    NSDictionary *dic = [_radioListArr objectAtIndex:tag];
-    AudioModel *acm = [AudioModel objectWithKeyValues:dic];
-    CatergoryVideoViewController *cvvc = [[CatergoryVideoViewController alloc] init];
-    cvvc.cid = acm.cid;
-    cvvc.cname = acm.cname;
-    cvvc.type = @"radio";
-    [self.navigationController pushViewController:cvvc animated:YES];
+    if (!_navigationView) {
+        _navigationView = [Helper view:BASERED nightColor:BASERED_NIGHT];
+        
+        UILabel *titleLabel = [Helper label:@"视频" font:[UIFont systemFontOfSize:18] textColor:[UIColor whiteColor] nightTextColor:[UIColor whiteColor] textAligment:NSTextAlignmentCenter];
+        [_navigationView addSubview:titleLabel];
+        [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(_navigationView);
+            make.top.equalTo(_navigationView).offset(20);
+            make.height.offset(44);
+        }];
+    }
+    return _navigationView;
 }
 
 @end

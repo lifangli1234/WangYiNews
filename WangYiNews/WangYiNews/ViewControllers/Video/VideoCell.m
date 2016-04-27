@@ -20,30 +20,30 @@
     // Configure the view for the selected state
 }
 
--(void)setVideoContentModel:(VideoContentModel *)videoContentModel
+-(void)setModel:(VideoModel *)model
 {
-    self.title.text = videoContentModel.title;
-    self.describe.text = videoContentModel.desc;
-    [self.cover sd_setImageWithURL:[NSURL URLWithString:videoContentModel.cover] placeholderImage:[UIImage imageNamed:@"video_cell_content_bg@2x.png"]];
-    NSInteger min = videoContentModel.length/60;
-    NSInteger sec = videoContentModel.length%60;
+    self.title.text = model.title;
+    self.describe.text = model.desc;
+    [self.cover sd_setImageWithURL:[NSURL URLWithString:model.cover] placeholderImage:[UIImage imageNamed:@"video_cell_content_bg@2x.png"]];
+    NSInteger min = [model.length integerValue]/60;
+    NSInteger sec = [model.length integerValue]%60;
     self.time.text = [NSString stringWithFormat:@"%.2ld:%.2ld",min,sec];
-    if (videoContentModel.playCount<10000) {
-        self.playCount.text = [NSString stringWithFormat:@"%ld",videoContentModel.playCount];
+    if ([model.playCount integerValue]<10000) {
+        self.playCount.text = [NSString stringWithFormat:@"%ld",[model.playCount integerValue]];
     }
     else{
-        self.playCount.text = [NSString stringWithFormat:@"%.1f万",videoContentModel.playCount/10000.0];
+        self.playCount.text = [NSString stringWithFormat:@"%.1f万",[model.playCount integerValue]/10000.0];
     }
     self.comment.layer.cornerRadius = 33/2;
     self.comment.layer.borderColor = [LINECOLOR CGColor];
     self.comment.layer.borderWidth = 0.5;
-    if (videoContentModel.replyCount>0) {
+    if (model.replyCount>0) {
         self.replyCount.hidden = NO;
-        if (videoContentModel.replyCount<10000) {
-            self.replyCount.text = [NSString stringWithFormat:@"%ld",videoContentModel.replyCount];
+        if ([model.replyCount integerValue]<10000) {
+            self.replyCount.text = [NSString stringWithFormat:@"%ld",[model.replyCount integerValue]];
         }
         else{
-            self.replyCount.text = [NSString stringWithFormat:@"%.1f万",videoContentModel.replyCount/10000.0];
+            self.replyCount.text = [NSString stringWithFormat:@"%.1f万",[model.replyCount integerValue]/10000.0];
         }
     }
     else{
