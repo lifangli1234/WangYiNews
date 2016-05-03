@@ -146,8 +146,14 @@
 }
 
 - (IBAction)shareBtn:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(videoCell:shareButton:)]) {
+        [self.delegate videoCell:self shareButton:self.shareBtn];
+    }
 }
 
 - (IBAction)videoPlay:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(videoCell:playButton:)]) {
+        [self.delegate videoCell:self playButton:self.playBtn];
+    }
 }
 @end

@@ -9,16 +9,28 @@
 #import "VideoTableViewController.h"
 #import "VideoCell.h"
 #import "VideoModel.h"
+#import "FMGVideoPlayView.h"
+#import "FullViewController.h"
+#import "VideoPlayViewController.h"
 
-@interface VideoTableViewController ()
+@interface VideoTableViewController ()<FMGVideoPlayViewDelegate, VideoCellDelegate>
 
 @property (nonatomic, strong) NSMutableArray *videosArr;
+@property (nonatomic, strong) FMGVideoPlayView *player;
+@property (nonatomic, strong) FullViewController *fullVC;
 
 @end
 
 @implementation VideoTableViewController
 {
     NSInteger count;
+}
+
+-(FullViewController *)fullVC{
+    if (_fullVC == nil) {
+        _fullVC = [[FullViewController alloc] init];
+    }
+    return _fullVC;
 }
 
 - (void)viewDidLoad {
@@ -34,6 +46,31 @@
     [self.tableView addFooterWithTarget:self action:@selector(loadMoreData)];
     [self.tableView addHeaderWithTarget:self action:@selector(refreshData)];
     [self.tableView headerBeginRefreshing];
+    _player = [FMGVideoPlayView videoPlayView];
+    _player.delegate = self;
+}
+
+-(void)videoplayViewSwitchOrientation:(BOOL)isFull
+{
+    if (isFull) {
+        [self.navigationController presentViewController:self.fullVC animated:NO completion:^{
+            [self.fullVC.view addSubview:self.player];
+            self.player.center = self.fullVC.view.center;
+            
+            [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionLayoutSubviews animations:^{
+                self.player.frame = self.fullVC.view.bounds;
+//                self.player.danmakuView.frame = self.player.frame;
+            } completion:nil];
+        }];
+    } else {
+        [self.fullVC dismissViewControllerAnimated:NO completion:^{
+            VideoCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathWithIndex:self.player.index]];
+            [cell.contentView addSubview:self.player];
+            [self.player mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.edges.equalTo(cell.cover);
+            }];
+        }];
+    }
 }
 
 -(void)refreshData
@@ -88,9 +125,31 @@
     NSDictionary *dic = [self.videosArr objectAtIndex:indexPath.row];
     VideoModel *model = [VideoModel objectWithKeyValues:dic];
     model.desc = dic[@"description"];
+    cell.delegate = self;
     cell.model = model;
+    cell.playBtn.tag = indexPath.row;
+    cell.shareBtn.tag = indexPath.row;
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == _player.index) {
+        [_player.player pause];
+        _player.hidden = YES;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [_player.player pause];
+    _player.hidden = YES;
+    VideoPlayViewController *videoController = [[VideoPlayViewController alloc] init];
+    NSDictionary *dic = [self.videosArr objectAtIndex:indexPath.row];
+    VideoModel *model = [VideoModel objectWithKeyValues:dic];
+    videoController.model = model;
+    [self.navigationController pushViewController:videoController animated:YES];
 }
 
 -(CGFloat )tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -104,6 +163,28 @@
         _videosArr = [[NSMutableArray alloc] init];
     }
     return _videosArr;
+}
+
+-(void)videoCell:(VideoCell *)videoCell playButton:(UIButton *)btn
+{
+    _player.index = btn.tag;
+    NSDictionary *dic = [self.videosArr objectAtIndex:btn.tag];
+    VideoModel *model = [VideoModel objectWithKeyValues:dic];
+    [_player setUrlString:model.mp4_url];
+    [videoCell.contentView addSubview:_player];
+    [_player mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(videoCell.cover);
+    }];
+    _player.contrainerViewController = self;
+    [_player.player play];
+    [_player showToolView:NO];
+    _player.playOrPauseBtn.selected = YES;
+    _player.hidden = NO;
+}
+
+-(void)videoCell:(VideoCell *)videoCell shareButton:(UIButton *)btn
+{
+    
 }
 
 @end

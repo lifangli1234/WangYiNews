@@ -9,9 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "VideoModel.h"
 
+@protocol VideoCellDelegate;
+
 @interface VideoCell : UITableViewCell
 
 @property (nonatomic, strong) VideoModel *model;
+@property (weak, nonatomic) id<VideoCellDelegate> delegate;
 
 @property (weak, nonatomic) IBOutlet UIButton *playBtn;
 @property (weak, nonatomic) IBOutlet UIView *line;
@@ -29,5 +32,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *replyCount;
 - (IBAction)shareBtn:(id)sender;
 - (IBAction)videoPlay:(id)sender;
+
+@end
+
+@protocol VideoCellDelegate <NSObject>
+
+-(void)videoCell:(VideoCell *)videoCell playButton:(UIButton *)btn;
+-(void)videoCell:(VideoCell *)videoCell shareButton:(UIButton *)btn;
 
 @end

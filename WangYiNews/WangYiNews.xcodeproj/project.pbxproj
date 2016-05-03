@@ -282,6 +282,16 @@
 		40250C111BE89CEF00CFB7F9 /* SepecialVideo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 40250C101BE89CEF00CFB7F9 /* SepecialVideo.xib */; };
 		40250C131BE8A02700CFB7F9 /* audionews_index_play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 40250C121BE8A02700CFB7F9 /* audionews_index_play@2x.png */; };
 		40250C151BE8A7DC00CFB7F9 /* SepecialBigPhoto.xib in Resources */ = {isa = PBXBuildFile; fileRef = 40250C141BE8A7DC00CFB7F9 /* SepecialBigPhoto.xib */; };
+		404384501CD8386D000DFA92 /* VideoPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4043844F1CD8386D000DFA92 /* VideoPlayViewController.m */; };
+		4043845C1CD87A43000DFA92 /* FMGAVPlayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 404384541CD87A43000DFA92 /* FMGAVPlayer.bundle */; };
+		4043845D1CD87A43000DFA92 /* FMGVideoPlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 404384561CD87A43000DFA92 /* FMGVideoPlayView.m */; };
+		4043845E1CD87A43000DFA92 /* FMGVideoPlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 404384571CD87A43000DFA92 /* FMGVideoPlayView.xib */; };
+		4043845F1CD87A43000DFA92 /* FullView.m in Sources */ = {isa = PBXBuildFile; fileRef = 404384591CD87A43000DFA92 /* FullView.m */; };
+		404384601CD87A43000DFA92 /* FullViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4043845B1CD87A43000DFA92 /* FullViewController.m */; };
+		404384691CD887FE000DFA92 /* CFDanmaku.m in Sources */ = {isa = PBXBuildFile; fileRef = 404384631CD887FE000DFA92 /* CFDanmaku.m */; };
+		4043846A1CD887FE000DFA92 /* CFDanmakuInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 404384651CD887FE000DFA92 /* CFDanmakuInfo.m */; };
+		4043846B1CD887FE000DFA92 /* CFDanmakuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 404384671CD887FE000DFA92 /* CFDanmakuView.m */; };
+		4043846C1CD887FE000DFA92 /* danmakufile in Resources */ = {isa = PBXBuildFile; fileRef = 404384681CD887FE000DFA92 /* danmakufile */; };
 		404468211C3E3ADA00EAC4F0 /* QuestionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4044681F1C3E3ADA00EAC4F0 /* QuestionCell.m */; };
 		404468221C3E3ADA00EAC4F0 /* QuestionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 404468201C3E3ADA00EAC4F0 /* QuestionCell.xib */; };
 		4044682F1C3E5ADC00EAC4F0 /* comment_support_fake@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 404468231C3E5ADC00EAC4F0 /* comment_support_fake@2x.png */; };
@@ -1100,6 +1110,23 @@
 		40250C101BE89CEF00CFB7F9 /* SepecialVideo.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SepecialVideo.xib; sourceTree = "<group>"; };
 		40250C121BE8A02700CFB7F9 /* audionews_index_play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "audionews_index_play@2x.png"; path = "../audionews_index_play@2x.png"; sourceTree = "<group>"; };
 		40250C141BE8A7DC00CFB7F9 /* SepecialBigPhoto.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SepecialBigPhoto.xib; sourceTree = "<group>"; };
+		4043844E1CD8386D000DFA92 /* VideoPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayViewController.h; sourceTree = "<group>"; };
+		4043844F1CD8386D000DFA92 /* VideoPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayViewController.m; sourceTree = "<group>"; };
+		404384541CD87A43000DFA92 /* FMGAVPlayer.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FMGAVPlayer.bundle; sourceTree = "<group>"; };
+		404384551CD87A43000DFA92 /* FMGVideoPlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMGVideoPlayView.h; sourceTree = "<group>"; };
+		404384561CD87A43000DFA92 /* FMGVideoPlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMGVideoPlayView.m; sourceTree = "<group>"; };
+		404384571CD87A43000DFA92 /* FMGVideoPlayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FMGVideoPlayView.xib; sourceTree = "<group>"; };
+		404384581CD87A43000DFA92 /* FullView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullView.h; sourceTree = "<group>"; };
+		404384591CD87A43000DFA92 /* FullView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullView.m; sourceTree = "<group>"; };
+		4043845A1CD87A43000DFA92 /* FullViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullViewController.h; sourceTree = "<group>"; };
+		4043845B1CD87A43000DFA92 /* FullViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullViewController.m; sourceTree = "<group>"; };
+		404384621CD887FE000DFA92 /* CFDanmaku.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFDanmaku.h; sourceTree = "<group>"; };
+		404384631CD887FE000DFA92 /* CFDanmaku.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFDanmaku.m; sourceTree = "<group>"; };
+		404384641CD887FE000DFA92 /* CFDanmakuInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFDanmakuInfo.h; sourceTree = "<group>"; };
+		404384651CD887FE000DFA92 /* CFDanmakuInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFDanmakuInfo.m; sourceTree = "<group>"; };
+		404384661CD887FE000DFA92 /* CFDanmakuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFDanmakuView.h; sourceTree = "<group>"; };
+		404384671CD887FE000DFA92 /* CFDanmakuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFDanmakuView.m; sourceTree = "<group>"; };
+		404384681CD887FE000DFA92 /* danmakufile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = danmakufile; sourceTree = "<group>"; };
 		4044681E1C3E3ADA00EAC4F0 /* QuestionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionCell.h; sourceTree = "<group>"; };
 		4044681F1C3E3ADA00EAC4F0 /* QuestionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionCell.m; sourceTree = "<group>"; };
 		404468201C3E3ADA00EAC4F0 /* QuestionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionCell.xib; sourceTree = "<group>"; };
@@ -1979,6 +2006,35 @@
 			path = WangYiNewsUITests;
 			sourceTree = "<group>";
 		};
+		404384531CD87A43000DFA92 /* FMGAVPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				404384541CD87A43000DFA92 /* FMGAVPlayer.bundle */,
+				404384551CD87A43000DFA92 /* FMGVideoPlayView.h */,
+				404384561CD87A43000DFA92 /* FMGVideoPlayView.m */,
+				404384571CD87A43000DFA92 /* FMGVideoPlayView.xib */,
+				404384581CD87A43000DFA92 /* FullView.h */,
+				404384591CD87A43000DFA92 /* FullView.m */,
+				4043845A1CD87A43000DFA92 /* FullViewController.h */,
+				4043845B1CD87A43000DFA92 /* FullViewController.m */,
+			);
+			path = FMGAVPlayer;
+			sourceTree = "<group>";
+		};
+		404384611CD887EF000DFA92 /* CFDanmaku */ = {
+			isa = PBXGroup;
+			children = (
+				404384621CD887FE000DFA92 /* CFDanmaku.h */,
+				404384631CD887FE000DFA92 /* CFDanmaku.m */,
+				404384641CD887FE000DFA92 /* CFDanmakuInfo.h */,
+				404384651CD887FE000DFA92 /* CFDanmakuInfo.m */,
+				404384661CD887FE000DFA92 /* CFDanmakuView.h */,
+				404384671CD887FE000DFA92 /* CFDanmakuView.m */,
+				404384681CD887FE000DFA92 /* danmakufile */,
+			);
+			path = CFDanmaku;
+			sourceTree = "<group>";
+		};
 		404FA84D1BD4839200FCEC69 = {
 			isa = PBXGroup;
 			children = (
@@ -2056,6 +2112,8 @@
 		404FA8951BD4B6B800FCEC69 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				404384611CD887EF000DFA92 /* CFDanmaku */,
+				404384531CD87A43000DFA92 /* FMGAVPlayer */,
 				404FA8B71BD4BB6700FCEC69 /* CONST.h */,
 				404FA8961BD4B6C800FCEC69 /* Helper.h */,
 				404FA8971BD4B6C800FCEC69 /* Helper.m */,
@@ -2141,6 +2199,8 @@
 				40E1B12C1C2B8F06006C2D2D /* RadioModel.m */,
 				4016802D1CCDEA6E00B24ABB /* VideoTableViewController.h */,
 				4016802E1CCDEA6E00B24ABB /* VideoTableViewController.m */,
+				4043844E1CD8386D000DFA92 /* VideoPlayViewController.h */,
+				4043844F1CD8386D000DFA92 /* VideoPlayViewController.m */,
 			);
 			path = Video;
 			sourceTree = "<group>";
@@ -2954,6 +3014,7 @@
 				40A81D491BDB6EE0008A315E /* todaynews_title_bg@2x.png in Resources */,
 				4004A5B71C439D6B00E8FD5A /* night_cell_tag_photo@2x.png in Resources */,
 				40A81D451BDB6EE0008A315E /* todaynews_cell_tag@2x.png in Resources */,
+				4043845C1CD87A43000DFA92 /* FMGAVPlayer.bundle in Resources */,
 				40F8FFAB1C50A71200852DA8 /* reader_cell_delete_bg@2x.png in Resources */,
 				406364231BD5E1C400202C16 /* night_tabbar_icon_reader_highlight@2x.png in Resources */,
 				40FBAB381C27EA690090716B /* night_lm_cell_detail_indicator@2x.png in Resources */,
@@ -3317,6 +3378,7 @@
 				40F8FFB51C50A71200852DA8 /* reader_recommend_icon@2x.png in Resources */,
 				40097BBE1C2AA8FE00D87458 /* audionews_list_download@2x.png in Resources */,
 				4012B7951BE1B5860057C8A2 /* snow@2x.png in Resources */,
+				4043845E1CD87A43000DFA92 /* FMGVideoPlayView.xib in Resources */,
 				400828791BF5D9030078FDFA /* night_icon_star@2x.png in Resources */,
 				40F800181C50A7E500852DA8 /* night_recommend_login_icon@2x.png in Resources */,
 				40FBAAD21C27E9B10090716B /* night_user_updatversionBtn@2x.png in Resources */,
@@ -3532,6 +3594,7 @@
 				40E8181E1C336E05003077FD /* qa_login_highlight@2x.png in Resources */,
 				40F8FFDB1C50A71200852DA8 /* recommend_report_arrow@2x.png in Resources */,
 				40F8FFDD1C50A71200852DA8 /* recommend_share@2x.png in Resources */,
+				4043846C1CD887FE000DFA92 /* danmakufile in Resources */,
 				40E8184C1C336FC2003077FD /* qa_search_highlight@2x.png in Resources */,
 				406364981BD6201500202C16 /* top_navigation_shareicon_highlighted@2x.png in Resources */,
 				400828741BF5D9030078FDFA /* icon_star_yellow@2x.png in Resources */,
@@ -3666,6 +3729,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4043846A1CD887FE000DFA92 /* CFDanmakuInfo.m in Sources */,
 				4012B8181BE3302B0057C8A2 /* SepecialSortModel.m in Sources */,
 				4050D0631C3D071600F883D6 /* AnswerModel.m in Sources */,
 				4012B8C61BE6F2C80057C8A2 /* NormalDetailModel.m in Sources */,
@@ -3683,6 +3747,7 @@
 				404FA8651BD4839200FCEC69 /* ViewController.m in Sources */,
 				40A81D3E1BDB6AB2008A315E /* HotNewsViewController.m in Sources */,
 				404468211C3E3ADA00EAC4F0 /* QuestionCell.m in Sources */,
+				404384501CD8386D000DFA92 /* VideoPlayViewController.m in Sources */,
 				402142261C51C5FA0003BDD3 /* RecommendedSubscribeCell.m in Sources */,
 				4050D05D1C3CF75700F883D6 /* ExpertViewController.m in Sources */,
 				404FA8AA1BD4B94000FCEC69 /* PreferenceViewController.m in Sources */,
@@ -3695,6 +3760,7 @@
 				4012B8211BE3469C0057C8A2 /* VideoRecommendModel.m in Sources */,
 				4021423A1C51CD060003BDD3 /* RecommendedSubscribeModel.m in Sources */,
 				406364001BD5CB8100202C16 /* VideoViewController.m in Sources */,
+				404384691CD887FE000DFA92 /* CFDanmaku.m in Sources */,
 				404FA8A21BD4B90C00FCEC69 /* MineViewController.m in Sources */,
 				4012B81E1BE333E80057C8A2 /* SepecialViewController.m in Sources */,
 				40A81D661BDB79EB008A315E /* MJRefreshHeaderView.m in Sources */,
@@ -3710,6 +3776,7 @@
 				402142221C51C2920003BDD3 /* RecommendSubscribeViewController.m in Sources */,
 				406363F71BD5CB5900202C16 /* NewsViewController.m in Sources */,
 				4012B8711BE4A0BC0057C8A2 /* NSDictionary_DeepMutableCopy.m in Sources */,
+				4043846B1CD887FE000DFA92 /* CFDanmakuView.m in Sources */,
 				404FA8A91BD4B94000FCEC69 /* LoginViewController.m in Sources */,
 				404FA8B61BD4BB3C00FCEC69 /* CustomButton.m in Sources */,
 				404FA85C1BD4839200FCEC69 /* main.m in Sources */,
@@ -3730,12 +3797,15 @@
 				40010A4F1C3A47AA0003B571 /* SegmentView.m in Sources */,
 				4012B7241BE1AE200057C8A2 /* WeatherModel.m in Sources */,
 				4012B8C71BE6F2C80057C8A2 /* NormalImageModel.m in Sources */,
+				4043845F1CD87A43000DFA92 /* FullView.m in Sources */,
 				404FA8981BD4B6C800FCEC69 /* Helper.m in Sources */,
 				4012B86E1BE4A0BC0057C8A2 /* MGTemplateStandardFilters.m in Sources */,
 				40A81D631BDB79EB008A315E /* MJRefreshBaseView.m in Sources */,
 				406363FA1BD5CB6500202C16 /* ReadingViewController.m in Sources */,
 				4012B8701BE4A0BC0057C8A2 /* NSArray_DeepMutableCopy.m in Sources */,
 				4012B8C81BE6F2C80057C8A2 /* NormalVideoModel.m in Sources */,
+				4043845D1CD87A43000DFA92 /* FMGVideoPlayView.m in Sources */,
+				404384601CD87A43000DFA92 /* FullViewController.m in Sources */,
 				40010A4C1C3A33AF0003B571 /* BaseViewController.m in Sources */,
 				40E1B12D1C2B8F06006C2D2D /* RadioModel.m in Sources */,
 				4004AFB91C23FBC200EF3954 /* PhotoSetScrollView.m in Sources */,

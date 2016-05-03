@@ -112,7 +112,7 @@
                 <outlet property="timeImg" destination="OXD-1L-Re1" id="vub-wX-6Nj"/>
                 <outlet property="title" destination="R5B-Zs-TuD" id="199-5o-Yud"/>
             </connections>
-            <point key="canvasLocation" x="456" y="249"/>
+            <point key="canvasLocation" x="476" y="254"/>
         </tableViewCell>
     </objects>
     <resources>
