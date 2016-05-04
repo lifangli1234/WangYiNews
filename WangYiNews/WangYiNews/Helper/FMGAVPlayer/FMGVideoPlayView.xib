@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_media_default.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="JJP-Ts-JgC">
+                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="video_content_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="JJP-Ts-JgC">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
                     <connections>
                         <outletCollection property="gestureRecognizers" destination="t1N-qu-Mhn" appends="YES" id="VIA-bB-2Kc"/>
@@ -29,15 +29,10 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B0Y-G9-Al9">
                     <rect key="frame" x="0.0" y="140" width="320" height="40"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00/00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wfa-dJ-lbC">
-                            <rect key="frame" x="198" y="12" width="72" height="15"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                         <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="HpB-Mp-8lf">
-                            <rect key="frame" x="48" y="5" width="152" height="31"/>
-                            <color key="maximumTrackTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <rect key="frame" x="38" y="5" width="194" height="31"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="thumbTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="slider" destination="iN0-l3-epB" eventType="touchUpInside" id="rWe-ZP-vJt"/>
                                 <action selector="sliderValueChange" destination="iN0-l3-epB" eventType="valueChanged" id="krh-94-3Wt"/>
@@ -45,11 +40,11 @@
                             </connections>
                         </slider>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6BU-1d-DTl">
-                            <rect key="frame" x="270" y="0.0" width="50" height="40"/>
+                            <rect key="frame" x="280" y="0.0" width="40" height="40"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="50" id="HIk-84-ZRo"/>
+                                <constraint firstAttribute="width" constant="40" id="HIk-84-ZRo"/>
                             </constraints>
-                            <state key="normal" image="mini_launchFullScreen_btn.png">
+                            <state key="normal" image="player_fullscreen@2x">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <state key="selected" image="mini_launchFullScreen_btn.png"/>
@@ -58,11 +53,11 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Lm-xe-Vds">
-                            <rect key="frame" x="0.0" y="0.0" width="50" height="40"/>
+                            <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="50" id="92v-cy-ncd"/>
+                                <constraint firstAttribute="width" constant="40" id="92v-cy-ncd"/>
                             </constraints>
-                            <state key="normal" image="full_play_btn_hl.png">
+                            <state key="normal" image="player_pause@2x">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <state key="selected" image="full_pause_btn.png"/>
@@ -70,6 +65,26 @@
                                 <action selector="playOrPause:" destination="iN0-l3-epB" eventType="touchUpInside" id="MTq-PS-PUU"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Th9-ln-3mM">
+                            <rect key="frame" x="240" y="0.0" width="40" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="40" id="TFA-b9-2mN"/>
+                            </constraints>
+                            <state key="normal" title="Button" image="player_open_barrage@2x"/>
+                            <connections>
+                                <action selector="openOrCloseBarrage:" destination="iN0-l3-epB" eventType="touchUpInside" id="Ycs-PK-1uy"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00/00:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wfa-dJ-lbC">
+                            <rect key="frame" x="118" y="24" width="112" height="15"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="112" id="0ew-zE-AW8"/>
+                                <constraint firstAttribute="height" constant="15" id="zGb-LD-ugr"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" red="0.1764705882352941" green="0.1764705882352941" blue="0.1764705882352941" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -78,13 +93,16 @@
                         <constraint firstItem="6BU-1d-DTl" firstAttribute="top" secondItem="B0Y-G9-Al9" secondAttribute="top" id="8GR-d6-Awb"/>
                         <constraint firstItem="4Lm-xe-Vds" firstAttribute="top" secondItem="B0Y-G9-Al9" secondAttribute="top" id="GXV-8U-wVX"/>
                         <constraint firstAttribute="bottom" secondItem="6BU-1d-DTl" secondAttribute="bottom" id="Lts-yc-0A4"/>
-                        <constraint firstItem="6BU-1d-DTl" firstAttribute="leading" secondItem="wfa-dJ-lbC" secondAttribute="trailing" id="byF-gY-jhz"/>
+                        <constraint firstItem="Th9-ln-3mM" firstAttribute="top" secondItem="B0Y-G9-Al9" secondAttribute="top" id="MJR-ah-yXd"/>
+                        <constraint firstAttribute="bottom" secondItem="Th9-ln-3mM" secondAttribute="bottom" id="OQP-0B-MHo"/>
+                        <constraint firstItem="Th9-ln-3mM" firstAttribute="leading" secondItem="HpB-Mp-8lf" secondAttribute="trailing" constant="10" id="OWI-jb-oJT"/>
+                        <constraint firstAttribute="bottom" secondItem="wfa-dJ-lbC" secondAttribute="bottom" constant="1" id="abN-Oe-gvp"/>
+                        <constraint firstItem="Th9-ln-3mM" firstAttribute="leading" secondItem="wfa-dJ-lbC" secondAttribute="trailing" constant="10" id="g9G-Wi-NHO"/>
                         <constraint firstAttribute="trailing" secondItem="6BU-1d-DTl" secondAttribute="trailing" id="hBF-JB-z22"/>
-                        <constraint firstItem="wfa-dJ-lbC" firstAttribute="leading" secondItem="HpB-Mp-8lf" secondAttribute="trailing" id="jAN-W8-EpX"/>
+                        <constraint firstItem="6BU-1d-DTl" firstAttribute="leading" secondItem="Th9-ln-3mM" secondAttribute="trailing" id="iGQ-vs-Mpw"/>
                         <constraint firstAttribute="height" constant="40" id="kTJ-IV-rkT"/>
                         <constraint firstItem="HpB-Mp-8lf" firstAttribute="leading" secondItem="4Lm-xe-Vds" secondAttribute="trailing" id="ohU-sV-SSZ"/>
                         <constraint firstAttribute="centerY" secondItem="HpB-Mp-8lf" secondAttribute="centerY" id="owu-xL-zqU"/>
-                        <constraint firstAttribute="centerY" secondItem="wfa-dJ-lbC" secondAttribute="centerY" id="znB-dN-o98"/>
                     </constraints>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fast_forward" translatesAutoresizingMaskIntoConstraints="NO" id="L5i-3n-Jkv">
@@ -113,7 +131,9 @@
             <connections>
                 <outlet property="backImageView" destination="exH-xX-tck" id="S7O-1Z-QVG"/>
                 <outlet property="forwardImageView" destination="L5i-3n-Jkv" id="aOH-f2-oZ2"/>
+                <outlet property="fullScreenBtn" destination="6BU-1d-DTl" id="rxt-s3-OHH"/>
                 <outlet property="imageView" destination="JJP-Ts-JgC" id="wSc-cl-hXl"/>
+                <outlet property="openOrCloseBarrageBtn" destination="Th9-ln-3mM" id="I9u-QI-FLK"/>
                 <outlet property="playOrPauseBtn" destination="4Lm-xe-Vds" id="vmA-5e-gqf"/>
                 <outlet property="progressSlider" destination="HpB-Mp-8lf" id="LIi-7e-r4L"/>
                 <outlet property="timeLabel" destination="wfa-dJ-lbC" id="JHN-yx-LCf"/>
@@ -138,11 +158,13 @@
         </tapGestureRecognizer>
     </objects>
     <resources>
-        <image name="bg_media_default.jpg" width="320" height="180"/>
         <image name="fast_back" width="100" height="100"/>
         <image name="fast_forward" width="100" height="100"/>
         <image name="full_pause_btn.png" width="50" height="50"/>
-        <image name="full_play_btn_hl.png" width="50" height="50"/>
         <image name="mini_launchFullScreen_btn.png" width="50" height="40"/>
+        <image name="player_fullscreen@2x" width="320" height="180"/>
+        <image name="player_open_barrage@2x" width="15" height="15"/>
+        <image name="player_pause@2x" width="320" height="180"/>
+        <image name="video_content_bg.png" width="320" height="240"/>
     </resources>
 </document>

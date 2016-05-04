@@ -12,6 +12,7 @@
 #import "FMGVideoPlayView.h"
 #import "FullViewController.h"
 #import "VideoPlayViewController.h"
+#import "CFDanmakuView.h"
 
 @interface VideoTableViewController ()<FMGVideoPlayViewDelegate, VideoCellDelegate>
 
@@ -54,21 +55,32 @@
 {
     if (isFull) {
         [self.navigationController presentViewController:self.fullVC animated:NO completion:^{
+            [self.player removeFromSuperview];
             [self.fullVC.view addSubview:self.player];
             self.player.center = self.fullVC.view.center;
+            self.player.fullScreenBtn.selected = YES;
             
+            [self.player mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.edges.equalTo(self.fullVC.view);
+            }];
+            [self.player.danmakuView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.left.right.equalTo(self.player);
+                make.bottom.equalTo(self.player).offset(-40);
+            }];
             [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionLayoutSubviews animations:^{
-                self.player.frame = self.fullVC.view.bounds;
-//                self.player.danmakuView.frame = self.player.frame;
+                [self.player layoutIfNeeded];
+                [self.player.danmakuView layoutIfNeeded];
             } completion:nil];
         }];
     } else {
         [self.fullVC dismissViewControllerAnimated:NO completion:^{
+            [self.player removeFromSuperview];
             VideoCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathWithIndex:self.player.index]];
-            [cell.contentView addSubview:self.player];
-            [self.player mas_makeConstraints:^(MASConstraintMaker *make) {
+            [cell addSubview:self.player];
+            [_player mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.edges.equalTo(cell.cover);
             }];
+            self.player.fullScreenBtn.selected = NO;
         }];
     }
 }
@@ -171,7 +183,7 @@
     NSDictionary *dic = [self.videosArr objectAtIndex:btn.tag];
     VideoModel *model = [VideoModel objectWithKeyValues:dic];
     [_player setUrlString:model.mp4_url];
-    [videoCell.contentView addSubview:_player];
+    [videoCell addSubview:_player];
     [_player mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(videoCell.cover);
     }];

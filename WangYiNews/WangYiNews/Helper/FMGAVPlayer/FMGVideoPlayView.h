@@ -28,6 +28,9 @@
 @property (nonatomic, weak) AVPlayerItem *currentItem;
 @property (weak, nonatomic) IBOutlet UISlider *progressSlider;
 
+@property (weak, nonatomic) IBOutlet UIButton *fullScreenBtn;
+@property (weak, nonatomic) IBOutlet UIButton *openOrCloseBarrageBtn;
+- (IBAction)openOrCloseBarrage:(UIButton *)sender;
 
 /* 播放器 */
 @property (nonatomic, strong) AVPlayer *player;

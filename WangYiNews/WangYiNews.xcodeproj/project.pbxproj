@@ -292,6 +292,24 @@
 		4043846A1CD887FE000DFA92 /* CFDanmakuInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 404384651CD887FE000DFA92 /* CFDanmakuInfo.m */; };
 		4043846B1CD887FE000DFA92 /* CFDanmakuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 404384671CD887FE000DFA92 /* CFDanmakuView.m */; };
 		4043846C1CD887FE000DFA92 /* danmakufile in Resources */ = {isa = PBXBuildFile; fileRef = 404384681CD887FE000DFA92 /* danmakufile */; };
+		404384801CD895F3000DFA92 /* player_airplay_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4043846E1CD895F3000DFA92 /* player_airplay_selected@2x.png */; };
+		404384811CD895F3000DFA92 /* player_airplay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4043846F1CD895F3000DFA92 /* player_airplay@2x.png */; };
+		404384821CD895F3000DFA92 /* player_backward@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 404384701CD895F3000DFA92 /* player_backward@2x.png */; };
+		404384831CD895F3000DFA92 /* player_close_barrage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 404384711CD895F3000DFA92 /* player_close_barrage@2x.png */; };
+		404384841CD895F3000DFA92 /* player_detail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 404384721CD895F3000DFA92 /* player_detail@2x.png */; };
+		404384851CD895F3000DFA92 /* player_embeddedscreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 404384731CD895F3000DFA92 /* player_embeddedscreen@2x.png */; };
+		404384861CD895F3000DFA92 /* player_exit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 404384741CD895F3000DFA92 /* player_exit@2x.png */; };
+		404384871CD895F3000DFA92 /* player_forward@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 404384751CD895F3000DFA92 /* player_forward@2x.png */; };
+		404384881CD895F3000DFA92 /* player_fullscreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 404384761CD895F3000DFA92 /* player_fullscreen@2x.png */; };
+		404384891CD895F3000DFA92 /* player_leftslider@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 404384771CD895F3000DFA92 /* player_leftslider@2x.png */; };
+		4043848A1CD895F3000DFA92 /* player_open_barrage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 404384781CD895F3000DFA92 /* player_open_barrage@2x.png */; };
+		4043848B1CD895F3000DFA92 /* player_pause@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 404384791CD895F3000DFA92 /* player_pause@2x.png */; };
+		4043848C1CD895F3000DFA92 /* player_play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4043847A1CD895F3000DFA92 /* player_play@2x.png */; };
+		4043848D1CD895F3000DFA92 /* player_playableslider@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4043847B1CD895F3000DFA92 /* player_playableslider@2x.png */; };
+		4043848E1CD895F3000DFA92 /* player_rightslider@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4043847C1CD895F3000DFA92 /* player_rightslider@2x.png */; };
+		4043848F1CD895F3000DFA92 /* player_thumb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4043847D1CD895F3000DFA92 /* player_thumb@2x.png */; };
+		404384901CD895F3000DFA92 /* player_topshadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4043847E1CD895F3000DFA92 /* player_topshadow@2x.png */; };
+		404384911CD895F3000DFA92 /* player_write_barrage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4043847F1CD895F3000DFA92 /* player_write_barrage@2x.png */; };
 		404468211C3E3ADA00EAC4F0 /* QuestionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4044681F1C3E3ADA00EAC4F0 /* QuestionCell.m */; };
 		404468221C3E3ADA00EAC4F0 /* QuestionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 404468201C3E3ADA00EAC4F0 /* QuestionCell.xib */; };
 		4044682F1C3E5ADC00EAC4F0 /* comment_support_fake@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 404468231C3E5ADC00EAC4F0 /* comment_support_fake@2x.png */; };
@@ -1127,6 +1145,24 @@
 		404384661CD887FE000DFA92 /* CFDanmakuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFDanmakuView.h; sourceTree = "<group>"; };
 		404384671CD887FE000DFA92 /* CFDanmakuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFDanmakuView.m; sourceTree = "<group>"; };
 		404384681CD887FE000DFA92 /* danmakufile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = danmakufile; sourceTree = "<group>"; };
+		4043846E1CD895F3000DFA92 /* player_airplay_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player_airplay_selected@2x.png"; sourceTree = "<group>"; };
+		4043846F1CD895F3000DFA92 /* player_airplay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player_airplay@2x.png"; sourceTree = "<group>"; };
+		404384701CD895F3000DFA92 /* player_backward@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player_backward@2x.png"; sourceTree = "<group>"; };
+		404384711CD895F3000DFA92 /* player_close_barrage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player_close_barrage@2x.png"; sourceTree = "<group>"; };
+		404384721CD895F3000DFA92 /* player_detail@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player_detail@2x.png"; sourceTree = "<group>"; };
+		404384731CD895F3000DFA92 /* player_embeddedscreen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player_embeddedscreen@2x.png"; sourceTree = "<group>"; };
+		404384741CD895F3000DFA92 /* player_exit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player_exit@2x.png"; sourceTree = "<group>"; };
+		404384751CD895F3000DFA92 /* player_forward@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player_forward@2x.png"; sourceTree = "<group>"; };
+		404384761CD895F3000DFA92 /* player_fullscreen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player_fullscreen@2x.png"; sourceTree = "<group>"; };
+		404384771CD895F3000DFA92 /* player_leftslider@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player_leftslider@2x.png"; sourceTree = "<group>"; };
+		404384781CD895F3000DFA92 /* player_open_barrage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player_open_barrage@2x.png"; sourceTree = "<group>"; };
+		404384791CD895F3000DFA92 /* player_pause@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player_pause@2x.png"; sourceTree = "<group>"; };
+		4043847A1CD895F3000DFA92 /* player_play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player_play@2x.png"; sourceTree = "<group>"; };
+		4043847B1CD895F3000DFA92 /* player_playableslider@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player_playableslider@2x.png"; sourceTree = "<group>"; };
+		4043847C1CD895F3000DFA92 /* player_rightslider@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player_rightslider@2x.png"; sourceTree = "<group>"; };
+		4043847D1CD895F3000DFA92 /* player_thumb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player_thumb@2x.png"; sourceTree = "<group>"; };
+		4043847E1CD895F3000DFA92 /* player_topshadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player_topshadow@2x.png"; sourceTree = "<group>"; };
+		4043847F1CD895F3000DFA92 /* player_write_barrage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player_write_barrage@2x.png"; sourceTree = "<group>"; };
 		4044681E1C3E3ADA00EAC4F0 /* QuestionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionCell.h; sourceTree = "<group>"; };
 		4044681F1C3E3ADA00EAC4F0 /* QuestionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionCell.m; sourceTree = "<group>"; };
 		404468201C3E3ADA00EAC4F0 /* QuestionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionCell.xib; sourceTree = "<group>"; };
@@ -2035,6 +2071,31 @@
 			path = CFDanmaku;
 			sourceTree = "<group>";
 		};
+		4043846D1CD895D9000DFA92 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				4043846E1CD895F3000DFA92 /* player_airplay_selected@2x.png */,
+				4043846F1CD895F3000DFA92 /* player_airplay@2x.png */,
+				404384701CD895F3000DFA92 /* player_backward@2x.png */,
+				404384711CD895F3000DFA92 /* player_close_barrage@2x.png */,
+				404384721CD895F3000DFA92 /* player_detail@2x.png */,
+				404384731CD895F3000DFA92 /* player_embeddedscreen@2x.png */,
+				404384741CD895F3000DFA92 /* player_exit@2x.png */,
+				404384751CD895F3000DFA92 /* player_forward@2x.png */,
+				404384761CD895F3000DFA92 /* player_fullscreen@2x.png */,
+				404384771CD895F3000DFA92 /* player_leftslider@2x.png */,
+				404384781CD895F3000DFA92 /* player_open_barrage@2x.png */,
+				404384791CD895F3000DFA92 /* player_pause@2x.png */,
+				4043847A1CD895F3000DFA92 /* player_play@2x.png */,
+				4043847B1CD895F3000DFA92 /* player_playableslider@2x.png */,
+				4043847C1CD895F3000DFA92 /* player_rightslider@2x.png */,
+				4043847D1CD895F3000DFA92 /* player_thumb@2x.png */,
+				4043847E1CD895F3000DFA92 /* player_topshadow@2x.png */,
+				4043847F1CD895F3000DFA92 /* player_write_barrage@2x.png */,
+			);
+			path = Player;
+			sourceTree = "<group>";
+		};
 		404FA84D1BD4839200FCEC69 = {
 			isa = PBXGroup;
 			children = (
@@ -2300,6 +2361,7 @@
 		406364011BD5E19900202C16 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				4043846D1CD895D9000DFA92 /* Player */,
 				40F8FFEA1C50A73B00852DA8 /* Read */,
 				40E818271C336FBB003077FD /* search */,
 				40E817EA1C336DF2003077FD /* qa */,
@@ -3042,6 +3104,7 @@
 				40FBAAD01C27E9B10090716B /* night_user_reading_circle@2x.png in Resources */,
 				40FBAB1A1C27E9B10090716B /* usercenter_hd_album.png in Resources */,
 				40FBAAF51C27E9B10090716B /* user_mission_explain_6_1@2x.png in Resources */,
+				4043848E1CD895F3000DFA92 /* player_rightslider@2x.png in Resources */,
 				40FBAB0F1C27E9B10090716B /* user_set_icon_mission@2x.png in Resources */,
 				40097BA11C2AA8FE00D87458 /* audio_block_bg@2x.png in Resources */,
 				40E818551C336FC2003077FD /* searchBar_icon@2x.png in Resources */,
@@ -3099,9 +3162,11 @@
 				40F800081C50A7E500852DA8 /* night_reader_cell_delete_bg@2x.png in Resources */,
 				4005A59F1C3509CA005DA585 /* headex_button@2x.png in Resources */,
 				40FBAB071C27E9B10090716B /* user_prize_more@2x.png in Resources */,
+				404384821CD895F3000DFA92 /* player_backward@2x.png in Resources */,
 				4012B7B51BE1B5860057C8A2 /* weather_hdcover_sand@2x.png in Resources */,
 				40FBAAC51C27E9B10090716B /* night_user_mission_progress_bg_1@2x.png in Resources */,
 				40FBAB1B1C27E9B10090716B /* usercenter_hd_album@2x.png in Resources */,
+				404384871CD895F3000DFA92 /* player_forward@2x.png in Resources */,
 				4012B7A91BE1B5860057C8A2 /* sun_and_snow@2x.png in Resources */,
 				4063649C1BD6201500202C16 /* topicheader_iconboard@2x.png in Resources */,
 				40E8180F1C336E05003077FD /* night_qa_login_normal@2x.png in Resources */,
@@ -3146,7 +3211,9 @@
 				4012B78E1BE1B5860057C8A2 /* rain_heavyxxx@2x.png in Resources */,
 				40FBAAB11C27E9B10090716B /* night_user_editBtn@2x.png in Resources */,
 				40FBAB1D1C27E9B10090716B /* usercenter_hd_avatar_default@2x.png in Resources */,
+				404384811CD895F3000DFA92 /* player_airplay@2x.png in Resources */,
 				40E8180B1C336E05003077FD /* night_qa_cell_tail@2x.png in Resources */,
+				404384851CD895F3000DFA92 /* player_embeddedscreen@2x.png in Resources */,
 				40F8001B1C50A7E500852DA8 /* night_recommend_refreshtip_button@2x.png in Resources */,
 				404468361C3E5ADC00EAC4F0 /* night_comment_support_hd@2x.png in Resources */,
 				40F8FFC61C50A71200852DA8 /* readercell_more_highlighted@2x.png in Resources */,
@@ -3187,6 +3254,7 @@
 				406364311BD5E1C400202C16 /* tabbar_icon_reader_normal@2x.png in Resources */,
 				404468311C3E5ADC00EAC4F0 /* comment_support_highlighted_hd@2x.png in Resources */,
 				40097BB71C2AA8FE00D87458 /* audionews_icon_download@2x.png in Resources */,
+				404384911CD895F3000DFA92 /* player_write_barrage@2x.png in Resources */,
 				4012B7D61BE1B6D40057C8A2 /* pluginboard_icon_mailbox@2x.png in Resources */,
 				40F8FFAE1C50A71200852DA8 /* reader_delete_button.png in Resources */,
 				40FBAAAA1C27E9B10090716B /* night_user_achieve_arrow@2x.png in Resources */,
@@ -3233,6 +3301,7 @@
 				40FBAB001C27E9B10090716B /* user_mission_textfiled_bg@2x.png in Resources */,
 				40097AFF1C2A842600D87458 /* night_video_recommend_cell_bg@2x.png in Resources */,
 				4063641F1BD5E1C400202C16 /* night_tabbar_icon_media_highlight@2x.png in Resources */,
+				404384901CD895F3000DFA92 /* player_topshadow@2x.png in Resources */,
 				40097B101C2A842700D87458 /* video_list_cell_time@2x.png in Resources */,
 				40097AF01C2A842600D87458 /* cell_tag_video_hd@2x.png in Resources */,
 				40FBAADB1C27E9B10090716B /* user_background@2x.png in Resources */,
@@ -3285,6 +3354,7 @@
 				4063647C1BD6201500202C16 /* night_top_navigation_readerplus@2x.png in Resources */,
 				4012B79D1BE1B5860057C8A2 /* snow_little@2x.png in Resources */,
 				40F8FFB61C50A71200852DA8 /* reader_remove_red_button@2x.png in Resources */,
+				404384801CD895F3000DFA92 /* player_airplay_selected@2x.png in Resources */,
 				4063647D1BD6201500202C16 /* night_top_navigation_readerplus_highlighted@2x.png in Resources */,
 				40FBAAA01C27E9B10090716B /* loginview_password.png in Resources */,
 				40097AF21C2A842600D87458 /* night_video_category_separator@2x.png in Resources */,
@@ -3346,6 +3416,7 @@
 				4012B79F1BE1B5860057C8A2 /* snow_mini@2x.png in Resources */,
 				4012B7A61BE1B5860057C8A2 /* sun_and_rain@2x.png in Resources */,
 				40097AEF1C2A842600D87458 /* cell_tag_video@2x.png in Resources */,
+				404384861CD895F3000DFA92 /* player_exit@2x.png in Resources */,
 				40097BDB1C2AA8FE00D87458 /* night_audionews_indexheader_download@2x.png in Resources */,
 				40FBAB161C27E9B10090716B /* user_weiboimage_netease@2x.png in Resources */,
 				40F8FFB11C50A71200852DA8 /* reader_hook@2x.png in Resources */,
@@ -3375,6 +3446,7 @@
 				40E818241C336E05003077FD /* qa_search@2x.png in Resources */,
 				40097BC81C2AA8FE00D87458 /* audionews_previous_button@2x.png in Resources */,
 				40FBAB371C27EA690090716B /* lm_cell_detail_indicator@2x.png in Resources */,
+				404384841CD895F3000DFA92 /* player_detail@2x.png in Resources */,
 				40F8FFB51C50A71200852DA8 /* reader_recommend_icon@2x.png in Resources */,
 				40097BBE1C2AA8FE00D87458 /* audionews_list_download@2x.png in Resources */,
 				4012B7951BE1B5860057C8A2 /* snow@2x.png in Resources */,
@@ -3393,6 +3465,7 @@
 				4012B77F1BE1B5860057C8A2 /* night_sun_and_snow_mini@2x.png in Resources */,
 				40FBAAF61C27E9B10090716B /* user_mission_explain_7_1@2x.png in Resources */,
 				4063642F1BD5E1C400202C16 /* tabbar_icon_news_normal@2x.png in Resources */,
+				4043848D1CD895F3000DFA92 /* player_playableslider@2x.png in Resources */,
 				40FBAA9B1C27E9B10090716B /* login_forgot_button@2x.png in Resources */,
 				40A81D371BDB5DF1008A315E /* BigPhotoCell.xib in Resources */,
 				40E818561C336FC2003077FD /* top_navigation_searchbutton_highlighted@2x.png in Resources */,
@@ -3451,6 +3524,7 @@
 				40F8FFB91C50A71200852DA8 /* reader_share_highlight@2x.png in Resources */,
 				40E818431C336FC2003077FD /* night_search_icon_highlighted@2x.png in Resources */,
 				40FBAACD1C27E9B10090716B /* night_user_prize_more@2x.png in Resources */,
+				4043848B1CD895F3000DFA92 /* player_pause@2x.png in Resources */,
 				40FBAABD1C27E9B10090716B /* night_user_mission_explain_2_1@2x.png in Resources */,
 				40163D421C55FF0E00550EE9 /* content.js in Resources */,
 				40FBAADA1C27E9B10090716B /* user_arrow@2x.png in Resources */,
@@ -3466,6 +3540,7 @@
 				40FBAB261C27E9B10090716B /* usercenter_hd_cover_small_1@2x.png in Resources */,
 				4012B7D71BE1B6D40057C8A2 /* pluginboard_icon_message@2x.png in Resources */,
 				40FBAB2F1C27E9B10090716B /* usercenter_hd_mycomments@2x.png in Resources */,
+				4043848C1CD895F3000DFA92 /* player_play@2x.png in Resources */,
 				400086281BDDC7530030BE78 /* HotBigCell.xib in Resources */,
 				4005A5A51C351338005DA585 /* share_platform_qqfriends@2x.png in Resources */,
 				40EDBDE11C40D57500AEE50D /* ReadingCell.xib in Resources */,
@@ -3487,6 +3562,7 @@
 				4012B7781BE1B5860057C8A2 /* night_rain_mini@2x.png in Resources */,
 				406364871BD6201500202C16 /* top_navigation_background@2x.png in Resources */,
 				40097BCC1C2AA8FE00D87458 /* audionews_slider_dot@2x.png in Resources */,
+				4043848A1CD895F3000DFA92 /* player_open_barrage@2x.png in Resources */,
 				40097AFC1C2A842600D87458 /* night_video_list_cell_seperator@2x.png in Resources */,
 				406364271BD5E1C400202C16 /* tab-bar-background@2x.png in Resources */,
 				40097BD11C2AA8FE00D87458 /* night_audio_comment_delete@2x.png in Resources */,
@@ -3542,6 +3618,7 @@
 				4012B7DD1BE1B6D40057C8A2 /* pluginboard_icon_weather@2x.png in Resources */,
 				40E818101C336E05003077FD /* night_qa_myconcern_blank@2x.png in Resources */,
 				40F8FFDF1C50A71200852DA8 /* recommend_start_selected@2x.png in Resources */,
+				4043848F1CD895F3000DFA92 /* player_thumb@2x.png in Resources */,
 				4012B7961BE1B5860057C8A2 /* snow_heavy.bundle in Resources */,
 				40097B0D1C2A842700D87458 /* video_list_cell_mask@2x.png in Resources */,
 				4044682F1C3E5ADC00EAC4F0 /* comment_support_fake@2x.png in Resources */,
@@ -3578,6 +3655,7 @@
 				40097AF51C2A842600D87458 /* night_video_cell_play@2x.png in Resources */,
 				40FBAAF21C27E9B10090716B /* user_mission_explain_3_1@2x.png in Resources */,
 				40097BB11C2AA8FE00D87458 /* audio_comment_stop@2x.png in Resources */,
+				404384881CD895F3000DFA92 /* player_fullscreen@2x.png in Resources */,
 				40FBAAF81C27E9B10090716B /* user_mission_footer@2x.png in Resources */,
 				400086251BDDB2EA0030BE78 /* cola_bubble_gray@2x.png in Resources */,
 				4012B78A1BE1B5860057C8A2 /* rain_heavyx@2x.png in Resources */,
@@ -3593,6 +3671,7 @@
 				40FBAAD31C27E9B10090716B /* night_user_vip_flag@2x.png in Resources */,
 				40E8181E1C336E05003077FD /* qa_login_highlight@2x.png in Resources */,
 				40F8FFDB1C50A71200852DA8 /* recommend_report_arrow@2x.png in Resources */,
+				404384891CD895F3000DFA92 /* player_leftslider@2x.png in Resources */,
 				40F8FFDD1C50A71200852DA8 /* recommend_share@2x.png in Resources */,
 				4043846C1CD887FE000DFA92 /* danmakufile in Resources */,
 				40E8184C1C336FC2003077FD /* qa_search_highlight@2x.png in Resources */,
@@ -3640,6 +3719,7 @@
 				40F8FFB31C50A71200852DA8 /* reader_login_guide_recommend@2x.png in Resources */,
 				40F8FFCC1C50A71200852DA8 /* recommend_image_bg@2x.png in Resources */,
 				4012B77E1BE1B5860057C8A2 /* night_sun_and_rain_mini@2x.png in Resources */,
+				404384831CD895F3000DFA92 /* player_close_barrage@2x.png in Resources */,
 				40E818251C336E05003077FD /* qa_share_normal@2x.png in Resources */,
 				40FBAAB61C27E9B10090716B /* night_user_gold@2x.png in Resources */,
 				40FDC22E1C5895DF0034C189 /* night_cell_tag_video@2x.png in Resources */,

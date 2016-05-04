@@ -92,6 +92,13 @@
         make.height.offset(40);
     }];
     
+    UIView *line = [[UIView alloc] init];
+    line.backgroundColor = GRAYCOLOR;
+    [titleView addSubview:line];
+    [line mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.left.right.equalTo(titleView);
+        make.height.equalTo(@0.8);
+    }];
     _titleScr = [[UIScrollView alloc] initWithFrame:CGRectMake(10, 0, [Helper screenWidth]-20, 40)];
     _titleScr.showsHorizontalScrollIndicator = NO;
     _titleScr.showsVerticalScrollIndicator = NO;
@@ -101,7 +108,7 @@
     [titleView addSubview:_titleScr];
     
     _contentScr = [[UIScrollView alloc] init];
-    _contentScr.frame = CGRectMake(0, 100, [Helper screenWidth], [Helper screenHeight]-149);
+    _contentScr.frame = CGRectMake(0, 104, [Helper screenWidth], [Helper screenHeight]-153);
     _contentScr.contentSize = CGSizeMake([Helper screenWidth]*self.titleArr.count, [Helper screenHeight]-149);
     _contentScr.showsHorizontalScrollIndicator = NO;
     _contentScr.delegate = self;

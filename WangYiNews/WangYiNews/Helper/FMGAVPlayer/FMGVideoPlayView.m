@@ -98,12 +98,22 @@
     self.backImageView.alpha = 0;
     
     // 设置进度条的内容
-    [self.progressSlider setThumbImage:[UIImage imageNamed:@"thumbImage"] forState:UIControlStateNormal];
+    [self.progressSlider setThumbImage:[UIImage imageNamed:@"player_thumb"] forState:UIControlStateNormal];
     [self.progressSlider setMaximumTrackImage:[UIImage imageNamed:@"MaximumTrackImage"] forState:UIControlStateNormal];
     [self.progressSlider setMinimumTrackImage:[UIImage imageNamed:@"MinimumTrackImage"] forState:UIControlStateNormal];
     
     // 设置按钮的状态
     self.playOrPauseBtn.selected = NO;
+    [self.playOrPauseBtn setImage:[UIImage imageNamed:@"player_play"] forState:UIControlStateNormal];
+    [self.playOrPauseBtn setImage:[UIImage imageNamed:@"player_pause"] forState:UIControlStateSelected];
+    
+    self.fullScreenBtn.selected = NO;
+    [self.fullScreenBtn setImage:[UIImage imageNamed:@"player_fullscreen"] forState:UIControlStateNormal];
+    [self.fullScreenBtn setImage:[UIImage imageNamed:@"player_embeddedscreen"] forState:UIControlStateSelected];
+    
+    self.openOrCloseBarrageBtn.selected = NO;
+    [self.openOrCloseBarrageBtn setImage:[UIImage imageNamed:@"player_close_barrage"] forState:UIControlStateNormal];
+    [self.openOrCloseBarrageBtn setImage:[UIImage imageNamed:@"player_open_barrage"] forState:UIControlStateSelected];
     
     [self showToolView:YES];
     [self setupDanmakuView];
@@ -298,7 +308,7 @@
 //        [self sliderValueChange];
         self.player = nil;
         self.playOrPauseBtn.selected = NO;
-        self.toolView.alpha = 1;
+        self.toolView.alpha = 0.6;
         
         [self removeProgressTimer];
         [self removeShowTimer];
@@ -484,4 +494,8 @@
     [self.currentItem removeObserver:self forKeyPath:@"status" context:nil];
 }
 
+- (IBAction)openOrCloseBarrage:(UIButton *)sender {
+    sender.selected = !sender.selected;
+    _danmakuView.hidden = sender.selected;
+}
 @end
